@@ -9,7 +9,7 @@ body {
 }
 
 .main{
-  background-color: #ecf0f1;
+  background-color: #2C2C2C;
 }
 .container {
   display: flex;
@@ -33,7 +33,7 @@ body {
 .content::before {
   content: "";
   position: absolute;
-  background-color: #58af9b;
+  background-image: linear-gradient(120deg, #7e57c2 20%, #6640a8 55% , #53318d 80% );
   width: 40%;
   height: 100%;
   border-top-left-radius: 15px;
@@ -53,7 +53,7 @@ body {
 }
 
 .title-second {
-  color: #58af9b;
+  color: #ffff;
 }
 
 .description {
@@ -68,7 +68,7 @@ body {
 }
 
 .description-second {
-  color: #7f8c8d;
+  color: #fff;
 }
 
 .btn {
@@ -92,20 +92,20 @@ body {
 }
 
 .btn-second {
-  background-color: #58af9b;
-  border: 1px solid #58af9b;
+  background-color: #53318d;
+  border: 1px solid #53318d;
   transition: background-color 0.5s;
 }
 
 .btn-second:hover {
   background-color: #ecf0f1;
-  color: #58af9b;
-  border: 1px solid #58af9b;
+  color: #7e57c2;
+  border: 1px solid #53318d;
 }
 
 .btn-primary:hover {
   background-color: #ecf0f1;
-  color: #58af9b;
+  color: #53318d;
 }
 
 .first-content {
@@ -144,9 +144,9 @@ body {
 }
 
 .link-social-media:hover .item-social-media {
-  background-color: #58af9b;
+  background-color: #7e57c2;
   color: #fff;
-  border-color: #58af9b;
+  border-color: #7e57c2;
 }
 
 .item-social-media {
@@ -156,7 +156,7 @@ body {
   height: 35px;
   line-height: 35px;
   text-align: center;
-  color: #95a5a6;
+  color: #ffff;
   transition: background-color 0.5s;
 }
 
@@ -189,11 +189,13 @@ body {
 .second-content {
   position: absolute;
   display: flex;
+  background-color: #121212;
 }
 
 .second-content .first-column {
   order: 2;
   z-index: -1;
+  
 }
 .second-content .second-column {
   order: 1;
@@ -201,7 +203,7 @@ body {
 }
 
 .password {
-  color: #34495e;
+  color: #ffff;
   font-size: 14px;
   align-self: center;
   margin: 15px 0;
@@ -383,6 +385,6 @@ body {
 
 .error-messages p{
   color: red;
-  font-weight: 700;
+  font-weight: 500;
   font-size: 15px;
 }

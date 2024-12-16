@@ -30,3 +30,5 @@ function isErrorMessagesActive (){
 if(isErrorMessagesActive()){
   body.className= "sign-up-js-errors";
 };
+
+

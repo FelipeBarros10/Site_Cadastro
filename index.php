@@ -11,7 +11,7 @@ session_start();
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Login</title>
-  <link rel="stylesheet" href="./Assets/css/style.css">
+  <link rel="stylesheet" href="./Assets/css/login.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 </head>
@@ -45,20 +45,20 @@ session_start();
               <input type="email" name="email" placeholder="Email">
             </label>
             <?php
-              if (isset($_SESSION['errorsLogin'])) {
-                echo "<div id='error-messages' class='error-messages'>";
+            if (isset($_SESSION['errorsLogin'])) {
+              echo "<div id='error-messages-login' class='error-messages'>";
 
-                foreach ($_SESSION['errorsLogin'] as $errorIndex => $errorMessage) {
-                  if ($errorIndex === 'email') {
-                    echo "<p>{$errorMessage}</p>";
-                  }
-
-                  if ($errorIndex === 'emailExist') {
-                    echo "<p>{$errorMessage}</p>";
-                  }
+              foreach ($_SESSION['errorsLogin'] as $errorIndex => $errorMessage) {
+                if ($errorIndex === 'emailEmpty') {
+                  echo "<p>{$errorMessage}</p>";
                 }
-                echo "</div>";
+
+                if ($errorIndex === 'emailEstructure') {
+                  echo "<p>{$errorMessage}</p>";
+                }
               }
+              echo "</div>";
+            }
 
             ?>
 
@@ -66,7 +66,23 @@ session_start();
               <i class="fas fa-lock icon-modify"></i>
               <input id="passwordInput" type="password" name="password" placeholder="Password">
             </label>
+            <?php
+            if (isset($_SESSION['errorsLogin'])) {
+              echo "<div id='error-messages-login' class='error-messages'>";
 
+              foreach ($_SESSION['errorsLogin'] as $errorIndex => $errorMessage) {
+                if ($errorIndex === 'password') {
+                  echo "<p>{$errorMessage}</p>";
+                }
+
+                if($errorIndex === 'doesntExistAtDB'){
+                  echo "<p>{$errorMessage}</p>";
+                }
+              }
+              echo "</div>";
+            }
+
+            ?>
             <a class="password" href="#">forgot your password?</a>
             <button class="btn btn-second">sign in</button>
           </form>
