@@ -21,13 +21,14 @@ session_start();
     <div data-aos="zoom-in-up" class="container">
       <div class="content first-content">
         <div class="first-column">
-          <h2 class="title title-primary">hello, friend!</h2>
-          <p class="description description-primary">Enter your personal details</p>
-          <p class="description description-primary">and start journey with us</p>
-          <button id="signup" class="btn btn-primary">sign up</button>
+          <h2 class="title title-primary">olá, amigo!</h2>
+          <p class="description description-primary">Insira seus dados pessoais</p>
+          <p class="description description-primary">
+          e comece a jornada conosco</p>
+          <button id="signup" class="btn btn-primary">cadastre-se</button>
         </div>
         <div class="second-column">
-          <h2 class="title title-second">sign in to developer</h2>
+          <h2 class="title title-second">faça login com google</h2>
           <div class="social-media">
             <ul class="list-social-media">
               <a class="link-social-media icon-modify" href="#">
@@ -37,7 +38,7 @@ session_start();
               </a>
             </ul>
           </div><!-- social media -->
-          <p class="description description-second">or use your email account:</p>
+          <p class="description description-second">ou use sua conta de email:</p>
           <form action="controller/handleLogin.php" method="post" class="form">
 
             <label class="label-input" for="">
@@ -64,7 +65,7 @@ session_start();
 
             <label class="label-input" for="">
               <i class="fas fa-lock icon-modify"></i>
-              <input id="passwordInput" type="password" name="password" placeholder="Password">
+              <input id="passwordInput" type="password" name="password" placeholder="Senha">
             </label>
             <?php
             if (isset($_SESSION['errorsLogin'])) {
@@ -83,8 +84,8 @@ session_start();
             }
 
             ?>
-            <a class="password" href="#">forgot your password?</a>
-            <button class="btn btn-second">sign in</button>
+            <a class="password" href="#">Esqueceu sua senha?</a>
+            <button class="btn btn-second">entrar</button>
           </form>
         </div><!-- second column -->
       </div><!-- first content -->
@@ -92,10 +93,11 @@ session_start();
 
       <div id="secondContent" class="content second-content">
         <div class="first-column">
-          <h2 class="title title-primary">welcome back!</h2>
-          <p class="description description-primary">To keep connected with us</p>
-          <p class="description description-primary">please login with your personal info</p>
-          <button id="signin" class="btn btn-primary">sign in</button>
+          <h2 class="title title-primary">Bem vindo de volta!</h2>
+          <p class="description description-primary">
+          Para se manter conectado conosco</p>
+          <p class="description description-primary">por favor faça login com suas informações pessoais</p>
+          <button id="signin" class="btn btn-primary">login</button>
         </div>
         <div class="second-column">
           <h2 class="title title-second">create account</h2>
@@ -189,7 +191,7 @@ session_start();
     </div>
   </div>
 
-  <script src="./Assets/js/app.js"></script>
+  <script src="./Assets/js/login.js"></script>
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
     AOS.init();

@@ -3,29 +3,34 @@
 <head>
   <link rel="stylesheet" href="../Assets/css/sideBar.css">
 </head>
-<div class="sidebar">
-  <div class="icons-sidebar">
+<div id="sidebar" class="sidebar">
+  <div  class="icons-sidebar">
     <div class="icon">
-      <a href=""><i class="bi bi-list"></i></a>
+      <a id="list" href="#"><i id="icon-list" class="bi bi-list"></i></a>
     </div>
 
+  
     <div id="sign-up" class="icon">
-      <a href=""><i class="bi bi-plus-circle"></i> </a>
-      <span>Cadastrar</span>
+      <a id="link" class="link" href="#">
+        <i id="icon" class="bi bi-plus-circle"></i>
+        <span>Cadastrar</span>
+      </a>
     </div>
+
+    
 
     <div id="history" class="icon">
-      <a href=""><i class="bi bi-hourglass"></i></a>
+      <a href="#"><i id="icon" class="bi bi-hourglass"></i></a>
       <span>Histórico</span>
     </div>
 
     <div id="users" class="icon">
-      <a href=""><i class="bi bi-people"></i></a>
+      <a href="#"><i id="icon" class="bi bi-people"></i></a>
       <span>Usuários</span>
     </div>
 
     <div id="statistics" class="icon">
-      <a href=""><i class="bi bi-bar-chart"></i></a>
+      <a href="#"><i id="icon" class="bi bi-bar-chart"></i></a>
       <span>Estatística</span>
     </div>
   </div>

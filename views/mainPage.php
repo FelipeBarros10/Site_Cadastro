@@ -11,8 +11,6 @@
 <body >
   <?php include '../components/sideBar.php' ?>
 
-  <div class="main">
-    <p>Olá</p>
-  </div>
 </body>
+<script src="../Assets/js/mainPage.js"></script>
 </html>

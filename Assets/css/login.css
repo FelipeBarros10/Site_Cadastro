@@ -49,11 +49,11 @@ body {
 }
 
 .title-primary {
-  color: #ffff;
+  color: #121212;
 }
 
 .title-second {
-  color: #ffff;
+  color: #53318d;
 }
 
 .description {
@@ -64,7 +64,7 @@ body {
 }
 
 .description-primary {
-  color: #fff;
+  color: #121212;
 }
 
 .description-second {
@@ -74,9 +74,9 @@ body {
 .btn {
   border-radius: 15px;
   text-transform: uppercase;
-  color: #ffff;
+  color: #121212;
   font-size: 10px;
-  padding: 10px 50px;
+  padding: 12px 20px;
   cursor: pointer;
   font-weight: bold;
   width: 150px;
@@ -87,7 +87,7 @@ body {
 
 .btn-primary {
   background-color: transparent;
-  border: 1px solid #fff;
+  border: 1px solid #121212;
   transition: background-color 0.5s;
 }
 
@@ -106,6 +106,7 @@ body {
 .btn-primary:hover {
   background-color: #ecf0f1;
   color: #53318d;
+  border: 1px solid #53318d;
 }
 
 .first-content {
@@ -239,7 +240,7 @@ body {
 .sign-up-js .first-content .second-column{
   z-index: -1;
   position: relative;
-  animation: deslocamentoEsquerda 2s;
+  animation: deslocamentoEsquerda 0.3s;
 
 }
 
@@ -293,7 +294,7 @@ body {
 .sign-in-js .second-content .second-column{
   z-index: -1;
   position: relative;
-  animation: deslocamentoDireita 2s;
+  animation: deslocamentoDireita 0.3s;
 
 }
 
@@ -305,15 +306,6 @@ body {
     z-index: 12;
   }
 
-  25% {
-    left: 80px;
-    opacity: .5;
-  }
-
-  50% {
-    left: 100px;
-    opacity: .2;
-  }
 
   to {
     left: 110px;
@@ -329,15 +321,6 @@ body {
     z-index: 12;
   }
 
-  25% {
-    left: -80px;
-    opacity: .5;
-  }
-
-  50% {
-    left: -100px;
-    opacity: .2;
-  }
 
   to {
     left: -110px;

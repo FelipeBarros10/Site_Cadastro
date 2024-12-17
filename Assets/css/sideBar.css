@@ -5,7 +5,7 @@
   box-sizing: border-box; 
 }
 
-.sidebar{
+.sidebar, .sidebar-open{
   width: 5%;
   height: 100vh;
   background-image: linear-gradient( #270069 10%, #6640a8 55% , #53318d 80% );
@@ -19,7 +19,7 @@
   width: 100%;
 }
 
-.icon{
+.icon, .icon-selected, .icon-sidebar-open{
   padding: 20px 0;
   justify-content: center;
   display: flex;
@@ -28,7 +28,10 @@
 }
 
 .icon:hover{
-  background: rgba(222, 238, 222, 0.1)
+  background: rgba(222, 238, 222, 0.2)
+}
+.icon-selected{
+  background: rgba(222, 238, 222, 0.2);
 }
 
 .icon:first-child{
@@ -36,14 +39,43 @@
 
 }
 
+.link, .link-sidebar-open{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+}
 
-.icon i {
+.icon i, .icon-selected i , .icon-sidebar-open i{
   font-size: 25px;
   color: #fff;
 }
 
-.icon span {
+
+.icon span, .icon-selected span, .icon-sidebar-open span {
   color: #d8d8d8;
   padding-top: 3px;
-  font-weight: 200;
+
+}
+
+
+/*Open Sidebar*/
+
+.sidebar-open{
+  width: 15%;  
+}
+
+.link-sidebar-open, .icon-sidebar-open{
+  flex-direction: row;
+  justify-content: left;
+}
+
+
+.icon-sidebar-open i{
+  padding: 0 15px;
+  
+}
+
+.icon-sidebar-open span{
+  font-size: 18px;
 }
