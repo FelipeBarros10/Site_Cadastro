@@ -13,13 +13,22 @@
   justify-content: center;
 }
 
+.logo-container{
+  display: flex;
+  justify-content: center;
+}
+
+.logo{
+  width: 6rem;
+}
+
 .icons-sidebar{
   flex-direction: column;
   background-color: transparent;
   width: 100%;
 }
 
-.icon, .icon-selected, .icon-sidebar-open{
+.icon, .icon-selected-sidebar-close, .icon-selected-sidebar-open , .icon-sidebar-open{
   padding: 20px 0;
   justify-content: center;
   display: flex;
@@ -30,7 +39,7 @@
 .icon:hover{
   background: rgba(222, 238, 222, 0.2)
 }
-.icon-selected{
+.icon-selected-sidebar-close, .icon-selected-sidebar-open{
   background: rgba(222, 238, 222, 0.2);
 }
 
@@ -46,13 +55,13 @@
   text-decoration: none;
 }
 
-.icon i, .icon-selected i , .icon-sidebar-open i{
+.icon i, .icon-selected-sidebar-close i , .icon-selected-sidebar-open i, .icon-sidebar-open i{
   font-size: 25px;
   color: #fff;
 }
 
 
-.icon span, .icon-selected span, .icon-sidebar-open span {
+.icon span, .icon-selected-sidebar-close span, .icon-selected-sidebar-open span,  .icon-sidebar-open span {
   color: #d8d8d8;
   padding-top: 3px;
 
@@ -65,13 +74,17 @@
   width: 15%;  
 }
 
-.link-sidebar-open, .icon-sidebar-open{
+.logo-sidebar-open{
+  width: 10rem;
+}
+
+.link-sidebar-open, .icon-sidebar-open, .icon-selected-sidebar-open{
   flex-direction: row;
   justify-content: left;
 }
 
 
-.icon-sidebar-open i{
+.icon-sidebar-open i, .icon-selected-sidebar-open i{
   padding: 0 15px;
   
 }

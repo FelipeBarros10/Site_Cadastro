@@ -4,9 +4,13 @@
   <link rel="stylesheet" href="../Assets/css/sideBar.css">
 </head>
 <div id="sidebar" class="sidebar">
-  <div  class="icons-sidebar">
-    <div class="icon">
-      <a id="list" href="#"><i id="icon-list" class="bi bi-list"></i></a>
+  <div class="icons-sidebar">
+    <div class="logo-container">
+      <img id="logo" class="logo" src="../Assets/img/logo.png" alt="">
+    </div>
+
+    <div id="list" class="icon">
+      <a id="link" href="#"><i id="icon-list" class="bi bi-list"></i></a>    
     </div>
 
   
@@ -20,18 +24,24 @@
     
 
     <div id="history" class="icon">
-      <a href="#"><i id="icon" class="bi bi-hourglass"></i></a>
+      <a id="link" class="link" href="#"><i id="icon" class="bi bi-book"></i>
       <span>Histórico</span>
+    </a>
+      
     </div>
 
     <div id="users" class="icon">
-      <a href="#"><i id="icon" class="bi bi-people"></i></a>
+      <a id="link" class="link" href="#"><i id="icon" class="bi bi-people"></i>
       <span>Usuários</span>
+    </a>
+      
     </div>
 
     <div id="statistics" class="icon">
-      <a href="#"><i id="icon" class="bi bi-bar-chart"></i></a>
+      <a id="link" class="link" href="#"><i id="icon" class="bi bi-bar-chart"></i>
       <span>Estatística</span>
+    </a>
+      
     </div>
   </div>
 </div>
