@@ -1,6 +1,9 @@
-let isOpen = false; // Centraliza o estado do sidebar
+// Cria a variável que vai falar se o sidebar está aberto ou não
+let sidebarIsOpen = false;
+
 
 function sidebarIconSelected() {
+  // Variável que recebe o DOM de todos os ícones do sidebar
   const icons = [
     document.getElementById("sign-up"),
     document.getElementById("history"),
@@ -8,59 +11,95 @@ function sidebarIconSelected() {
     document.getElementById("statistics"),
   ];
 
+  //Variável que vai receber o ícone selecionado
   let currentSelected = null;
 
-  icons.forEach((item) => {
-    if (item) {
+  //Laço de repetição dentro da várivel de ícones
+  icons.forEach(item => { //item corresponde a cada índice(item) do array
+
+    //Verifica se o item existe
+    if(item){
+      
+      //Se sim, é incluído o evento de escuta que vai verificar se algum item será clicado
       item.addEventListener("click", (event) => {
-        if (currentSelected) {
-          // Reseta o estado do ícone anterior
-          const prevIcon = currentSelected.querySelector("#icon");
-          prevIcon.className = prevIcon.className.replace("-fill", "");
+        //Primeiro, verifica se já existe um ícone selecionado
+        if(currentSelected){
+          //Se sim, seleciona o <i> e o desenho de ícone preenchido é retirado
+         const currentIconSelected = currentSelected.querySelector('#icon');
+         currentIconSelected.className = currentIconSelected.className.replace("-fill", "");
 
-          if (isOpen) {
-            currentSelected.classList.remove("icon-selected-sidebar-open");
-            currentSelected.classList.add("icon-sidebar-open");
-          } else {
-            currentSelected.classList.remove("icon-selected-sidebar-close");
-            currentSelected.classList.add("icon");
-          }
+         //Verifica se o sidebar está aberto ou não quando um ícone está selecionado
+         if(sidebarIsOpen){
+          //Se sim, retira a classe de ícone selecionado e volta para a classe padrão
+          currentSelected.classList.remove("icon-selected-sidebar-open");
+          currentSelected.classList.add("icon-sidebar-open");
+         } else {
+          //Se o sidebar estiver fechada, a classe de ícone selecionado també é retirada e volta para a classe padrão
+          currentSelected.classList.remove("icon-selected-sidebar-close");
+          currentSelected.classList.add("icon")
+         }
         }
 
-        // Define o ícone selecionado
-        const selectedIcon = event.currentTarget.querySelector("#icon");
+        //Criando constantes que vai receber o "evento"(icone do array) atual clicado(a div pai)
         const parentElementIcon = event.currentTarget;
-
-        switch (event.currentTarget.id) {
+        //Criando uma constante que recebe o <i> do "evento"(icone do array) atual clicado
+        const iconElementSelected = event.currentTarget.querySelector("#icon");
+        
+        //Seitch para verificar qual ícone está sendo clicado
+        switch(parentElementIcon.id){
+          //Caso seja o "sign-up"
           case "sign-up":
-            selectedIcon.className = "bi bi-plus-circle-fill";
+            //inserimos o desenho de ícone preenchido ao <i>
+            iconElementSelected.className = "bi bi-plus-circle-fill";
             break;
+
+          //Caso seja o "history"
           case "history":
-            selectedIcon.className = "bi bi-book-fill";
+            //inserimos o desenho de ícone preenchido ao <i>
+            iconElementSelected.className = "bi bi-book-fill";
             break;
+
+          //Caso seja o "users"
           case "users":
-            selectedIcon.className = "bi bi-people-fill";
-            break;
+            //inserimos o desenho de ícone preenchido ao <i>
+            iconElementSelected.className = "bi bi-people-fill";
+           break;
+          
+          //Caso seja o "statistics"
           case "statistics":
-            selectedIcon.className = "bi bi-bar-chart-fill";
-            break;
+            //inserimos o desenho de ícone preenchido ao <i>
+            iconElementSelected.className = "bi bi-bar-chart-fill";
+           break;
         }
 
-        if (isOpen) {
-          parentElementIcon.className = "icon-selected-sidebar-open";
+        //Outra validação é feita para verificar se o sidebar estiver aberta ou não
+        if (sidebarIsOpen){
+          //Se sim,retira a classe padrão inclui a classe para a div pai ficar selecionada
+          parentElementIcon.classList.remove("icon-sidebar-open");
+          parentElementIcon.classList.add("icon-selected-sidebar-open")
         } else {
-          parentElementIcon.className = "icon-selected-sidebar-close";
+          //Se não,retira a classe padrão inclui a classe para a div pai ficar selecionada
+          parentElementIcon.classList.remove("icon");
+          parentElementIcon.classList.add("icon-selected-sidebar-close")
         }
 
-        currentSelected = event.currentTarget; // Atualiza o selecionado
-      });
+        //Inclui o "evento"(icone do array) atual clicado(a div pai) a variável
+        currentSelected = parentElementIcon
+      })
     }
-  });
+  })
 }
 
-function openAndCloseSideBar() {
+
+//Função que será responsável pela abertura e fechamento do sidebar
+function openAndCloseSideBar (){
+  //Constante que recebe o DOM do sidebar
   const sidebar = document.getElementById("sidebar");
-  const listIconElement = document.querySelector("#icon-list");
+
+  //Constante que recebe o DOM do ícone da lista
+  const listIconElement = document.getElementById("icon-list");
+
+  // Variável que recebe o DOM de todos os ícones do sidebar
   const icons = [
     document.getElementById("list"),
     document.getElementById("sign-up"),
@@ -69,36 +108,69 @@ function openAndCloseSideBar() {
     document.getElementById("statistics"),
   ];
 
+  //Cria a constante que procura o item "list" dentro do array de icons
   const list = icons.find((item) => item?.id === "list");
 
-  if (list) {
+  //Verifica se existe
+  if(list){
+    //Variável que vai ficar escutando o click dos items do array
     list.addEventListener("click", () => {
-      if (isOpen) {
+      //Validação se o sidebar está aberto 
+      if(sidebarIsOpen){
+
+        //Se estiver a classe de sidebar fechada é incluída
         sidebar.className = "sidebar";
+
+        //O desenho de lista é incluído no <i>
         listIconElement.className = "bi bi-list";
 
-        icons.forEach((item) => {
+        //É feito um foreach no array de ícones
+        icons.forEach((item) => { //item corresponde a cada índice(item) do array
+          //Constante que pega o <a> link de cada item do array
           const link = item.querySelector("#link");
-          if (link) link.className = "link";
-          item.className = "icon";
-        });
 
-        isOpen = false;
+          if(link){
+            //Se o link existir é colocado a classe padrão de quando o sidebar é fechado
+            link.className = "link";
+          }
+
+          //É colocado a classe padrão na div pai de quando o sidebar é aberto
+          item.className = "icon"  
+        })
+
+        //Seta que o sidebar está fechado
+        sidebarIsOpen = false
+
       } else {
+        //Se a sidebar estive fechada na hora do click, a classe para a abertura do sidebar é incluída 
         sidebar.className = "sidebar-open";
+
+        //Altera o ícone do <i> de lista para uma flecha
         listIconElement.className = "bi bi-arrow-bar-left";
-
+        
+        //É feito um foreach no array de ícones
         icons.forEach((item) => {
+
+          //Constante que pega o <a> link de cada item do array
           const link = item.querySelector("#link");
-          if (link) link.className = "link-sidebar-open";
-          item.className = "icon-sidebar-open";
-        });
 
-        isOpen = true;
+          if(link){
+            //Se o link existir é colocado a classe padrão e quando o sidebar é aberto
+            link.className = "link-sidebar-open";
+          }
+
+          //É colocado a classe padrão na div pai de quando o sidebar é aberto
+          item.className = "icon-sidebar-open"  
+        })
+
+        //Seta que o sidebar está aberto
+        sidebarIsOpen = true
       }
-    });
-  }
-}
+    })
 
+  }
+
+}
+//Chama as funções
 sidebarIconSelected();
 openAndCloseSideBar();

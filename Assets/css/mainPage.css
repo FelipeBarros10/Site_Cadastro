@@ -2,9 +2,19 @@
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box; 
+  box-sizing: border-box;
+  font-family: "Open Sans", serif
 }
 
 body{
-  background-color: #2C2C2C;
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+
+.main-parent{
+  display: flex;
+}
+
+.main-register-content{
+  width: 95%;
 }

@@ -9,8 +9,14 @@
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 </head>
 <body >
-  <?php include '../components/sideBar.php' ?>
+  <div class="main-parent">
+    <?php include '../components/sideBar.php' ?>
 
+  <main class="main-register-content">
+    <?php include '../components/mainPage/header.php'?>
+  </main>
+  </div>
+  
 </body>
 <script src="../Assets/js/mainPage.js"></script>
 </html>
