@@ -11,7 +11,7 @@
   flex-direction: column;
 }
 
-.title-content{
+.title-content, .header-information-stock{
   padding: 32px;
   background-color: rgb(236, 236, 236,0.3);
   flex-direction: row;
@@ -57,7 +57,7 @@
 }
 
 .inputs-search-subtitle, .inputs-select-subtitle, .inputs-plus-product-subtitle{
-  padding: 32px;
+  padding: 22px 32px;
   display: flex;
   align-items: center;
 }
@@ -70,12 +70,19 @@
   outline: none;
   border-bottom-left-radius: 5px;
   border-top-left-radius: 5px;
+  padding-left: 5px;
+  font-weight: 700;
 }
 
 .inputs-search-subtitle button {
   border-bottom-right-radius: 5px;
   border-top-right-radius: 5px;
 }
+
+.inputs-search-subtitle button:hover, .inputs-plus-product-subtitle button:hover{
+  background-image: linear-gradient( 128deg, #4b3375 10%, #7758ad 55% , #6e539e 80% );
+}
+
 
 .inputs-search-subtitle button, .icon-select, .inputs-plus-product-subtitle button {
   background-image: linear-gradient( 128deg, #270069 10%, #6640a8 55% , #53318d 80% );
@@ -84,8 +91,18 @@
   border-left: none;
   height: 46px;
   cursor: pointer;
+  transition: background ease 0.5s;
 }
 
+.icon-select{
+  cursor: default;
+}
+
+.input-search{
+  font-weight: 700;
+  outline: none;
+  padding-left: 5px;
+}
 
 .inputs-search-subtitle button i, .icon-select i{
   color: white;
@@ -101,6 +118,10 @@
   height: 45px;
   border-bottom-right-radius: 5px;
   border-top-right-radius: 5px;
+  padding-left: 5px;
+  font-weight: 700;
+  outline: none;
+  color: #7a7a7a;
 }
 
 .icon-select {
@@ -122,4 +143,11 @@
 }
 
 
+.header-information-stock{
+  justify-content: start;
+}
+
+.value-stock, .cost-stock, .profit-stock{
+  padding: 0 32px;
+}
  

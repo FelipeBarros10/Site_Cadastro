@@ -3,7 +3,7 @@
 <head>
   <link rel="stylesheet" href="./../Assets/css/header.css">
 </head>
-
+<!--Início Título-->
 <div class="main-header">
   <div class="title-content">
     <div>
@@ -13,7 +13,7 @@
     <div class="perfil-content">
       <div class="image-content">
         <div class="image">
-            
+
         </div>
       </div>
 
@@ -23,10 +23,12 @@
       </div>
     </div>
   </div>
+  <!--Fim Título-->
 
+  <!--Início Subtítulo-->
   <div class="header-inputs">
     <div class="inputs-search-subtitle">
-      <input type="text" placeholder="Pesquise" >
+      <input type="text" placeholder="Pesquise">
       <button><i class="bi bi-search"></i></button>
     </div>
 
@@ -34,11 +36,14 @@
       <div class="icon-select">
         <i class="bi bi-funnel"></i>
       </div>
-      <select name="" id="">
-        <option value="filtros">Filtros</option>
-        <option value="sim">Sim</option>
-        <option value="nao">Não</option>
-      </select>
+
+      <form action="">
+        <select name="filtros" id="">
+          <option value="">Filtros</option>
+          <option value="sim">Sim</option>
+          <option value="nao">Não</option>
+        </select>
+      </form>
     </div>
 
     <div class="inputs-plus-product-subtitle">
@@ -48,10 +53,26 @@
       </button>
     </div>
   </div>
+  <!--Fim Subtítulo-->
 
-  <div>
+  <!--Início do Segundo Subtítulo-->
+  <div class="header-information-stock">
+    <div class="value-stock">
+      <h4>R$ 000.000,0</h4>
+      <span>Valor em estoque</span>
+    </div>
 
+    <div class="cost-stock">
+      <h4>R$ 000.000,0</h4>
+      <span>Custo do estoque</span>
+    </div>
+
+    <div class="profit-stock">
+      <h4>R$ 000.000,0</h4>
+      <span>Lucro Previsto</span>
+    </div>
   </div>
+  <!--Fim Segundo Subtítulo-->
 </div>
 
 

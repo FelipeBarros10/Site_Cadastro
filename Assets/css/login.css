@@ -9,7 +9,7 @@ body {
 }
 
 .main{
-  background-color: #2C2C2C;
+  background-color: #f1f1f1;
 }
 .container {
   display: flex;
@@ -49,7 +49,7 @@ body {
 }
 
 .title-primary {
-  color: #121212;
+  color: #fff;
 }
 
 .title-second {
@@ -59,22 +59,22 @@ body {
 .description {
   font-size: 14px;
   font-weight: 300px;
-  color: #ffff;
+  color: #53318d;
   line-height: 30px;
 }
 
 .description-primary {
-  color: #121212;
+  color: #fff;
 }
 
 .description-second {
-  color: #fff;
+  color: #53318d;
 }
 
 .btn {
   border-radius: 15px;
   text-transform: uppercase;
-  color: #121212;
+  color: white;
   font-size: 10px;
   padding: 12px 20px;
   cursor: pointer;
@@ -87,7 +87,7 @@ body {
 
 .btn-primary {
   background-color: transparent;
-  border: 1px solid #121212;
+  border: 1px solid #fff;
   transition: background-color 0.5s;
 }
 
@@ -157,7 +157,7 @@ body {
   height: 35px;
   line-height: 35px;
   text-align: center;
-  color: #ffff;
+  color: #53318d;
   transition: background-color 0.5s;
 }
 
@@ -183,14 +183,14 @@ body {
 }
 
 .icon-modify {
-  color: #7f8c8d;
+  color: #53318d;
   padding: 0 5px;
 }
 
 .second-content {
   position: absolute;
   display: flex;
-  background-color: #121212;
+  background-color:#ffff;
 }
 
 .second-content .first-column {
@@ -204,7 +204,7 @@ body {
 }
 
 .password {
-  color: #ffff;
+  color: #53318d;
   font-size: 14px;
   align-self: center;
   margin: 15px 0;

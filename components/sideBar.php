@@ -39,7 +39,7 @@
 
     <div id="statistics" class="icon">
       <a id="link" class="link" href="#"><i id="icon" class="bi bi-bar-chart"></i>
-      <span>Estatística</span>
+      <span>Estatísticas</span>
     </a>
       
     </div>
