@@ -4,7 +4,7 @@
     $hostName = "localhost";
     $userHost = "root";
     $password = "";
-    $nameDb = "usuarios_bd";
+    $nameDb = "site_register";
 
     $conn = mysqli_connect($hostName, $userHost, $password, $nameDb);
 
