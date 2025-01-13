@@ -38,7 +38,7 @@ function registerValidate($userInformation){
     #Se não, a função de conexão do BD é chamada
     $conn = connectDb();
     #A consulta é realizada, chamando uma função que recebe
-    $result = dbQuery($conn, 'SELECT * FROM CADASTRO_USUARIOS');
+    $result = dbQuerySelect($conn, 'SELECT * FROM CADASTRO_USUARIOS');
 
     #Verifica se o número de linhas é maior que 0
     if (mysqli_num_rows($result) > 0) {

@@ -6,7 +6,7 @@
 <div id="sidebar" class="sidebar">
   <div class="icons-sidebar">
     <div class="logo-container">
-      <img id="logo" class="logo" src="../Assets/img/logo.png" alt="">
+      <a href="../views/mainPage.php"><img id="logo" class="logo" src="../Assets/img/logo.png" alt=""></a>
     </div>
 
     <div id="list" class="icon">
@@ -15,7 +15,7 @@
 
   
     <div id="sign-up" class="icon">
-      <a id="link" class="link" href="#">
+      <a id="link" class="link" href="../views/registerPage.php">
         <i id="icon" class="bi bi-plus-circle"></i>
         <span>Cadastrar</span>
       </a>

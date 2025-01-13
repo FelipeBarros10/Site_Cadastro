@@ -16,7 +16,7 @@ body{
 }
 
 .main-register-content{
-  width: 95%;
+  width: 100%;
 }
 
 .main-table-products{
@@ -68,9 +68,6 @@ td{
   border-radius: 20px;
   padding: 2px 6px;
   transition: background-color 0.5s ease;
-
-
-  
 }
 
 .btn:hover{

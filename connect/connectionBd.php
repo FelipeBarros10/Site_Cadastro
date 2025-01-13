@@ -20,7 +20,6 @@ function connectDb()
 }
 
 
-
 function dbQueryInsert($conn, $query, array $values)
 {
 

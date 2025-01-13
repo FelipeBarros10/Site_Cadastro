@@ -24,19 +24,17 @@ function createUser($userInformation) {
     #Comando SQL de insert no BD
     $queryInsert = 'INSERT INTO CADASTRO_USUARIOS (NOME, EMAIL, SENHA) VALUES (?, ?, ?)';
 
-      #Verifica se a preparação do insert foi realizada
-    if ($prepareSql = $conn->prepare($queryInsert)) {
-      #Se sim, será feito o bind dos parâmetros "?" com cada informação que será inserida no BD
-      $prepareSql->bind_param("sss", $name, $email, $hashedPassword);
+    $values = [$name, $email, $hashedPassword];
 
-      #Verifica se foi executado
-      if ($prepareSql->execute()) {
-        #Se sim, retorna true
-        return true;
-      } else {
-        #Se naõ, retorna false
-        return false;
-      }
+    $resultOfInsert = dbQueryInsert($conn, $queryInsert, $values);
+
+      #Verifica se a preparação do insert foi realizada
+    if ($resultOfInsert) {
+      return true;
+
+    } else {
+      #Se naõ, retorna false
+      return false;
     }
 }
 
