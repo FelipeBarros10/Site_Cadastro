@@ -22,7 +22,7 @@
 
 
       <div class="main-register-products">
-        <form action="../controller/handleRegisterProducts.php" method="post">
+        <form action="../controller/handleRegisterProducts.php" method="post" enctype="multipart/form-data">
           <div class="register-inputs">
 
             <div class="first-content-inputs">
@@ -34,7 +34,7 @@
 
               <div class="button-img-product">
                 <input type="file" name="file" id="file" style="display: none;">
-                <button id="btn" onclick="openFile()">
+                <button type="button" id="btn" onclick="openFile()">
                   <i class="bi bi-camera-fill"></i>
                 </button>
 

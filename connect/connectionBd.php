@@ -20,8 +20,9 @@ function connectDb()
 }
 
 
-function dbQueryInsert($conn, $query, array $values)
+function dbQueryInsert( $query, $values)
 {
+  $conn = connectDb();
 
   if ($query != '') {
 
@@ -33,19 +34,33 @@ function dbQueryInsert($conn, $query, array $values)
 
         $typeParam = [];
 
-        foreach ($values as $value) {
-          if (is_string($value)) {
+        if (is_array($values)) {
+          foreach ($values as $value) {
+            if (is_string($value)) {
+              $typeParam[] = "s";
+            } else if (is_int($value)) {
+              $typeParam[] = "i";
+            } else {
+              $typeParam[] = "d";
+            }
+          }
+
+          $typeParamToStr = implode($typeParam);
+
+          $bindParam = mysqli_stmt_bind_param($stmt, $typeParamToStr, ...$values);
+        } else {
+          if (is_string($values)) {
             $typeParam[] = "s";
-          } else if (is_int($value)) {
+          } else if (is_int($values)) {
             $typeParam[] = "i";
           } else {
             $typeParam[] = "d";
           }
+
+          $typeParamToStr = implode($typeParam);
+
+          $bindParam = mysqli_stmt_bind_param($stmt, $typeParamToStr, $values);
         }
-
-        $typeParamToStr = implode($typeParam);
-
-        $bindParam = mysqli_stmt_bind_param($stmt, $typeParamToStr, ...$values);
 
         if (isset($bindParam)) {
           $queryResult = mysqli_stmt_execute($stmt);
@@ -53,18 +68,61 @@ function dbQueryInsert($conn, $query, array $values)
         }
       }
     };
-
   } else {
     return false;
   }
 }
 
 
-function dbQuerySelect ($conn, $query) {
+function dbQuerySelect($query, $values = "")
+{
+  $conn = connectDb();
   if ($query != '') {
-    $queryResult = mysqli_query($conn, $query);
-    return $queryResult;
-  }  else{
+    if ($values) {
+      $stmt = mysqli_prepare($conn, $query);
+
+      if (is_array($values)) {
+        $typeParam = [];
+
+        if (isset($stmt)) {
+          foreach ($values as $value) {
+            if (is_string($value)) {
+              $typeParam[] = "s";
+            } else if (is_int($value)) {
+              $typeParam[] = "i";
+            } else {
+              $typeParam[] = "d";
+            }
+          }
+
+          $typeParamToStr = implode($typeParam);
+
+          $bindParam = mysqli_stmt_bind_param($stmt, $typeParamToStr, ...$values);
+        } else {
+          if (is_string($values)) {
+            $typeParam[] = "s";
+          } else if (is_int($values)) {
+            $typeParam[] = "i";
+          } else {
+            $typeParam[] = "d";
+          }
+
+          $typeParamToStr = implode($typeParam);
+
+          $bindParam = mysqli_stmt_bind_param($stmt, $typeParamToStr, $values);
+        }
+
+
+        if (isset($bindParam)) {
+          $queryResult = mysqli_stmt_execute($stmt);
+          return $queryResult;
+        }
+      }
+    } else {
+      $queryResult = mysqli_query($conn, $query);
+      return $queryResult;
+    }
+  } else {
     return false;
   }
 }

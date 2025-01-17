@@ -1,5 +1,7 @@
 <?php
 
+require_once __DIR__ . "/../model/products.php";
+
 function registerProductValidate($productInformations)
 {
 
@@ -36,6 +38,12 @@ function registerProductValidate($productInformations)
   if (empty($productInformations["selectCategory"])) {
     if (empty($productInformations["newCategory"])) {
       $errors["selectCategory"] = "Selecione a categoria do produto ou registre uma nova abaixo";
+    } else {
+      $checkingCategoryTable = checkingCategoryTable($productInformations["newCategory"]);
+      
+      if(isset($checkingCategoryTable)){
+        $errors["categorieAlreadyExist"] = "Essa categoria já existe, selecione-a no campo acima";
+      }
     }
   }
 

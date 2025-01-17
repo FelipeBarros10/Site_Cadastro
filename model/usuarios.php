@@ -6,7 +6,6 @@ require_once '../connect/connectionBd.php';
 #Função que cria usuário dentro do BD
 function createUser($userInformation) {
   #Chama a funçãod e conexão com o BD
-  $conn = connectDb();
 
   #Laço de repetição
   foreach($userInformation as $keyIndex => $userContent){
@@ -26,7 +25,7 @@ function createUser($userInformation) {
 
     $values = [$name, $email, $hashedPassword];
 
-    $resultOfInsert = dbQueryInsert($conn, $queryInsert, $values);
+    $resultOfInsert = dbQueryInsert($queryInsert, $values);
 
       #Verifica se a preparação do insert foi realizada
     if ($resultOfInsert) {
