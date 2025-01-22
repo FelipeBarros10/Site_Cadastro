@@ -30,7 +30,7 @@ function register($userInformation) {
   } else {
     #Se não, criamos uma variável que recebe a criação do usuário no BD
     $userCreated = createUser($userInformation);
-    
+  
     #Verifica se foi criado
     if(isset($userCreated)){
       #Se sim, passa para a próxima página

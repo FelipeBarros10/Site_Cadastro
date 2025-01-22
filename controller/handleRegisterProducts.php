@@ -3,8 +3,8 @@
 session_start();
 
 #Incluindo os arquivos necessários
-include_once '../model/products.php';
-include_once '../validations/registerProductValidate.php';
+require_once __DIR__  . '/../model/products.php';
+require_once __DIR__  . '/../validations/registerProductValidate.php';
 
 if(isset($_POST)){
 
@@ -19,9 +19,16 @@ function registerProduct ($productInformations){
   if(isset($registerProductValidating['invalid'])){
     $_SESSION['errors'] = $registerProductValidating['invalid'];
   } else {
+    
     if(isset($_FILES["file"])){
       $infoUploadImage = $_FILES["file"];
-      $createNewProduct = createNewProduct($registerProductValidating, $infoUploadImage);
+    }
+
+    $createNewProduct = createNewProduct($registerProductValidating, $infoUploadImage);
+
+    if(isset($createNewProduct['valid'])){
+      header("Location: ../views/mainPage.php");
+      exit();
     }
     
   }

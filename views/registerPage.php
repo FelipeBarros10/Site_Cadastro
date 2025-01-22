@@ -1,3 +1,5 @@
+<?php require_once __DIR__  . '/../model/products.php'?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,9 +16,9 @@
 
 <body>
   <div class="main-parent">
-    <?php include '../components/sideBar.php' ?>
+    <?php  require_once __DIR__  . '/../components/sideBar.php' ?>
 
-    <?php include '../components/registerPage/headerRegisterPage.php' ?>
+    <?php  require_once __DIR__  . '/../components/registerPage/headerRegisterPage.php' ?>
 
     <main class="main-register-content">
 
@@ -62,9 +64,20 @@
               <div class="input-category-product">
                 <div class="select-category">
                   <label>Selecione a categoria</label>
-                  <select name="selectCategory" id="">
-                    <option value="">Categoria do produto</option>
-                  </select>
+                  <?php 
+                    $query = "SELECT nome FROM categorias";
+                    $queryResult = dbQuerySelect($query);
+
+                    echo "<select name='selectCategory' id=''>";
+                      echo "<option value=''>Selecione uma categoria</option>";
+                      if(mysqli_num_rows($queryResult) > 0){
+                        while($row = mysqli_fetch_assoc($queryResult)){
+                          echo "<option value='{$row["nome"]}'>{$row["nome"]}</option>";
+                        }
+                      }
+                    echo '</select>';                  
+                  ?>
+                  
                 </div>
 
                 <div class="input-new-category">

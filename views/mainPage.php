@@ -1,3 +1,5 @@
+<?php require_once __DIR__ . "/../config/config.php"?>
+<?php require_once __DIR__ . "/../connect/connectionBd.php"?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -31,20 +33,39 @@
             </thead>
 
             <tbody class="table-body">
-              <tr>
-                <td>
-                  <div >
-                    <a class="column-product" href="">
-                      <img class="image-product" src="./../Assets/img/camiseta.jpeg" alt="">
-                      <span>Camisetas polo - pacote com 3</span>
-                    </a>
-                  </div>
-                </td>
-                <td>Acessórios</td>
-                <td>50</td>
-                <td>R$ 100,00</td>
-                <td><button class="btn"><i class="bi bi-trash"></i></button></td>
-              </tr>
+              
+                <?php 
+                  $query = "SELECT * FROM produtos";
+                  $queryResult = dbQuerySelect($query);
+
+                
+                  if(mysqli_num_rows($queryResult) > 0){
+
+                    while($row = mysqli_fetch_assoc($queryResult)){
+
+                      $queryInnerJoin = "SELECT categorias.NOME FROM categorias
+                      INNER JOIN produtos ON categorias.ID = produtos.ID_CATEGORIA WHERE categorias.ID = ?";
+
+                      $values = $row["ID_CATEGORIA"];
+
+                      $queryInnerJoinResult = dbQuerySelect($queryInnerJoin, $values);
+
+                      $categorieName = implode(mysqli_fetch_assoc($queryInnerJoinResult));
+
+                      echo "<tr>";
+                      echo "<td><a class='column-product' href=''>
+                                <img class='image-product' src='./../Assets/img/{$row['IMAGENS']}' 
+                                <span>{$row['NOME']}</span>
+                                </a>
+                            </td>";
+                      echo "<td>$categorieName</td>";
+                      echo "<td>{$row['QUANTIDADE_ESTOQUE']}</td>";
+                      echo "<td>{$row['PRECO']}</td>";
+                      echo "<td><button class='btn'><i class='bi bi-trash'></i></button></td>";
+                      echo "</tr>";
+                    }
+                  }
+                ?>
             </tbody>
           </table>
         </div>

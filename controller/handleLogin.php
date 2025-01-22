@@ -11,12 +11,14 @@ include_once '../validations/loginValidate.php';
 if(isset($_POST)){
   #Se sim, uma variável é criada para receber as informações do usuário
   $userInformation = $_POST;
+
   #Passa as informações para a função que cuidará do login
   login($userInformation);
   
 }
 
 function login($userInformation) {
+
   #Criando uma variável que recebe o retorno das validações feitas das informações do usuário
   $userLoginValidating = loginValidate($userInformation);
 

@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 #Incluindo a conexão com o BD
 require_once '../connect/connectionBd.php';
@@ -27,9 +28,13 @@ function createUser($userInformation) {
 
     $resultOfInsert = dbQueryInsert($queryInsert, $values);
 
-      #Verifica se a preparação do insert foi realizada
+    #Verifica se o insert foi realizado
     if ($resultOfInsert) {
-      return true;
+      #Pegando o Id inserido do usuário
+      $_SESSION["userId"] = $resultOfInsert;
+
+      $success = "Bem-vindo(a)";
+      return ['valid' => $success];
 
     } else {
       #Se naõ, retorna false
