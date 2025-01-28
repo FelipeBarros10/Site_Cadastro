@@ -14,19 +14,15 @@ function registerProductValidate($productInformations)
     $errors["productNameEmpty"] = "Informe o nome do produto";
   }
 
-  if (!empty($productInformations["file"])) {
-    $separator = explode(".", $productInformations["file"]);
-
-    if (!preg_match('/^\(jpeg|png|gif|bmp|jpg\)$/', $separator[1])) {
-      $errors["file"] = "Verifique a extensão. Extesões permitidas: (jpeg|png|gif|bmp|jpg)";
-    }
-  }
-
 
   if (empty($productInformations["price"])) {
     $errors["priceEmpty"] = "Informe o valor do produto";
   } else if ($productInformations["price"] === 0) {
     $errors["priceEqualZero"] = "O valor do produto deve ser maior que 0";
+  }
+
+  if(empty($productInformations["cost"])){
+    $errors["emptyCost"] = "Informe o custo do produto";
   }
 
   if (empty($productInformations["quantity"])) {

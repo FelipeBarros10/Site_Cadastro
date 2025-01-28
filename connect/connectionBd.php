@@ -1,7 +1,5 @@
 <?php
 
-use function PHPSTORM_META\type;
-
 function connectDb()
 {
   $hostName = "localhost";
@@ -88,71 +86,3 @@ function dbQuery($query, $values = ""){
     return false;
   }
 }
-
-// $query = "DELETE FROM produtos WHERE ID = ?";
-//   $values = "7";
-//   $deletingTheProduct = dbQuery($query, $values);
-
-
-// function dbQuery($query, $values = "")
-// {
-
-//   $conn = connectDb();
-
-//   if ($query != '') {
-//     if ($values) {
-//       $stmt = mysqli_prepare($conn, $query);
-//       if (is_array($values)) {
-//         $typeParam = [];
-
-//         if (isset($stmt)) {
-//           foreach ($values as $value) {
-//             if(filter_var($values, FILTER_VALIDATE_INT)){
-//               $typeParam[] = "i";
-//             } elseif (filter_var($values, FILTER_VALIDATE_FLOAT)){
-//               $typeParam[] = "d";
-//             } else {
-//               $typeParam[] = "s";
-//             }
-//           }
-
-//           $typeParamToStr = implode($typeParam);
-
-//           $bindParam = mysqli_stmt_bind_param($stmt, $typeParamToStr, ...$values);
-//         } else {
-//           return false;
-//         }
-//       } else {
-
-//         if(filter_var($values, FILTER_VALIDATE_INT)){
-//           $typeParam[] = "i";
-//         } elseif (filter_var($values, FILTER_VALIDATE_FLOAT)){
-//           $typeParam[] = "d";
-//         } else {
-//           $typeParam[] = "s";
-//         }
-
-
-//         $typeParamToStr = implode($typeParam);
-
-
-//         $bindParam = mysqli_stmt_bind_param($stmt, $typeParamToStr, $values);
-//       }
-
-//       if (isset($bindParam)) {
-//         $queryResult = mysqli_stmt_execute($stmt);
-
-//         if ($queryResult) {
-//           $result = mysqli_stmt_get_result($stmt);
-//           return $result;
-//         }
-        
-//       }
-//     } else {
-//       $queryResult = mysqli_query($conn, $query);
-//       return $queryResult;
-//     }
-//   } else {
-//     return false;
-//   }
-// }

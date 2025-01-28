@@ -1,5 +1,5 @@
-<?php require_once __DIR__ . "/../config/config.php"?>
-<?php require_once __DIR__ . "/../connect/connectionBd.php"?>
+<?php require_once __DIR__ . "/../config/config.php" ?>
+<?php require_once __DIR__ . "/../connect/connectionBd.php" ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,62 +17,119 @@
     <?php include '../components/sideBar.php' ?>
 
     <main class="main-register-content">
-      <?php include '../components/mainPage/header.php' ?>
+      <?php
+        $page_title = "Produtos";
+        include '../components/headerTop.php' 
+      ?>
+      <!--Início Subtítulo-->
+      <div class="header-inputs">
+        <div class="inputs-search-subtitle">
+          <input type="text" placeholder="Pesquise">
+          <button><i class="bi bi-search"></i></button>
+        </div>
 
-      <div class="main-table-products">
-        <div>
-          <table class="table-products">
-            <thead class="table-header">
-              <tr>
-                <th>Produto</th>
-                <th>Categoria</th>
-                <th>Estoque</th>
-                <th>Preço</th>
-                <th></th>
-              </tr>
-            </thead>
+        <div class="inputs-select-subtitle">
+          <div class="icon-select">
+            <i class="bi bi-funnel"></i>
+          </div>
 
-            <tbody class="table-body">
-              
-                <?php 
-                  $query = "SELECT * FROM produtos";
-                  $queryResult = dbQuerySelect($query);
+          <form action="">
+            <select name="filtros" id="">
+              <option value="">Filtros</option>
+              <option value="sim">Sim</option>
+              <option value="nao">Não</option>
+            </select>
+          </form>
+        </div>
 
-                
-                  if(mysqli_num_rows($queryResult) > 0){
-
-                    while($row = mysqli_fetch_assoc($queryResult)){
-
-                      $queryInnerJoin = "SELECT categorias.NOME FROM categorias
-                      INNER JOIN produtos ON categorias.ID = produtos.ID_CATEGORIA WHERE categorias.ID = ?";
-
-                      $values = $row["ID_CATEGORIA"];
-
-                      $queryInnerJoinResult = dbQuerySelect($queryInnerJoin, $values);
-
-                      $categorieName = implode(mysqli_fetch_assoc($queryInnerJoinResult));
-
-                      echo "<tr>";
-                      echo "<td><a class='column-product' href=''>
-                                <img class='image-product' src='./../Assets/img/{$row['IMAGENS']}' 
-                                <span>{$row['NOME']}</span>
-                                </a>
-                            </td>";
-                      echo "<td>$categorieName</td>";
-                      echo "<td>{$row['QUANTIDADE_ESTOQUE']}</td>";
-                      echo "<td>{$row['PRECO']}</td>";
-                      echo "<td><button class='btn'><i class='bi bi-trash'></i></button></td>";
-                      echo "</tr>";
-                    }
-                  }
-                ?>
-            </tbody>
-          </table>
+        <div class="inputs-plus-product-subtitle">
+          <button>
+            <i class="bi bi-plus-lg"></i>
+            <span>Produto</span>
+          </button>
         </div>
       </div>
+      <!--Fim Subtítulo-->
+
+      <!--Início do Segundo Subtítulo-->
+      <div class="header-information-stock">
+        <div class="value-stock">
+          <h4>R$ 000.000,0</h4>
+          <span>Valor em estoque</span>
+        </div>
+
+        <div class="cost-stock">
+          <h4>R$ 000.000,0</h4>
+          <span>Custo do estoque</span>
+        </div>
+
+        <div class="profit-stock">
+          <h4>R$ 000.000,0</h4>
+          <span>Lucro Previsto</span>
+        </div>
+      </div>
+      <!--Fim Segundo Subtítulo-->
+      
+      <?php
+        $query = "SELECT * FROM produtos";
+        $queryResult = dbQuery($query);
+
+
+        if (mysqli_num_rows($queryResult) > 0) {
+
+          while ($row = mysqli_fetch_assoc($queryResult)) {
+
+            $queryInnerJoin = "SELECT categorias.NOME FROM categorias
+            INNER JOIN produtos ON categorias.ID = produtos.ID_CATEGORIA WHERE categorias.ID = ?";
+
+            $values = $row["ID_CATEGORIA"];
+
+            $queryInnerJoinResult = dbQuery($queryInnerJoin, $values);
+
+            $categorieName = implode(mysqli_fetch_assoc($queryInnerJoinResult));
+                  
+              echo"<div class='main-table-products'>";
+                echo"<div>";
+                  echo"<table class='table-products'>";
+                    echo"<thead class='table-header'";
+                        echo"<tr>";
+                        echo"<th>Produto</th>";
+                        echo"<th>Categoria</th>";
+                        echo"<th>Estoque</th>";
+                        echo"<th>Preço</th>";
+                        echo"<th></th>";
+                        echo "</tr>";
+                    echo"</thead>";
+
+                      echo"<tbody class='table-body'>";
+                          echo "<tr>";
+
+                            echo "<td><a class='column-product' href=''>
+                                        <img class='image-product' src='./../Assets/img/{$row['IMAGENS']}' />
+                                        <span>{$row['NOME']}</span>
+                                      </a>
+                                  </td>";
+                            echo "<td>$categorieName</td>";
+                            echo "<td>{$row['QUANTIDADE_ESTOQUE']}</td>";
+                            echo "<td>{$row['PRECO']}</td>";
+                            echo "<td>
+                                    <form action='../controller/handleDeleteProducts.php' method='post' class=''>
+                                      <input type='hidden' name='product_id' value='{$row['ID']}'>
+                                      <button class='btn'><i class='bi bi-trash'></i></button>
+                                    </form>
+                                  </td>";
+                          echo "</tr>";
+                      echo"</tbody>";
+                    echo "</table>";
+                  echo"</div>";
+                 echo"</div>";
+                }
+              }
+            ?>
+
+      
     </main>
   </div>
-
 </body>
 <script src="../Assets/js/mainPage.js"></script>
 

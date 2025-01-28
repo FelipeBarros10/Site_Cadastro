@@ -100,7 +100,7 @@ session_start();
           <button id="signin" class="btn btn-primary">login</button>
         </div>
         <div class="second-column">
-          <h2 class="title title-second">create account</h2>
+          <h2 class="title title-second">crie sua conta com  Google</h2>
           <div class="social-media">
             <ul class="list-social-media">
               <a class="link-social-media" href="#">
@@ -110,11 +110,25 @@ session_start();
               </a>
             </ul>
           </div><!-- social media -->
-          <p class="description description-second">or use your email for registration:</p>
-          <form action="controller/handleCreateAccount.php" method="post" class="form">
+          <p class="description description-second">ou use seu email para o cadastro:</p>
+          <form action="controller/handleCreateAccount.php" method="post" class="form" enctype="multipart/form-data">
+
+            <div class="profileImg">
+              <div>
+                <input style="display: none;" type="file" name="profileImage" id="inputFile" accept="image/*" onchange="profileImgView(event)">
+                <button type="button" id="btn" onclick="openFile()">
+                  <img src="./Assets/img/iconeUser.png" id="profileImg" />
+                </button>
+              </div>
+
+              <div>
+                <span>Insira sua foto de perfil</span>
+              </div>
+            </div>
+
             <label class="label-input" for="">
               <i class="bi bi-person icon-modify "></i>
-              <input type="text" name="name" placeholder="Name">
+              <input type="text" name="name" placeholder="Nome">
             </label>
             <?php
             if (isset($_SESSION['errors'])) {
@@ -184,7 +198,7 @@ session_start();
             }
 
             ?>
-            <button class="btn btn-second">sign up</button>
+            <button class="btn btn-second">cadastre-se</button>
           </form>
         </div><!-- second column -->
       </div><!-- second-content -->

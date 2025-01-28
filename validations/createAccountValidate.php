@@ -21,7 +21,7 @@ function registerValidate($userInformation){
 
     #Se for menor que 2, uma variável de erros é criada e nela e passada um valor associativo contendo o aviso de erro
     $errors['nameShortLength'] = "O nome deve ter no mínimo 2 caracteres.";
-  } 
+  }
 
   #Verifica se o cumprimento do nom é maior que 50 caracteres
   if (strlen($userInformation['name']) > 50) {
@@ -38,7 +38,7 @@ function registerValidate($userInformation){
     #Se não, a função de conexão do BD é chamada
     $query = "SELECT * FROM CADASTRO_USUARIOS";
     #A consulta é realizada, chamando uma função que recebe
-    $result = dbQuerySelect($query);
+    $result = dbQuery($query);
 
     #Verifica se o número de linhas é maior que 0
     if (mysqli_num_rows($result) > 0) {

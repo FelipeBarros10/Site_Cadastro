@@ -1,3 +1,4 @@
+<?php require_once __DIR__ . "/../config/config.php" ?>
 <?php require_once __DIR__  . '/../model/products.php'?>
 
 <!DOCTYPE html>
@@ -16,9 +17,12 @@
 
 <body>
   <div class="main-parent">
-    <?php  require_once __DIR__  . '/../components/sideBar.php' ?>
+    <?php require_once __DIR__  . '/../components/sideBar.php' ?>
 
-    <?php  require_once __DIR__  . '/../components/registerPage/headerRegisterPage.php' ?>
+    <?php  
+      $page_title = "Cadastre seu produto";
+      require_once __DIR__  . '/../components/headerTop.php' 
+    ?>
 
     <main class="main-register-content">
 
@@ -51,6 +55,11 @@
                   <input type="text" name="price" id="price">
                 </div>
 
+                <div class="input-cost">
+                  <label>Custo</label>
+                  <input type="text" name="cost" id="cost">
+                </div>
+
                 <div class="input-stock">
                   <label>Quantidade</label>
                   <input type="text" name="quantity" id="">
@@ -66,7 +75,7 @@
                   <label>Selecione a categoria</label>
                   <?php 
                     $query = "SELECT nome FROM categorias";
-                    $queryResult = dbQuerySelect($query);
+                    $queryResult = dbQuery($query);
 
                     echo "<select name='selectCategory' id=''>";
                       echo "<option value=''>Selecione uma categoria</option>";

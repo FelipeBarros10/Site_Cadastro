@@ -14,10 +14,11 @@ function createNewProduct($productInformations, $infoUploadImage)
     }
   }
 
-  if(isset($productInformations["price"])){
-    $explodingStr = explode("R$", $productInformations["price"]);
+  if(isset($productInformations["price"]) && isset($productInformations["cost"])){
+    $explodingStrPrice = array(explode("R$", $productInformations["price"]), explode("R$", $productInformations["cost"]));
     
-    $gettingPriceStr = $explodingStr[1];
+    $gettingPriceStr = $explodingStrPrice[0][1];
+    $gettingCostStr = $explodingStrPrice[1][1];
   }
 
   if ($productInformations["newCategory"] != "") {
@@ -33,7 +34,7 @@ function createNewProduct($productInformations, $infoUploadImage)
   } else if ($productInformations["selectCategory"] != "") {
     $query = "SELECT ID FROM categorias WHERE NOME = ?";
     $values = $productInformations["selectCategory"];
-    $queryResult = dbQuerySelect($query, $values);
+    $queryResult = dbQuery($query, $values);
 
     if(mysqli_num_rows($queryResult) > 0){
       $row = mysqli_fetch_assoc($queryResult);
@@ -42,7 +43,7 @@ function createNewProduct($productInformations, $infoUploadImage)
   }
 
 
-  $insertProducts = insertDbProducts($productInformations["productName"], $productInformations["quantity"], $gettingPriceStr, $_SESSION["userId"], $categorieId, $imageUniqueName);
+  $insertProducts = insertDbProducts($productInformations["productName"], $productInformations["quantity"], $gettingPriceStr, $_SESSION["userId"], $categorieId, $imageUniqueName, $gettingCostStr);
 
   if (isset($insertProducts)){
     $success = "Produto Cadastrado";
@@ -62,6 +63,7 @@ function public_path($path = '')
 
 function imageUniqueName($infoUploadImage)
 {
+
   $imageName = $infoUploadImage["name"];
   $extensionImage = pathinfo($imageName);
   $imageHashed = md5($imageName . time()) . "." . $extensionImage["extension"];
@@ -88,7 +90,7 @@ function insertDbCategories($categorie)
 
   $values = $categorie;
 
-  $categorieInsert = dbQueryInsert($query, $values);
+  $categorieInsert = dbQuery($query, $values);
 
   if ($categorieInsert) {
     var_dump($categorieInsert);
@@ -101,7 +103,7 @@ function insertDbCategories($categorie)
 function checkingCategoryTable($categorie)
 {
   $queryCommand = "SELECT NOME FROM CATEGORIAS";
-  $queryResult = dbQuerySelect($queryCommand);
+  $queryResult = dbQuery($queryCommand);
   $categorie = strtolower($categorie);
 
   if (mysqli_num_rows($queryResult) > 0) {
@@ -173,13 +175,17 @@ function removeAccents($string)
   return strtr($string, $mapa);
 }
 
-function insertDbProducts ($productName, $quantity, $price, $userId, $categorieId, $image) {
-  $values = array($productName, $quantity, $price, $userId, $categorieId, $image);
-  $query = "INSERT INTO produtos (NOME, QUANTIDADE_ESTOQUE, PRECO, ID_USUARIO, ID_CATEGORIA, IMAGENS) VALUES (?, ?, ?, ?, ?, ?)";
+function insertDbProducts ($productName, $quantity, $price, $userId, $categorieId, $image, $cost) {
+  $values = array($productName, $quantity, $price, $userId, $categorieId, $image, $cost);
+  $query = "INSERT INTO produtos (NOME, QUANTIDADE_ESTOQUE, PRECO, ID_USUARIO, ID_CATEGORIA, IMAGENS, CUSTO) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
-  $insertProducts = dbQueryInsert($query, $values);
+  $insertProducts = dbQuery($query, $values);
 
   return $insertProducts;
   
   
+}
+
+function deleteProductAtDb ($productId){
+
 }

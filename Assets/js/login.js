@@ -30,5 +30,20 @@ if(isErrorMessagesActive()){
   body.className= "sign-up-js-errors";
 };
 
+function profileImgView (event){
+  const reader = new FileReader();
+  reader.onload = function (){
+    document.getElementById("profileImg").src = reader.result;
+  }
+
+  reader.readAsDataURL(event.target.files[0]);
+}
+
+
+function openFile() {
+  const inputFile = document.getElementById("inputFile");
+
+  inputFile.click();
+}
 
 
