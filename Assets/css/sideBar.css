@@ -1,16 +1,26 @@
-@import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box; 
+  box-sizing: border-box;
+  font-family: "Open Sans", serif;
 }
 
-.sidebar{
-  width: 5%;
+.sidebar, .sidebar-open{
+  width: 7%;
   height: 100vh;
   background-image: linear-gradient( #270069 10%, #6640a8 55% , #53318d 80% );
   display: flex;
   justify-content: center;
+}
+
+.logo-container{
+  display: flex;
+  justify-content: center;
+}
+
+.logo{
+  width: 6rem;
 }
 
 .icons-sidebar{
@@ -19,7 +29,7 @@
   width: 100%;
 }
 
-.icon{
+.icon, .icon-selected-sidebar-close, .icon-selected-sidebar-open , .icon-sidebar-open{
   padding: 20px 0;
   justify-content: center;
   display: flex;
@@ -28,7 +38,10 @@
 }
 
 .icon:hover{
-  background: rgba(222, 238, 222, 0.1)
+  background: rgba(222, 238, 222, 0.2)
+}
+.icon-selected-sidebar-close, .icon-selected-sidebar-open{
+  background: rgba(222, 238, 222, 0.2);
 }
 
 .icon:first-child{
@@ -36,14 +49,49 @@
 
 }
 
+.link, .link-sidebar-open{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+}
 
-.icon i {
+.icon i, .icon-selected-sidebar-close i , .icon-selected-sidebar-open i, .icon-sidebar-open i{
   font-size: 25px;
   color: #fff;
 }
 
-.icon span {
+
+.icon span, .icon-selected-sidebar-close span, .icon-selected-sidebar-open span,  .icon-sidebar-open span {
   color: #d8d8d8;
   padding-top: 3px;
-  font-weight: 200;
+  font-size: 17px;
 }
+
+
+/*Open Sidebar*/
+
+.sidebar-open{
+  width: 15%;  
+}
+
+.logo-sidebar-open{
+  width: 10rem;
+}
+
+.link-sidebar-open, .icon-sidebar-open, .icon-selected-sidebar-open{
+  flex-direction: row;
+  justify-content: left;
+}
+
+
+.icon-sidebar-open i, .icon-selected-sidebar-open i{
+  padding: 0 15px;
+  
+}
+
+.icon-sidebar-open span{
+  font-size: 18px;
+}
+
+

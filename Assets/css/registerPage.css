@@ -1,0 +1,132 @@
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,700&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Open Sans", serif;
+}
+
+body {
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+.main-parent, .main-register-content, .register-inputs, .first-content-inputs, .input-name-product, .button-img-product, .second-content-input, .input-category-product, .input-price-stock-product{
+  display: flex;
+}
+
+.main-register-content, .register-inputs, .first-content-inputs, .input-name-product, .button-img-product, .second-content-input{
+  align-items: center;
+  justify-content: center;
+}
+
+
+.main-register-content {
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  padding: 32px 0;
+}
+
+.main-register-products {
+  padding: 20px 40px;
+  width: 50%;
+  background-image: linear-gradient(#270069 10%, #6640a8 55%, #53318d 80%);
+  border-radius: 20px;
+  height: 630px;
+}
+
+.register-inputs, .button-img-product, .input-name-product, .input-category-product, .input-price-stock-product{
+  flex-direction: column;
+}
+
+.first-content-inputs, .second-content-input{
+  width: 100%;
+}
+
+.input-name-product, .button-img-product, .input-price-stock-product, .input-category-product{
+  width: 50%;
+}
+
+.input-name-product{
+  align-items: start;
+}
+
+.input-name-product input, .input-price-stock-product input, .input-category-product input, .input-category-product select {
+  border: none;
+  width: 90%;
+  height: 45px;
+  outline: none;
+  border-radius: 10px;
+  padding-left: 5px;
+  font-weight: 700;
+  margin-top: 10px;
+  color: #6640a8;
+  font-size: 14px;
+}
+
+.button-img-product{
+  padding-top: 40px;
+}
+
+.button-img-product button{
+  background-color: #fff;  
+  border: none;
+  padding: 17px 25px;
+  border-radius: 100%;
+  cursor: pointer;
+  transition: background-color ease 0.5s;
+}
+
+.button-img-product button:hover{
+  background-color:#6640a8;
+}
+
+.button-img-product i{
+  font-size: 45px;
+  color: #6640a8;
+}
+
+.button-img-product button:hover i {
+  color: #fff;
+}
+
+
+
+.button-img-product span , .input-name-product , .input-cost , .input-price-stock-product , .input-category-product , .input-new-category  , .select-category , .input-stock {
+  padding-top: 15px;
+  font-weight: bold;
+  font-size: 17px;
+  color: #ffff;
+}
+
+.input-category-product{
+  padding-top: 25px;
+}
+
+.second-content-input{
+  padding-top: 40px;
+}
+
+
+.button-register{
+  margin-top: 20px;
+}
+
+.button-register button{
+  background-color: #6640a8;
+  padding: 10px;
+  border: 2px solid #ccc;
+  height: 46px;
+  cursor: pointer;
+  color: #fff;
+  font-weight: bold;
+  border-radius: 10px;
+  transition: background-color ease 0.5s;
+}
+
+.button-register button:hover{
+  background-color: #fff ;
+  color: #6640a8;
+}
+
+
