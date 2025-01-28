@@ -8,7 +8,7 @@
   <div id="sidebar" class="sidebar">
     <div class="icons-sidebar">
       <div class="logo-container">
-        <a href="../views/mainPage.php"><img id="logo" class="logo" src="../Assets/img/logo.png" alt=""></a>
+        <a href="../views/mainPage.php"><img id="logo" class="logo" src="../Assets/img/logo2.png" alt=""></a>
       </div>
 
       <div id="list" class="icon">
