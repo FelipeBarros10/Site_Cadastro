@@ -4,7 +4,7 @@ require_once __DIR__ . "/../connect/connectionBd.php";
 
 function createNewProduct($productInformations, $infoUploadImage)
 {
-
+ 
   if (!empty($infoUploadImage)) {
     $imageUniqueName = imageUniqueName($infoUploadImage);
 
@@ -93,7 +93,6 @@ function insertDbCategories($categorie)
   $categorieInsert = dbQuery($query, $values);
 
   if ($categorieInsert) {
-    var_dump($categorieInsert);
     return true;
   } else {
     return false;
@@ -176,8 +175,9 @@ function removeAccents($string)
 }
 
 function insertDbProducts ($productName, $quantity, $price, $userId, $categorieId, $image, $cost) {
+
   $values = array($productName, $quantity, $price, $userId, $categorieId, $image, $cost);
-  $query = "INSERT INTO produtos (NOME, QUANTIDADE_ESTOQUE, PRECO, ID_USUARIO, ID_CATEGORIA, IMAGENS, CUSTO) VALUES (?, ?, ?, ?, ?, ?, ?)";
+  $query = "INSERT INTO produtos (NOME, QUANTIDADE_ESTOQUE, PRECO, ID_USUARIO, ID_CATEGORIAS, IMAGENS, CUSTO) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
   $insertProducts = dbQuery($query, $values);
 

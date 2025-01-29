@@ -1,5 +1,6 @@
 <?php require_once __DIR__ . "/../config/config.php" ?>
 <?php require_once __DIR__ . "/../connect/connectionBd.php" ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -80,9 +81,9 @@
           while ($row = mysqli_fetch_assoc($queryResult)) {
 
             $queryInnerJoin = "SELECT categorias.NOME FROM categorias
-            INNER JOIN produtos ON categorias.ID = produtos.ID_CATEGORIA WHERE categorias.ID = ?";
+            INNER JOIN produtos ON categorias.ID = produtos.ID_CATEGORIAS WHERE categorias.ID = ?";
 
-            $values = $row["ID_CATEGORIA"];
+            $values = $row["ID_CATEGORIAS"];
 
             $queryInnerJoinResult = dbQuery($queryInnerJoin, $values);
 
@@ -104,7 +105,7 @@
                       echo"<tbody class='table-body'>";
                           echo "<tr>";
 
-                            echo "<td><a class='column-product' href=''>
+                            echo "<td><a class='column-product' href='showProducts.php?id={$row['ID']}'>
                                         <img class='image-product' src='./../Assets/img/{$row['IMAGENS']}' />
                                         <span>{$row['NOME']}</span>
                                       </a>

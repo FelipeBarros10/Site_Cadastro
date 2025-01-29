@@ -36,8 +36,8 @@ function registerProductValidate($productInformations)
       $errors["selectCategory"] = "Selecione a categoria do produto ou registre uma nova abaixo";
     } else {
       $checkingCategoryTable = checkingCategoryTable($productInformations["newCategory"]);
-      
-      if(isset($checkingCategoryTable)){
+
+      if($checkingCategoryTable == true){
         $errors["categorieAlreadyExist"] = "Essa categoria já existe, selecione-a no campo acima";
       }
     }

@@ -10,7 +10,7 @@ let currentUrl = window.location.pathname;
     // if(currentUrl != url)
     const selectedIconId = localStorage.getItem("selectedIcon");
 
-    if(!currentUrl.includes("register") || !currentUrl.includes("historic") || !currentUrl.includes("users") || !currentUrl.includes("historic") || !currentUrl.includes("statistics")){
+    if(!currentUrl.includes("register") || !currentUrl.includes("historic") || !currentUrl.includes("users") || !currentUrl.includes("historic") || !currentUrl.includes("sale")){
       localStorage.removeItem("selectedIcon");
     }
   
@@ -30,8 +30,8 @@ let currentUrl = window.location.pathname;
           case "users":
             iconElementSelected.className = "bi bi-people-fill";
             break;
-          case "statistics":
-            iconElementSelected.className = "bi bi-bar-chart-fill";
+          case "sale":
+            iconElementSelected.className = "bi bi-check-circle-fill";
             break;
         }
   
@@ -52,7 +52,7 @@ function sidebarIconSelected() {
     document.getElementById("register"),
     document.getElementById("historic"),
     document.getElementById("users"),
-    document.getElementById("statistics"),
+    document.getElementById("sale"),
   ];
 
   //Variável que vai receber o ícone selecionado
@@ -117,10 +117,10 @@ function sidebarIconSelected() {
             iconElementSelected.className = "bi bi-people-fill";
            break;
           
-          //Caso seja o "statistics"
-          case "statistics":
+          //Caso seja o "sale"
+          case "sale":
             //inserimos o desenho de ícone preenchido ao <i>
-            iconElementSelected.className = "bi bi-bar-chart-fill";
+            iconElementSelected.className = "bi bi-check-circle-fill";
            break;
         }
 
@@ -157,7 +157,7 @@ function openAndCloseSideBar (){
     document.getElementById("register"),
     document.getElementById("historic"),
     document.getElementById("users"),
-    document.getElementById("statistics"),
+    document.getElementById("sale"),
   ];
 
   //Cria a constante que procura o item "list" dentro do array de icons
