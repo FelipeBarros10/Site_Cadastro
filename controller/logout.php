@@ -5,7 +5,7 @@ session_start();
 if($_POST){
   if($_COOKIE["user"]){
 
-    $deletingCookie = setcookie("user", "", 0);
+    $deletingCookie = setcookie("user", "", time() - 3600, "/");
 
     if($deletingCookie){
       session_destroy();

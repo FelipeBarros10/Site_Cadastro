@@ -78,6 +78,19 @@
 
         if (mysqli_num_rows($queryResult) > 0) {
 
+          echo"<div class='main-table-products'>";
+          echo"<div>";
+            echo"<table class='table-products'>";
+              echo"<thead class='table-header'";
+                  echo"<tr>";
+                  echo"<th>Produto</th>";
+                  echo"<th>Categoria</th>";
+                  echo"<th>Estoque</th>";
+                  echo"<th>Preço</th>";
+                  echo"<th></th>";
+                  echo "</tr>";
+              echo"</thead>";
+
           while ($row = mysqli_fetch_assoc($queryResult)) {
 
             $queryInnerJoin = "SELECT categorias.NOME FROM categorias
@@ -87,20 +100,11 @@
 
             $queryInnerJoinResult = dbQuery($queryInnerJoin, $values);
 
-            $categorieName = implode(mysqli_fetch_assoc($queryInnerJoinResult));
+            $categorieRow = mysqli_fetch_assoc($queryInnerJoinResult);
+
+            $categorieName = $categorieRow["NOME"];
                   
-              echo"<div class='main-table-products'>";
-                echo"<div>";
-                  echo"<table class='table-products'>";
-                    echo"<thead class='table-header'";
-                        echo"<tr>";
-                        echo"<th>Produto</th>";
-                        echo"<th>Categoria</th>";
-                        echo"<th>Estoque</th>";
-                        echo"<th>Preço</th>";
-                        echo"<th></th>";
-                        echo "</tr>";
-                    echo"</thead>";
+             
 
                       echo"<tbody class='table-body'>";
                           echo "<tr>";
@@ -121,11 +125,12 @@
                                   </td>";
                           echo "</tr>";
                       echo"</tbody>";
-                    echo "</table>";
-                  echo"</div>";
-                 echo"</div>";
+                    
                 }
               }
+              echo "</table>";
+              echo"</div>";
+             echo"</div>";
             ?>
 
       

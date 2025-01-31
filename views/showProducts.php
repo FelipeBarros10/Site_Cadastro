@@ -6,51 +6,103 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Register</title>
-  <link rel="stylesheet" href="../Assets/css/showProducts.css">
+  <link rel="stylesheet" href="../Assets/css/registerAndShowProductsPages.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 </head>
 
-<body>
+<body class="showProductsPage">
   <div class="main-parent">
     <?php include '../components/sideBar.php' ?>
 
     <?php
-      $page_title = "Seu Produto";
-      include '../components/headerTop.php'
-      ?>
+    $page_title = "Seu Produto";
+    include '../components/headerTop.php'
+    ?>
 
     <main class="main-register-content">
-      
-      <div class="col-md-10 offset-md-1">
-        <div class="row">
-          <div id="image-container" class="col-md-6">
-            <img src="/img/events/{{ $events->image }}" class="img-fluid" alt="">
-          </div>
-          <div id="info-container" class="col-md-6">
-            <h1></h1>
-            <p class="event-city"><i class="bi bi-geo-alt-fill"></i> </p>
-            <p class="events-participants"><i class="bi bi-people-fill"></i> Participantes</p>
-            <p class="event-owner"><i class="bi bi-star"></i></p>
-            <p class="already-joined-msg">Preseça já confirmada</p>
+      <div class="main-register-products">
+        <form action="../controller/handleRegisterProducts.php" method="post" enctype="multipart/form-data">
+          <div class="register-inputs">
 
-            <form action="/events/join/{{ $events->id }}" method="POST">
-              <a href="" class="btn btn-primary" id="event-submit">Confirmar Presença</a>
-            </form>
-            <h3>O evento conta com:</h3>
-            <ul id="items-list">
-              <li><i class="bi bi-play"></i> <span></span></li>
-            </ul>
-          </div>
-          <div class="col-md-12" id="description-container">
-            <h3>Sobre o evento:</h3>
-            <p class="event-description"></p>
-          </div>
-        </div>
+            <div class="first-content-inputs">
+
+              <div class="input-name-product">
+                <label>Nome do produto</label>
+                <input type="text" name="productName" id="">
+              </div>
+
+              <div class="button-img-product">
+
+                <div class="currentImg">
+                  <img src="../Assets/img/iconeUser.jpg" alt="" />
+                </div>
+
+                <input type="file" name="file" id="inputFile" style="display: none;">
+                <button class="btnChangeImg" type="button" id="btn" onclick="openFile()">
+                  <span>Alterar imagem</span>
+                </button>
+
+
+              </div>
+            </div>
+
+            <div class="second-content-input">
+              <div class="input-price-stock-product">
+                <div class="input-price">
+                  <label>Preço</label>
+                  <input type="text" name="price" id="price">
+                </div>
+
+                <div class="input-cost">
+                  <label>Custo</label>
+                  <input type="text" name="cost" id="cost">
+                </div>
+
+                <div class="input-stock">
+                  <label>Quantidade</label>
+                  <input type="text" name="quantity" id="">
+                </div>
+
+                <div class="button-register">
+                  <button>Cadastrar</button>
+                </div>
+              </div>
+
+              <div class="input-category-product">
+                <div class="select-category">
+                  <label>Selecione a categoria</label>
+                  <?php
+                  $query = "SELECT nome FROM categorias";
+                  $queryResult = dbQuery($query);
+
+                  echo "<select name='selectCategory' id=''>";
+                  echo "<option value=''>Selecione uma categoria</option>";
+                  if (mysqli_num_rows($queryResult) > 0) {
+                    while ($row = mysqli_fetch_assoc($queryResult)) {
+                      echo "<option value='{$row["nome"]}'>{$row["nome"]}</option>";
+                    }
+                  }
+                  echo '</select>';
+                  ?>
+
+                </div>
+
+                <div class="input-new-category">
+                  <label>Nova categoria</label>
+                  <input type="text" name="newCategory" id="">
+                </div>
+
+              </div>
+            </div>
+          </div><!--até aqui-->
+        </form>
       </div>
+
+    </main>
   </div>
 
-  </main>
+
 
 
 </body>
