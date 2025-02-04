@@ -14,7 +14,7 @@ function createNewProduct($productInformations, $infoUploadImage)
     }
   }
 
-  if(isset($productInformations["price"]) && isset($productInformations["cost"])){
+  if($productInformations["price"] != "" && $productInformations["cost"] != ""){
     $explodingStrPrice = array(explode("R$", $productInformations["price"]), explode("R$", $productInformations["cost"]));
     
     $gettingPriceStr = $explodingStrPrice[0][1];
@@ -198,6 +198,23 @@ function deleteProductAtDb ($productId){
   }
 }
 
-function upadteProduct($productId, $productInformations){
+function upadteProduct($productId, $productInformations, $infoUploadImage = NULL){
+  $queryProductsSelect = "SELECT * FROM produtos WHERE id = ?";
+  $values = $productId;
+  $queryResult = dbQuery($queryProductsSelect, $values);
+
+  if(mysqli_num_rows($queryResult) > 0){
+    $row = mysqli_fetch_assoc($queryResult);
+  } else {
+    return false;
+  }
+
+  //TODO: CASO "SELECTCATEGORY" ESTEJA PREENCHIDO PEGAR ID DA CATEGORIA DO E VERIFICAR SE É O MESMO ID QUE ESTÁ NA $ROW DA TABELA DE PRODUTOS, SE NÃO, COLOCAR NO ARRAY DE ALTEAÇÕES E DE VALORES QUE IRÃO PARA A QUERY DINÂMICA
+
+  //TODO: CASO "NEW CATEGORY" ESTEJA PREECHIDO, FAZER O INSERT NA TABELA CATEGORIAS E COLOCAR NO ARRAY DE ALTERAÇÕES E DE VALORES QUE IRÃO PARA A QUERY DINÂMICA
+
+  //TODO: FAZER O RESTANTE DAS COMPARAÇÕES, NOME, VALOR, ETC. E COLOCAR NO ARRAY DE ALTERAÇÕES E DE VALORES QUE IRÃO PARA A QUERY DINÂMICA
+
+
 
 }

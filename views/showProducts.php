@@ -53,7 +53,7 @@
               <div class="button-img-product">
 
                 <div class="currentImg">
-                  <img src="../Assets/img/<?php echo $rowProduct["IMAGENS"] ?>" alt="" />
+                  <img src="../Assets/img/<?php echo $rowProduct["IMAGENS"] ?>" alt="" id="currentImgProduct" />
                 </div>
 
                 <input type="file" name="file" id="inputFile" style="display: none;">
@@ -141,4 +141,5 @@
   </div>
 <script src="../Assets/js/global.js"></script>
 </body>
+
 

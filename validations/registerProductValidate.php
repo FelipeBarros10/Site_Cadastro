@@ -26,7 +26,7 @@ function registerProductValidate($productInformations)
   }
 
   if (empty($productInformations["quantity"])) {
-    $errors["quantityEmpty"] = "Informe o valor do produto";
+    $errors["quantityEmpty"] = "Informe a quantidade do produto";
   } else if ($productInformations["quantity"] === 0) {
     $errors["quantityEqualZero"] = "A quantidade do produto deve ser maior que 0";
   }
@@ -35,9 +35,9 @@ function registerProductValidate($productInformations)
     if (empty($productInformations["newCategory"])) {
       $errors["selectCategory"] = "Selecione a categoria do produto ou registre uma nova abaixo";
     } else {
-      $checkingCategoryTable = checkingCategoryTable($productInformations["newCategory"]);
+      $categorieExist = checkingCategoryTable($productInformations["newCategory"]);
 
-      if($checkingCategoryTable == true){
+      if($categorieExist == true){
         $errors["categorieAlreadyExist"] = "Essa categoria já existe, selecione-a no campo acima";
       }
     }

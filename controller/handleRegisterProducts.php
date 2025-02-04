@@ -26,7 +26,6 @@ function registerProduct ($productInformations){
 
     $createNewProduct = createNewProduct($registerProductValidating, $infoUploadImage);
 
-
     if(isset($createNewProduct['valid'])){
       header("Location: ../views/mainPage.php");
       exit();

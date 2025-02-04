@@ -4,24 +4,43 @@ function openFile() {
 
   const iconBtn = document.getElementById("iconBtn");
 
-  var img = btn.querySelector("img");
+  if(iconBtn){ 
+    var img = btn.querySelector("img");
+  }
+  
 
+  
   inputFile.click();
 
   inputFile.addEventListener("change", (event) => {
     if (iconBtn) {
       iconBtn.remove(); // Remove o ícone se ele existir
       img = document.createElement("img");
+
+      const reader = new FileReader();
+
+      reader.readAsDataURL(event.target.files[0]);
+
+      reader.onload = function (event) {
+        img.src = reader.result;
+        console.log(img);   
+        btn.appendChild(img);
+      };
+    } else {
+      
+      const img = document.getElementById("currentImgProduct");
+      console.log(img);
+      
+      const reader = new FileReader();
+
+      reader.readAsDataURL(event.target.files[0]);
+
+      reader.onload = function (event) {
+        img.src = reader.result;
+      };
     }
 
-    const reader = new FileReader();
-
-    reader.readAsDataURL(event.target.files[0]);
-
-    reader.onload = function (event) {
-      img.src = reader.result;
-      btn.appendChild(img);
-    };
+    
   });
 }
 
