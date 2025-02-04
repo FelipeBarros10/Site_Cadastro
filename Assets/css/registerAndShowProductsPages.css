@@ -1,0 +1,234 @@
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,700&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Open Sans", serif;
+}
+
+body {
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+.main-parent,
+.main-register-content,
+.register-inputs,
+.first-content-inputs,
+.input-name-product,
+.button-img-product,
+.second-content-input,
+.input-category-product,
+.input-price-stock-product {
+  display: flex;
+}
+
+.main-register-content,
+.register-inputs,
+.first-content-inputs,
+.input-name-product,
+.button-img-product {
+  align-items: center;
+  justify-content: center;
+}
+
+.main-register-content {
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  padding: 32px 0;
+}
+
+.main-register-products {
+  padding: 20px 40px;
+  width: 70%;
+  background-image: linear-gradient(#270069 10%, #6640a8 55%, #53318d 80%);
+  border-radius: 20px;
+  height: 720px;
+}
+
+.register-inputs,
+.button-img-product,
+.input-name-product,
+.input-category-product,
+.input-price-stock-product,
+.input-price,
+.input-cost,
+.input-stock {
+  flex-direction: column;
+  display: flex;
+}
+
+.first-content-inputs,
+.second-content-input {
+  width: 100%;
+}
+
+.input-name-product,
+.button-img-product,
+.input-price-stock-product,
+.input-category-product {
+  width: 50%;
+}
+
+.input-name-product {
+  align-items: start;
+  padding-bottom: 10%;
+}
+
+.input-name-product input,
+.input-price-stock-product input,
+.input-category-product input,
+.input-category-product select {
+  border: none;
+  width: 90%;
+  height: 45px;
+  outline: none;
+  border-radius: 10px;
+  padding-left: 5px;
+  font-weight: 700;
+  margin-top: 10px;
+  color: #6640a8;
+  font-size: 14px;
+}
+
+.button-img-product {
+  padding-top: 40px;
+}
+
+.button-img-product button {
+  background-color: #fff;
+  border: none;
+  width: 240px;
+  height: 220px;
+  border-radius: 100%;
+  cursor: pointer;
+  position: relative;
+  transition: background-color ease 0.5s;
+}
+
+
+.button-img-product img{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 100%;
+  top: 0;
+  left: 0;
+}
+
+
+.button-img-product button:hover {
+  background-color: #6640a8;
+}
+
+.button-img-product i {
+  font-size: 45px;
+  color: #6640a8;
+}
+
+.button-img-product button:hover i {
+  color: #fff;
+}
+
+.button-img-product span,
+.input-name-product,
+.input-cost,
+.input-price-stock-product,
+.input-category-product,
+.input-new-category,
+.input-stock {
+  padding-top: 15px;
+  font-weight: bold;
+  font-size: 17px;
+  color: #ffff;
+}
+
+
+.second-content-input {
+  padding-top: 5px;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.button-register {
+  margin-top: 20px;
+}
+
+.button-register button {
+  background-color: #6640a8;
+  padding: 10px;
+  border: 2px solid #ccc;
+  height: 46px;
+  cursor: pointer;
+  color: #fff;
+  font-weight: bold;
+  border-radius: 10px;
+  transition: background-color ease 0.5s;
+}
+
+.button-register button:hover {
+  background-color: #fff;
+  color: #6640a8;
+}
+
+ .showProductsPage .currentImg {
+  position: relative;
+  width: 220px;
+  height: 220px;
+}
+
+.showProductsPage .currentImg img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 100%;
+} 
+
+.showProductsPage .button-img-product button {
+  border-radius: 10px;
+  width: 200px;
+  height: 30px;
+  margin-top: 15px;
+}
+
+
+.showProductsPage .second-content-input {
+  padding-top: 17px;
+}
+
+.showProductsPage .input-name-product {
+  padding-bottom: 5%;
+}
+
+.showProductsPage .button-img-product span{
+  color: #6640a8;
+  transition: color ease 0.5s;
+}
+
+.showProductsPage .button-img-product button:hover span{
+  color: #fff;
+}
+
+.showProductsPage .who-registered-product{
+  padding-top: 20px;
+}
+
+.showProductsPage .who-registered-product div{
+  padding-top: 7px;
+}
+
+
+
+.showProductsPage .who-registered-product span{
+  padding-left: 10px;
+
+}
+
+.showProductsPage .who-registered-product i{
+  font-size: 20px;
+
+}
+
+
+
+

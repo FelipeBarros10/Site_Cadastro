@@ -187,5 +187,17 @@ function insertDbProducts ($productName, $quantity, $price, $userId, $categorieI
 }
 
 function deleteProductAtDb ($productId){
+  $query = "DELETE FROM produtos WHERE ID = ?";
+  $values = $productId["product_id"];
+  $deletingTheProduct = dbQuery($query, $values);
+
+  if($deletingTheProduct){
+    return true;
+  } else {
+    return false;
+  }
+}
+
+function upadteProduct($productId, $productInformations){
 
 }
