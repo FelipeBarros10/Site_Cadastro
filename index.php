@@ -115,7 +115,7 @@ session_start();
 
             <div class="profileImg">
               <div>
-                <input style="display: none;" type="file" name="profileImage" id="inputFile" accept="image/*" onchange="profileImgView(event)">
+                <input style="display: none;" type="file" name="profileImage" id="inputFile" accept="image/*">
                 <button type="button" id="btn" onclick="openFile()">
                   <img src="./Assets/img/iconeUser.png" id="profileImg" />
                 </button>
@@ -205,7 +205,8 @@ session_start();
     </div>
   </div>
 
-  <script src="./Assets/js/login.js"></script>
+  <script  src="./Assets/js/global.js"></script>
+  <script  src="./Assets/js/login.js"></script>
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
     AOS.init();

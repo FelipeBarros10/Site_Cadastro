@@ -8,7 +8,7 @@
   <div id="sidebar" class="sidebar">
     <div class="icons-sidebar">
       <div class="logo-container">
-        <a href="../views/mainPage.php"><img id="logo" class="logo" src="../Assets/img/logo.png" alt=""></a>
+        <a href="../views/mainPage.php"><img id="logo" class="logo" src="../Assets/img/logo2.png" alt=""></a>
       </div>
 
       <div id="list" class="icon">
@@ -16,14 +16,21 @@
       </div>
 
 
-      <div id="register" class="icon">
+      <div id="sale" class="icon">
         <a id="link" class="link" href="../views/registerPage.php">
-          <i id="icon" class="bi bi-plus-circle"></i>
-          <span>Cadastrar</span>
+          <i id="icon" class="bi bi-check-circle"></i>
+          <span>Vender</span>
         </a>
       </div>
 
 
+
+      <div id="register" class="icon">
+        <a id="link" class="link" href="../views/registerPage.php" ><i id="icon" class="bi bi-plus-circle"></i>
+          <span>Cadastrar</span>
+        </a>
+
+      </div>
 
       <div id="historic" class="icon">
         <a id="link" class="link" href="../views/historic.php"><i id="icon" class="bi bi-book"></i>
@@ -35,13 +42,6 @@
       <div id="users" class="icon">
         <a id="link" class="link" href="#"><i id="icon" class="bi bi-people"></i>
           <span>Usuários</span>
-        </a>
-
-      </div>
-
-      <div id="statistics" class="icon">
-        <a id="link" class="link" href="#"><i id="icon" class="bi bi-bar-chart"></i>
-          <span>Estatísticas</span>
         </a>
 
       </div>
