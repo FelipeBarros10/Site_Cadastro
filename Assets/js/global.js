@@ -12,7 +12,7 @@ function openFile() {
     if (iconBtn) {
       iconBtn.remove(); // Remove o ícone se ele existir
       img = document.createElement("img");
-    } 
+    }
 
     const reader = new FileReader();
 
@@ -25,28 +25,33 @@ function openFile() {
   });
 }
 
-
 function stylingThePriceInput() {
-
   var inputPrice = document.getElementById("price");
   var inputCost = document.getElementById("cost");
 
+  var inputPriceDotReplace = inputPrice.value.replace(".", ",");
+  var inputCostDotReplace = inputCost.value.replace(".", ",")
+
+  inputPrice.value = inputPriceDotReplace;
+
+  inputCost.value = inputCostDotReplace;
+  
+
   new Cleave(inputPrice, {
-    prefix: 'R$ ',
+    prefix: "R$ ",
     numeral: true,
-    numeralDecimalMark: ',',
-    delimiter: '.',
+    numeralDecimalMark: ",",
+    delimiter: ".",
     numeralPositiveOnly: true,
-});
+  });
 
-new Cleave(inputCost, {
-  prefix: 'R$ ',
-  numeral: true,
-  numeralDecimalMark: ',',
-  delimiter: '.',
-  numeralPositiveOnly: true,
-});
-
+  new Cleave(inputCost, {
+    prefix: "R$ ",
+    numeral: true,
+    numeralDecimalMark: ",",
+    delimiter: ".",
+    numeralPositiveOnly: true,
+  });
 }
 
 stylingThePriceInput();
