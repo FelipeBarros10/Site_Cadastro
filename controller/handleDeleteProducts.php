@@ -14,11 +14,11 @@ if(isset($_POST)){
 
 
 function deleteProduct ($productId){
-  $query = "DELETE FROM produtos WHERE ID = ?";
-  $values = $productId["product_id"];
-  $deletingTheProduct = dbQuery($query, $values);
+  if(isset($productId)){
+    $productDeletion = deleteProductAtDb($productId);
+  }
 
-  if(isset($deletingTheProduct)){
+  if(isset($productDeletion)){
     header("Location: ../views/mainPage.php");
     exit();
   }

@@ -209,4 +209,23 @@ body {
   color: #fff;
 }
 
+.showProductsPage .who-registered-product{
+  padding-top: 20px;
+}
+
+.showProductsPage .who-registered-product div{
+  padding-top: 7px;
+}
+
+
+
+.showProductsPage .who-registered-product span{
+  padding-left: 10px;
+
+}
+
+.showProductsPage .who-registered-product i{
+  font-size: 20px;
+
+}
 
