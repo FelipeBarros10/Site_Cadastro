@@ -8,7 +8,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Register</title>
-  <link rel="stylesheet" href="../Assets/css/registerPage.css">
+  <link rel="stylesheet" href="../Assets/css/registerAndShowProductsPages.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
@@ -39,9 +39,10 @@
               </div>
 
               <div class="button-img-product">
-                <input type="file" name="file" id="file" style="display: none;">
-                <button type="button" id="btn" onclick="openFile()">
-                  <i class="bi bi-camera-fill"></i>
+                <input type="file" name="file" id="inputFile" style="display: none;" >
+
+                <button type="button" id="btn" onclick="openFile(event)">
+                  <i id="iconBtn" class="bi bi-camera-fill"></i>
                 </button>
 
                 <span>Imagem do produto</span>
@@ -100,7 +101,7 @@
       </div>
     </main>
   </div>
-  <script src="../Assets/js/registerPage.js"></script>
+  <script src="../Assets/js/global.js"></script>
 </body>
 
 

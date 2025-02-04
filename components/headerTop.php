@@ -36,12 +36,7 @@
                   echo "<img src='./../Assets/img/iconeUser.png'>";
               }
               
-             } 
-
-            
-
-             
-          
+             }         
           ?>  
         </div>
       </div>
