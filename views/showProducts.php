@@ -1,4 +1,4 @@
-<?php require_once __DIR__ . "/../config/config.php" ?>
+'<?php require_once __DIR__ . "/../config/config.php" ?>
 <?php require_once __DIR__ . "/../connect/connectionBd.php" ?>
 
 
@@ -101,8 +101,13 @@
 
     </main>
   </div>
+<<<<<<< main
 
 
 
 
 </body>
+=======
+<script src="../Assets/js/global.js"></script>
+</body>'
+>>>>>>> local
