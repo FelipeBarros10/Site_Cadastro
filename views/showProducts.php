@@ -101,13 +101,8 @@
 
     </main>
   </div>
-<<<<<<< main
-
-
-
-
 </body>
-=======
+
 <script src="../Assets/js/global.js"></script>
 </body>'
->>>>>>> local
+
