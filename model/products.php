@@ -99,23 +99,45 @@ function insertDbCategories($categorie)
   }
 }
 
-function checkingCategoryTable($categorie)
+function checkingCategoryTable($query, $values)
 {
-  $queryCommand = "SELECT NOME FROM CATEGORIAS";
-  $queryResult = dbQuery($queryCommand);
-  $categorie = strtolower($categorie);
+  $queryCommand = $query;
 
-  if (mysqli_num_rows($queryResult) > 0) {
-    while ($row = mysqli_fetch_assoc($queryResult)) {
-      $rowValue = strtolower(removeAccents($row["NOME"]));
-      if ($categorie == $rowValue) {
-        return true;
-      }
+  if($values){
+    if(is_string($values)){
+      $queryResult = dbQuery($queryCommand, $values);
+  
+      $values = strtolower(removeAccents($values));
+  
+      if (mysqli_num_rows($queryResult) > 0) {
+      
+        while ($row = mysqli_fetch_assoc($queryResult)) {
+          
+          $rowValue = strtolower(removeAccents($row["NOME"]));
+          if ($values == $rowValue) {
+            return true;
+          }
+        }
+      } 
+  
+      return false;
     }
-  } else {
+
+    $queryResult = dbQuery($queryCommand, $values);
+
+    if($queryResult){
+      return true;
+    }
+
     return false;
+    
   }
+  
+
+  
+  
 }
+
 
 function removeAccents($string)
 {
@@ -205,11 +227,26 @@ function upadteProduct($productId, $productInformations, $infoUploadImage = NULL
 
   if(mysqli_num_rows($queryResult) > 0){
     $row = mysqli_fetch_assoc($queryResult);
-  } else {
-    return false;
-  }
+  } 
 
-  //TODO: CASO "SELECTCATEGORY" ESTEJA PREENCHIDO PEGAR ID DA CATEGORIA DO E VERIFICAR SE É O MESMO ID QUE ESTÁ NA $ROW DA TABELA DE PRODUTOS, SE NÃO, COLOCAR NO ARRAY DE ALTEAÇÕES E DE VALORES QUE IRÃO PARA A QUERY DINÂMICA
+  return false;
+
+  //TODO: CASO "SELECTCATEGORY" ESTEJA PREENCHIDO PEGAR ID DA CATEGORIA E VERIFICAR SE É O MESMO ID QUE ESTÁ NA $ROW DA TABELA DE PRODUTOS.
+
+  if($productInformations["selectCategory"] != ""){
+    $query = "SELECT produtos.ID_CATEGORIAS FROM produtos
+              INNER JOIN categorias ON categorias.ID = produtos.ID_CATEGORIAS
+              WHERE categorias.NOME = ?";
+    $values = $productInformations["selectCategory"];
+
+    $existAtRowProduct = checkingCategoryTable($query, $values);
+
+    if($existAtRowProduct == false){
+  
+      //TODO: Se o ID não for o mesmo então tenho que pegar o ID dessa categoria que já está na tabela categorias para colocar no array de alterações e de valores dessas alterações
+    }
+
+  }
 
   //TODO: CASO "NEW CATEGORY" ESTEJA PREECHIDO, FAZER O INSERT NA TABELA CATEGORIAS E COLOCAR NO ARRAY DE ALTERAÇÕES E DE VALORES QUE IRÃO PARA A QUERY DINÂMICA
 

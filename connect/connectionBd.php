@@ -44,8 +44,7 @@ function dbQuery($query, $values = ""){
           }
 
           $typeParamToStr = implode($typeParam);
-
-          $bindParam = mysqli_stmt_bind_param($stmt, $typeParamToStr, ...$values);
+  
         } else {
           if(filter_var($values, FILTER_VALIDATE_INT)){
             $typeParam[] = "i";
