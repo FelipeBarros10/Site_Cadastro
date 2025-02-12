@@ -13,6 +13,7 @@ body{
 
 .main-parent{
   display: flex;
+  height: 100%;
 }
 
 .main-register-content{

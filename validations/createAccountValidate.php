@@ -40,6 +40,8 @@ function registerValidate($userInformation){
     #A consulta é realizada, chamando uma função que recebe
     $result = dbQuery($query);
 
+    
+
     #Verifica se o número de linhas é maior que 0
     if (mysqli_num_rows($result) > 0) {
       #Enquanto tiver linhas no BD o laço de repetição acontece

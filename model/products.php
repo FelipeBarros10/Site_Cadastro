@@ -92,6 +92,7 @@ function insertDbCategories($categorie)
 
   $categorieInsert = dbQuery($query, $values);
 
+
   if ($categorieInsert) {
     return true;
   } else {
@@ -199,9 +200,18 @@ function removeAccents($string)
 function insertDbProducts ($productName, $quantity, $price, $userId, $categorieId, $image, $cost) {
 
   $values = array($productName, $quantity, $price, $userId, $categorieId, $image, $cost);
-  $query = "INSERT INTO produtos (NOME, QUANTIDADE_ESTOQUE, PRECO, ID_USUARIO, ID_CATEGORIAS, IMAGENS, CUSTO) VALUES (?, ?, ?, ?, ?, ?, ?)";
+
+  $query = "INSERT INTO produtos SET 
+    NOME = ?,  
+    QUANTIDADE_ESTOQUE = ?,  
+    PRECO = ?,  
+    ID_USUARIO = ?,  
+    ID_CATEGORIAS = ?,  
+    IMAGENS = ?,  
+    CUSTO = ?;";
 
   $insertProducts = dbQuery($query, $values);
+
 
   return $insertProducts;
   
