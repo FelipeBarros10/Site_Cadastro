@@ -1,5 +1,4 @@
 <?php
-session_start();
 
 #Incluindo a conexão com o BD
 require_once __DIR__ . '/../connect/connectionBd.php';

@@ -2,8 +2,7 @@
 
 require_once __DIR__ . "/../connect/connectionBd.php";
 
-function createNewProduct($productInformations, $infoUploadImage)
-{
+function createNewProduct($productInformations, $infoUploadImage) {
  
   if (!empty($infoUploadImage)) {
     $imageUniqueName = imageUniqueName($infoUploadImage);
@@ -55,14 +54,12 @@ function createNewProduct($productInformations, $infoUploadImage)
 
 }
 
-function public_path($path = '')
-{
+function public_path($path = '') {
   return realpath(__DIR__ . '/' . $path);
 }
 
 
-function imageUniqueName($infoUploadImage)
-{
+function imageUniqueName($infoUploadImage) {
 
   $imageName = $infoUploadImage["name"];
   $extensionImage = pathinfo($imageName);
@@ -83,8 +80,7 @@ function imageUniqueName($infoUploadImage)
 
 
 
-function insertDbCategories($categorie)
-{
+function insertDbCategories($categorie) {
 
   $query = "INSERT INTO CATEGORIAS (NOME) VALUES (?)";
 
@@ -100,14 +96,13 @@ function insertDbCategories($categorie)
   }
 }
 
-function checkingCategoryTable($query, $values)
-{
+function comparingCategorieName($query, $values) {
   $queryCommand = $query;
 
   if($values){
     if(is_string($values)){
       $queryResult = dbQuery($queryCommand, $values);
-  
+
       $values = strtolower(removeAccents($values));
   
       if (mysqli_num_rows($queryResult) > 0) {
@@ -140,8 +135,7 @@ function checkingCategoryTable($query, $values)
 }
 
 
-function removeAccents($string)
-{
+function removeAccents($string) {
   $mapa = [
 
 
@@ -212,7 +206,6 @@ function insertDbProducts ($productName, $quantity, $price, $userId, $categorieI
 
   $insertProducts = dbQuery($query, $values);
 
-
   return $insertProducts;
   
   
@@ -230,33 +223,44 @@ function deleteProductAtDb ($productId){
   }
 }
 
-function upadteProduct($productId, $productInformations, $infoUploadImage = NULL){
+function updateProduct($productId, $productInformations, $infoUploadImage = NULL){
   $queryProductsSelect = "SELECT * FROM produtos WHERE id = ?";
   $values = $productId;
   $queryResult = dbQuery($queryProductsSelect, $values);
 
   if(mysqli_num_rows($queryResult) > 0){
     $row = mysqli_fetch_assoc($queryResult);
-  } 
+    $updates = [];
+    $updatesValues = [];
 
-  return false;
+    if($productInformations["selectCategory"] != ""){
 
-  //TODO: CASO "SELECTCATEGORY" ESTEJA PREENCHIDO PEGAR ID DA CATEGORIA E VERIFICAR SE É O MESMO ID QUE ESTÁ NA $ROW DA TABELA DE PRODUTOS.
+      $query = "SELECT ID FROM categorias WHERE NOME = ?";
+    
+      $values = [$productInformations["selectCategory"]];
+    
+      $categoryResult = dbQuery($query, $values);
+    
+      if(mysqli_num_rows($categoryResult) > 0){
+        $cateoryRow = mysqli_fetch_assoc($categoryResult);
+        $categoryId = $cateoryRow["ID"];        
 
-  if($productInformations["selectCategory"] != ""){
-    $query = "SELECT produtos.ID_CATEGORIAS FROM produtos
-              INNER JOIN categorias ON categorias.ID = produtos.ID_CATEGORIAS
-              WHERE categorias.NOME = ?";
-    $values = $productInformations["selectCategory"];
+        if($categoryId != $row["ID_CATEGORIAS"]){
+          $updates[] = "ID_CATEGORIAS = ?";
+          $updatesValues[] = $categoryId;
 
-    $existAtRowProduct = checkingCategoryTable($query, $values);
-
-    if($existAtRowProduct == false){
+        }
+      }
   
-      //TODO: Se o ID não for o mesmo então tenho que pegar o ID dessa categoria que já está na tabela categorias para colocar no array de alterações e de valores dessas alterações
     }
 
+    return false;
   }
+  
+  
+
+
+  
 
   //TODO: CASO "NEW CATEGORY" ESTEJA PREECHIDO, FAZER O INSERT NA TABELA CATEGORIAS E COLOCAR NO ARRAY DE ALTERAÇÕES E DE VALORES QUE IRÃO PARA A QUERY DINÂMICA
 

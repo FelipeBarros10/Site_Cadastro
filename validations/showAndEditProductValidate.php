@@ -37,7 +37,7 @@ function productInformationValidate($productInformations)
     } else {
       $query = "SELECT * FROM categorias";
       $values = $productInformations["newCategory"];
-      $categorieExist = checkingCategoryTable($query, $values);
+      $categorieExist = comparingCategorieName($query, $values);
 
       if($categorieExist == true){
         $errors["categorieAlreadyExist"] = "Essa categoria já existe, selecione-a no campo acima";

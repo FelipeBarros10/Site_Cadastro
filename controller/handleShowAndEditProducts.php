@@ -13,12 +13,12 @@ if(isset($_POST)){
 
   $productInformations = $_POST;
 
-  var_dump($productInformations);
+  update($productId,$productInformations);
 
 }
 
 
-function updateProduct ($productId, $productInformations){
+function update ($productId, $productInformations){
   if(isset($productId) && isset($productInformations)){
     $productInformationValidating = productInformationValidate($productInformations);
 
@@ -32,8 +32,11 @@ function updateProduct ($productId, $productInformations){
       }
 
       $updatingProduct = updateProduct($productId, $productInformations, $infoUploadImage);
-      header("Location: ../views/mainPage.php");
-      exit();
+
+      var_dump($updatingProduct);
+
+      // header("Location: ../views/mainPage.php");
+      // exit();
     }
   }
 
