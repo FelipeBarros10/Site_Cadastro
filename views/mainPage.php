@@ -104,7 +104,7 @@
 
             $categorieName = $categorieRow["NOME"];
                   
-             
+            $row['PRECO'] = str_replace(".", ",", $row['PRECO']);
 
                       echo"<tbody class='table-body'>";
                           echo "<tr>";

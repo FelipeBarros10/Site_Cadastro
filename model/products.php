@@ -2,8 +2,9 @@
 
 require_once __DIR__ . "/../connect/connectionBd.php";
 
-function createNewProduct($productInformations, $infoUploadImage) {
- 
+function createNewProduct($productInformations, $infoUploadImage)
+{
+
   if (!empty($infoUploadImage)) {
     $imageUniqueName = imageUniqueName($infoUploadImage);
 
@@ -13,20 +14,21 @@ function createNewProduct($productInformations, $infoUploadImage) {
     }
   }
 
-  if($productInformations["price"] != "" && $productInformations["cost"] != ""){
-    $explodingStrPrice = array(explode("R$", $productInformations["price"]), explode("R$", $productInformations["cost"]));
-    
-    $gettingPriceStr = $explodingStrPrice[0][1];
-    $gettingCostStr = $explodingStrPrice[1][1];
+  if ($productInformations["price"] != "" && $productInformations["cost"] != "") {
+    $explodingStrPrice = array(str_replace(",", ".", implode(explode("R$ ", $productInformations["price"]))), str_replace(",", ".",implode(explode("R$ ", $productInformations["cost"]))));
+
+    $gettingPriceStr = $explodingStrPrice[0];
+    $gettingCostStr = $explodingStrPrice[1];
+
   }
 
   if ($productInformations["newCategory"] != "") {
     $insertDbCategories = insertDbCategories($productInformations["newCategory"]);
 
-    if($insertDbCategories){
+    if ($insertDbCategories) {
       $categorieId = $insertDbCategories;
     }
-    
+
     if (!isset($insertDbCategories)) {
       return $errors["insertDb"] = "Erro na conexão com o banco de dados";
     }
@@ -35,7 +37,7 @@ function createNewProduct($productInformations, $infoUploadImage) {
     $values = $productInformations["selectCategory"];
     $queryResult = dbQuery($query, $values);
 
-    if(mysqli_num_rows($queryResult) > 0){
+    if (mysqli_num_rows($queryResult) > 0) {
       $row = mysqli_fetch_assoc($queryResult);
       $categorieId = $row["ID"];
     }
@@ -44,22 +46,22 @@ function createNewProduct($productInformations, $infoUploadImage) {
 
   $insertProducts = insertDbProducts($productInformations["productName"], $productInformations["quantity"], $gettingPriceStr, $_SESSION["userId"], $categorieId, $imageUniqueName, $gettingCostStr);
 
-  if (isset($insertProducts)){
+  if (isset($insertProducts)) {
     $success = "Produto Cadastrado";
     return ['valid' => $success];
-
   } else {
     return $errors["insertDb"] = "Erro na conexão com o banco de dados";
   }
-
 }
 
-function public_path($path = '') {
+function public_path($path = '')
+{
   return realpath(__DIR__ . '/' . $path);
 }
 
 
-function imageUniqueName($infoUploadImage) {
+function imageUniqueName($infoUploadImage)
+{
 
   $imageName = $infoUploadImage["name"];
   $extensionImage = pathinfo($imageName);
@@ -80,7 +82,8 @@ function imageUniqueName($infoUploadImage) {
 
 
 
-function insertDbCategories($categorie) {
+function insertDbCategories($categorie)
+{
 
   $query = "INSERT INTO CATEGORIAS (NOME) VALUES (?)";
 
@@ -96,46 +99,43 @@ function insertDbCategories($categorie) {
   }
 }
 
-function comparingCategorieName($query, $values) {
+function comparingCategoryName($query, $values)
+{
   $queryCommand = $query;
 
-  if($values){
-    if(is_string($values)){
+  if ($values) {
+    if (is_string($values)) {
       $queryResult = dbQuery($queryCommand, $values);
 
       $values = strtolower(removeAccents($values));
-  
+
       if (mysqli_num_rows($queryResult) > 0) {
-      
+
         while ($row = mysqli_fetch_assoc($queryResult)) {
-          
+
           $rowValue = strtolower(removeAccents($row["NOME"]));
           if ($values == $rowValue) {
             return true;
           }
         }
-      } 
-  
+      }
+
       return false;
     }
 
     $queryResult = dbQuery($queryCommand, $values);
 
-    if($queryResult){
+    if ($queryResult) {
       return true;
     }
 
     return false;
-    
   }
-  
-
-  
-  
 }
 
 
-function removeAccents($string) {
+function removeAccents($string)
+{
   $mapa = [
 
 
@@ -191,7 +191,8 @@ function removeAccents($string) {
   return strtr($string, $mapa);
 }
 
-function insertDbProducts ($productName, $quantity, $price, $userId, $categorieId, $image, $cost) {
+function insertDbProducts($productName, $quantity, $price, $userId, $categorieId, $image, $cost)
+{
 
   $values = array($productName, $quantity, $price, $userId, $categorieId, $image, $cost);
 
@@ -207,65 +208,93 @@ function insertDbProducts ($productName, $quantity, $price, $userId, $categorieI
   $insertProducts = dbQuery($query, $values);
 
   return $insertProducts;
-  
-  
 }
 
-function deleteProductAtDb ($productId){
+function deleteProductAtDb($productId)
+{
   $query = "DELETE FROM produtos WHERE ID = ?";
   $values = $productId["product_id"];
   $deletingTheProduct = dbQuery($query, $values);
 
-  if($deletingTheProduct){
+  if ($deletingTheProduct) {
     return true;
   } else {
     return false;
   }
 }
 
-function updateProduct($productId, $productInformations, $infoUploadImage = NULL){
+function updateProduct($productId, $productInformations, $infoUploadImage = NULL)
+{
   $queryProductsSelect = "SELECT * FROM produtos WHERE id = ?";
   $values = $productId;
   $queryResult = dbQuery($queryProductsSelect, $values);
 
-  if(mysqli_num_rows($queryResult) > 0){
-    $row = mysqli_fetch_assoc($queryResult);
+  if (mysqli_num_rows($queryResult) > 0) {
+    $productRow = mysqli_fetch_assoc($queryResult);
     $updates = [];
     $updatesValues = [];
 
-    if($productInformations["selectCategory"] != ""){
+    if ($productInformations["selectCategory"] != "") {
 
       $query = "SELECT ID FROM categorias WHERE NOME = ?";
-    
+
       $values = [$productInformations["selectCategory"]];
-    
+
       $categoryResult = dbQuery($query, $values);
-    
-      if(mysqli_num_rows($categoryResult) > 0){
-        $cateoryRow = mysqli_fetch_assoc($categoryResult);
-        $categoryId = $cateoryRow["ID"];        
 
-        if($categoryId != $row["ID_CATEGORIAS"]){
-          $updates[] = "ID_CATEGORIAS = ?";
+      if (mysqli_num_rows($categoryResult) > 0) {
+        $categoryRow = mysqli_fetch_assoc($categoryResult);
+        $categoryId = $categoryRow["ID"];
+
+        if ($categoryId != $productRow["ID_CATEGORIAS"]) {
+          $updates[] = " ID_CATEGORIAS = ?";
           $updatesValues[] = $categoryId;
-
         }
       }
-  
+
+      if ($productInformations["cost"]){
+
+        $explodingStrCost = str_replace(",", ".",implode(explode("R$ ",$productInformations["cost"])));
+
+        if ($explodingStrCost != $productRow["CUSTO"]){
+          $updates[] = " CUSTO = ?";
+          $updatesValues[] = $explodingStrCost;
+        }  
+
+
+      if ($infoUploadImage != "") {
+        $imageUniqueName = imageUniqueName($infoUploadImage);
+        $updates[] = " IMAGENS = ?";
+        $updatesValues[] = $imageUniqueName;
+      }
+
+      if ($productInformations["price"]){
+        $explodingStrPrice = str_replace(",", ".",implode(explode("R$ ",$productInformations["price"])));
+
+        if ($explodingStrPrice != $productRow["PRECO"]){
+          $updates[] = " PRECO = ?";
+          $updatesValues[] = $explodingStrPrice;
+        }  
+       
+      }
+      
+      }
+
+      if ($productInformations["quantity"] != $productRow["QUANTIDADE_ESTOQUE"]) {
+        $updates[] = " QUANTIDADE_ESTOQUE = ?";
+        $updatesValues[] = $productInformations["quantity"];
+      }
+
+      if ($productInformations["productName"] != $productRow["NOME"]) {
+        $updates[] = " NOME = ?";
+        $updatesValues[] = $productInformations["productName"];
+      }
     }
-
-    return false;
+    
+    $query = "UPDATE produtos SET";
+    $query .= implode(" ,", $updates);
+    var_dump($query);
+    //TODO: Continuar o update
   }
-  
-  
-
-
-  
-
-  //TODO: CASO "NEW CATEGORY" ESTEJA PREECHIDO, FAZER O INSERT NA TABELA CATEGORIAS E COLOCAR NO ARRAY DE ALTERAÇÕES E DE VALORES QUE IRÃO PARA A QUERY DINÂMICA
-
-  //TODO: FAZER O RESTANTE DAS COMPARAÇÕES, NOME, VALOR, ETC. E COLOCAR NO ARRAY DE ALTERAÇÕES E DE VALORES QUE IRÃO PARA A QUERY DINÂMICA
-
-
-
+  return false;
 }
