@@ -77,14 +77,11 @@
                   <input type="text" name="cost" id="cost" value="<?php echo $rowProduct["CUSTO"] ?>">
                 </div>
 
-                <div class="input-stock">
-                  <label>Quantidade</label>
-                  <input type="text" name="quantity" id="" value="<?php echo $rowProduct["QUANTIDADE_ESTOQUE"] ?>">
-                </div>
-
+               
                 <div class="button-register">
                   <button>Atualizar</button>
                 </div>
+               
               </div>
 
               <div class="input-category-product">
@@ -109,9 +106,9 @@
 
                 </div>
 
-                <div class="input-new-category">
-                  <label>Nova categoria</label>
-                  <input type="text" name="newCategory" id="">
+                <div class="input-stock">
+                  <label>Quantidade</label>
+                  <input type="text" name="quantity" id="" value="<?php echo $rowProduct["QUANTIDADE_ESTOQUE"] ?>">
                 </div>
 
                 <div class="who-registered-product">
@@ -132,6 +129,9 @@
                     ?>
                   </div>
                 </div>
+
+             
+               
               </div>
             </div>
           </div><!--até aqui-->

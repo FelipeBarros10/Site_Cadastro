@@ -62,10 +62,10 @@ function public_path($path = '')
 
 function imageUniqueName($infoUploadImage)
 {
-
+  echo "entrou";
   $imageName = $infoUploadImage["name"];
-  $extensionImage = pathinfo($imageName);
-  $imageHashed = md5($imageName . time()) . "." . $extensionImage["extension"];
+  $extensionImage = explode(".", $infoUploadImage["name"] );
+  $imageHashed = md5($imageName . time()) . "." . $extensionImage[1];
 
   $tmpName = $infoUploadImage["tmp_name"];
 
@@ -225,6 +225,7 @@ function deleteProductAtDb($productId)
 
 function updateProduct($productId, $productInformations, $infoUploadImage = NULL)
 {
+
   $queryProductsSelect = "SELECT * FROM produtos WHERE id = ?";
   $values = $productId;
   $queryResult = dbQuery($queryProductsSelect, $values);
@@ -260,9 +261,9 @@ function updateProduct($productId, $productInformations, $infoUploadImage = NULL
           $updates[] = " CUSTO = ?";
           $updatesValues[] = $explodingStrCost;
         }  
+      }
 
-
-      if ($infoUploadImage != "") {
+      if ($infoUploadImage["name"] != "") {
         $imageUniqueName = imageUniqueName($infoUploadImage);
         $updates[] = " IMAGENS = ?";
         $updatesValues[] = $imageUniqueName;
@@ -277,8 +278,6 @@ function updateProduct($productId, $productInformations, $infoUploadImage = NULL
         }  
        
       }
-      
-      }
 
       if ($productInformations["quantity"] != $productRow["QUANTIDADE_ESTOQUE"]) {
         $updates[] = " QUANTIDADE_ESTOQUE = ?";
@@ -292,9 +291,15 @@ function updateProduct($productId, $productInformations, $infoUploadImage = NULL
     }
     
     $query = "UPDATE produtos SET";
-    $query .= implode(" ,", $updates);
-    var_dump($query);
-    //TODO: Continuar o update
+    $query .= implode(" ,", $updates) . " WHERE ID = ?";
+    $values = array(explode($updatesValues), $productId);
+    var_dump($values);
+    $updatingProduct = dbQuery($query, $updatesValues);
+
+    if(isset($updatingProduct)){
+      return true;
+    }
+    
   }
   return false;
 }

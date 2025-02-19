@@ -33,10 +33,10 @@ function update ($productId, $productInformations){
 
       $updatingProduct = updateProduct($productId, $productInformations, $infoUploadImage);
 
-      var_dump($updatingProduct);
-
-      // header("Location: ../views/mainPage.php");
-      // exit();
+      if(isset($updatingProduct)){
+        header("Location: ../views/mainPage.php");
+        exit();
+      } 
     }
   }
 
