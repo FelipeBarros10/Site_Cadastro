@@ -292,8 +292,7 @@ function updateProduct($productId, $productInformations, $infoUploadImage = NULL
     
     $query = "UPDATE produtos SET";
     $query .= implode(" ,", $updates) . " WHERE ID = ?";
-    $values = array(explode($updatesValues), $productId);
-    var_dump($values);
+    $updatesValues[] = $productId;
     $updatingProduct = dbQuery($query, $updatesValues);
 
     if(isset($updatingProduct)){
