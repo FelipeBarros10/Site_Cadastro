@@ -85,7 +85,7 @@ function imageUniqueName($infoUploadImage)
 function insertDbCategories($categorie)
 {
 
-  $query = "INSERT INTO CATEGORIAS (NOME) VALUES (?)";
+  $query = "INSERT INTO CATEGORIAS SET NOME = ?";
 
   $values = $categorie;
 
@@ -203,7 +203,7 @@ function insertDbProducts($productName, $quantity, $price, $userId, $categorieId
     ID_USUARIO = ?,  
     ID_CATEGORIAS = ?,  
     IMAGENS = ?,  
-    CUSTO = ?;";
+    CUSTO = ?";
 
   $insertProducts = dbQuery($query, $values);
 

@@ -44,10 +44,10 @@
         </div>
 
         <div class="inputs-plus-product-subtitle">
-          <button>
+          <a href="./registerPage.php">
             <i class="bi bi-plus-lg"></i>
             <span>Produto</span>
-          </button>
+          </a>
         </div>
       </div>
       <!--Fim Subtítulo-->
@@ -122,6 +122,9 @@
                                       <input type='hidden' name='product_id' value='{$row['ID']}'>
                                       <button class='btn'><i class='bi bi-trash'></i></button>
                                     </form>
+                                  </td>";
+                            echo "<td>
+                                    <button class='btn'><i class='bi bi-pencil-square'></i></button>
                                   </td>";
                           echo "</tr>";
                       echo"</tbody>";

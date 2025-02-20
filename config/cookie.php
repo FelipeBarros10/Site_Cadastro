@@ -1,5 +1,4 @@
 <?php
-session_start();
 
 function setUserCookie ($name, $value){
   $userCookie = setcookie($name, $value, 0 , "/");
