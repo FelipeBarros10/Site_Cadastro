@@ -14,10 +14,14 @@ function registerProductValidate($productInformations)
     $errors["productNameEmpty"] = "Informe o nome do produto";
   }
 
+   $price = implode(explode("R$ ", $productInformations["price"]));
+    
 
-  if (empty($productInformations["price"])) {
+  if ($price === "R$") {
     $errors["priceEmpty"] = "Informe o valor do produto";
-  } else if ($productInformations["price"] === 0) {
+  } 
+  
+  if ($price == 0) {
     $errors["priceEqualZero"] = "O valor do produto deve ser maior que 0";
   }
 
