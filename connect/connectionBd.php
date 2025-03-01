@@ -1,11 +1,17 @@
 <?php
 
+require_once '../vendor/autoload.php';
+
+
 function connectDb()
 {
-  $hostName = "localhost";
-  $userHost = "root";
-  $password = "";
-  $nameDb = "site_register";
+  $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+  $dotenv->load();
+
+  $hostName = $_ENV['DB_HOST'];
+  $userHost = $_ENV['DB_USER'];
+  $password = $_ENV['DB_PASS'];
+  $nameDb = $_ENV['DB_NAME'];
 
   $conn = mysqli_connect($hostName, $userHost, $password, $nameDb);
 

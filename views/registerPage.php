@@ -1,5 +1,5 @@
 <?php require_once __DIR__ . "/../config/config.php" ?>
-<?php require_once __DIR__  . '/../model/products.php'?>
+<?php require_once __DIR__  . '/../model/products.php' ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -11,7 +11,9 @@
   <link rel="stylesheet" href="../Assets/css/registerAndShowProductsPages.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-
+  <link rel="stylesheet" href="../vendor/alertifyjs/css/alertify.min.css" />
+  <link rel="stylesheet" href="../vendor/alertifyjs/css/themes/default.min.css" />
+  <script src="../vendor/alertifyjs/alertify.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/cleave.js"></script>
 </head>
 
@@ -19,9 +21,9 @@
   <div class="main-parent">
     <?php require_once __DIR__  . '/../components/sideBar.php' ?>
 
-    <?php  
-      $page_title = "Cadastre seu produto";
-      require_once __DIR__  . '/../components/headerTop.php' 
+    <?php
+    $page_title = "Cadastre seu produto";
+    require_once __DIR__  . '/../components/headerTop.php'
     ?>
 
     <main class="main-register-content">
@@ -37,9 +39,32 @@
                 <label>Nome do produto</label>
                 <input type="text" name="productName" id="">
               </div>
+              <?php
+              if (isset($_SESSION['errorsRegisterProduct'])) {
+                foreach ($_SESSION['errorsRegisterProduct'] as $errorIndex => $errorMessage) {
+                      if ($errorIndex === 'productNameEmpty') {
+                        echo "<script>
+                                alertify.error('$errorMessage');
+                              </script>";
+                      }
+                    }
+                
+              }
+
+              // if (isset($_SESSION['errorsRegisterProduct'])) {
+              //   echo "<div id='error-messages-login' class='error-messages'>";
+              //   foreach ($_SESSION['errorsRegisterProduct'] as $errorIndex => $errorMessage) {
+              //     if ($errorIndex === 'productNameEmpty') {
+              //       echo "<p>{$errorMessage}</p>";
+              //     }
+              //   }
+              //   echo "</div>";
+              // }
+              ?>
+
 
               <div class="button-img-product">
-                <input type="file" name="file" id="inputFile" style="display: none;" >
+                <input type="file" name="file" id="inputFile" style="display: none;">
 
                 <button type="button" id="btn" onclick="openFile(event)">
                   <i id="iconBtn" class="bi bi-camera-fill"></i>
@@ -55,6 +80,29 @@
                   <label>Preço</label>
                   <input type="text" name="price" id="price">
                 </div>
+
+                <?php
+                  if (isset($_SESSION['errorsRegisterProduct'])) {
+                    echo "<div id='error-messages-login' class='error-messages'>";
+                    foreach ($_SESSION['errorsRegisterProduct'] as $errorIndex => $errorMessage) {
+                      if ($errorIndex === 'priceEmpty') {
+                        echo "<script>
+                                  alertify.error('$errorMessage');
+                                </script>";
+                          
+                      }
+
+                      if($errorIndex === 'priceEqualZero'){
+                        echo "<script>
+                                alertify.error('$errorMessage');
+                              </script>";                      
+                      }
+                    }
+                    echo "</div>";
+                  }
+
+                  unset($_SESSION['errorsRegisterProduct']);
+                ?>
 
                 <div class="input-cost">
                   <label>Custo</label>
@@ -74,20 +122,20 @@
               <div class="input-category-product">
                 <div class="select-category">
                   <label>Selecione a categoria</label>
-                  <?php 
-                    $query = "SELECT nome FROM categorias";
-                    $queryResult = dbQuery($query);
+                  <?php
+                  $query = "SELECT nome FROM categorias";
+                  $queryResult = dbQuery($query);
 
-                    echo "<select name='selectCategory' id=''>";
-                      echo "<option value=''>Selecione uma categoria</option>";
-                      if(mysqli_num_rows($queryResult) > 0){
-                        while($row = mysqli_fetch_assoc($queryResult)){
-                          echo "<option value='{$row["nome"]}'>{$row["nome"]}</option>";
-                        }
-                      }
-                    echo '</select>';                  
+                  echo "<select name='selectCategory' id=''>";
+                  echo "<option value=''>Selecione uma categoria</option>";
+                  if (mysqli_num_rows($queryResult) > 0) {
+                    while ($row = mysqli_fetch_assoc($queryResult)) {
+                      echo "<option value='{$row["nome"]}'>{$row["nome"]}</option>";
+                    }
+                  }
+                  echo '</select>';
                   ?>
-                  
+
                 </div>
 
                 <div class="input-new-category">

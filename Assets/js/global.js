@@ -1,3 +1,4 @@
+
 function openFile() {
   const inputFile = document.getElementById("inputFile");
   const btn = document.getElementById("btn");

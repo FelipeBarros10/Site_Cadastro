@@ -15,9 +15,12 @@ if(isset($_POST)){
 
 function registerProduct ($productInformations){
   $registerProductValidating = registerProductValidate($productInformations);
-
+  
   if(isset($registerProductValidating['invalid'])){
-    $_SESSION['errors'] = $registerProductValidating['invalid'];
+    $_SESSION['errorsRegisterProduct'] = $registerProductValidating['invalid'];
+
+    header('Location: ../views/registerPage.php');
+    exit();
   } else {
     
     if(isset($_FILES["file"])){
@@ -25,8 +28,6 @@ function registerProduct ($productInformations){
     }
 
     $createNewProduct = createNewProduct($registerProductValidating, $infoUploadImage);
-
-    var_dump($createNewProduct);
 
     if(isset($createNewProduct['valid'])){
       header("Location: ../views/mainPage.php");
