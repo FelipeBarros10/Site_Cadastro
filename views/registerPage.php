@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="../vendor/alertifyjs/css/themes/default.min.css" />
   <script src="../vendor/alertifyjs/alertify.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/cleave.js"></script>
+  
 </head>
 
 <body>
@@ -101,18 +102,62 @@
                     echo "</div>";
                   }
 
-                  unset($_SESSION['errorsRegisterProduct']);
                 ?>
 
                 <div class="input-cost">
                   <label>Custo</label>
                   <input type="text" name="cost" id="cost">
                 </div>
+                <?php
+                  if (isset($_SESSION['errorsRegisterProduct'])) {
+                      echo "<div id='error-messages-login' class='error-messages'>";
+                      foreach ($_SESSION['errorsRegisterProduct'] as $errorIndex => $errorMessage) {
+                        if ($errorIndex === 'emptyCost') {
+                          echo "<script>
+                                    alertify.error('$errorMessage');
+                                  </script>";
+                            
+                        }
+
+                        if($errorIndex === 'costEqualZero'){
+                          echo "<script>
+                                  alertify.error('$errorMessage');
+                                </script>";                      
+                        }
+                      }
+                      echo "</div>";
+                    }
+
+                    
+                ?>
 
                 <div class="input-stock">
                   <label>Quantidade</label>
                   <input type="text" name="quantity" id="">
                 </div>
+
+                <?php
+                  if (isset($_SESSION['errorsRegisterProduct'])) {
+                      echo "<div id='error-messages-login' class='error-messages'>";
+                      foreach ($_SESSION['errorsRegisterProduct'] as $errorIndex => $errorMessage) {
+                        if ($errorIndex === 'quantityEmpty') {
+                          echo "<script>
+                                    alertify.error('$errorMessage');
+                                  </script>";
+                            
+                        }
+
+                        if($errorIndex === 'quantityEqualZero'){
+                          echo "<script>
+                                  alertify.error('$errorMessage');
+                                </script>";                      
+                        }
+                      }
+                      echo "</div>";
+                    }
+
+                    
+                ?>
 
                 <div class="button-register">
                   <button>Cadastrar</button>
@@ -142,6 +187,29 @@
                   <label>Nova categoria</label>
                   <input type="text" name="newCategory" id="">
                 </div>
+
+                <?php
+                  if (isset($_SESSION['errorsRegisterProduct'])) {
+                      echo "<div id='error-messages-login' class='error-messages'>";
+                      foreach ($_SESSION['errorsRegisterProduct'] as $errorIndex => $errorMessage) {
+                        if ($errorIndex === 'selectCategory') {
+                          echo "<script>
+                                    alertify.error('$errorMessage');
+                                  </script>";
+                            
+                        }
+
+                        if($errorIndex === 'categorieAlreadyExist'){
+                          echo "<script>
+                                  alertify.error('$errorMessage');
+                                </script>";                      
+                        }
+                      }
+                      echo "</div>";
+                    }
+
+                    unset($_SESSION['errorsRegisterProduct']);
+                ?>
               </div>
             </div>
           </div><!--até aqui-->

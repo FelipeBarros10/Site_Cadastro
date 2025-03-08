@@ -62,7 +62,6 @@ function public_path($path = '')
 
 function imageUniqueName($infoUploadImage)
 {
-  echo "entrou";
   $imageName = $infoUploadImage["name"];
   $extensionImage = explode(".", $infoUploadImage["name"] );
   $imageHashed = md5($imageName . time()) . "." . $extensionImage[1];
@@ -101,11 +100,14 @@ function insertDbCategories($categorie)
 
 function comparingCategoryName($query, $values)
 {
+ 
   $queryCommand = $query;
 
   if ($values) {
     if (is_string($values)) {
+      
       $queryResult = dbQuery($queryCommand, $values);
+      // return $queryResult;
 
       $values = strtolower(removeAccents($values));
 
@@ -123,6 +125,7 @@ function comparingCategoryName($query, $values)
       return false;
     }
 
+   
     $queryResult = dbQuery($queryCommand, $values);
 
     if ($queryResult) {

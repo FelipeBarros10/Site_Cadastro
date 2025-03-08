@@ -15,7 +15,6 @@ if(isset($_POST)){
 
 function registerProduct ($productInformations){
   $registerProductValidating = registerProductValidate($productInformations);
-  
   if(isset($registerProductValidating['invalid'])){
     $_SESSION['errorsRegisterProduct'] = $registerProductValidating['invalid'];
 

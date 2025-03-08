@@ -22,7 +22,7 @@ function openFile() {
 
       reader.readAsDataURL(event.target.files[0]);
 
-      reader.onload = function (event) {
+      reader.onload = function () {
         img.src = reader.result;
         console.log(img);   
         btn.appendChild(img);

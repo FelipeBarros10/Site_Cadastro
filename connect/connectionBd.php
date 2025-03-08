@@ -25,7 +25,7 @@ function connectDb()
 
 
 function dbQuery($query, $values = ""){
-
+  // return [$query, $values];
   $conn = connectDb();
 
   if ($query != '') {
@@ -33,7 +33,8 @@ function dbQuery($query, $values = ""){
     if ($values) {
       
       $stmt = mysqli_prepare($conn, $query);
-
+      // return [$stmt];
+      
       if (isset($stmt)) {
 
         $typeParam = [];
@@ -54,6 +55,7 @@ function dbQuery($query, $values = ""){
           $bindParam = mysqli_stmt_bind_param($stmt, $typeParamToStr, ...$values);
   
         } else {
+          
           if(filter_var($values, FILTER_VALIDATE_INT)){
             $typeParam[] = "i";
           } elseif (filter_var($values, FILTER_VALIDATE_FLOAT)){
@@ -62,18 +64,18 @@ function dbQuery($query, $values = ""){
             $typeParam[] = "s";
           }
 
+          
           $typeParamToStr = implode($typeParam);
-
+          
           $bindParam = mysqli_stmt_bind_param($stmt, $typeParamToStr, $values);
+          
           
         }
 
-        
-        
 
         if (isset($bindParam)) {
           $queryResult = mysqli_stmt_execute($stmt);
-
+         
           if ($queryResult) {
             if(preg_match("/SELECT/", $query)){
               $result = mysqli_stmt_get_result($stmt);

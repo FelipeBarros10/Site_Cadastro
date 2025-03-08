@@ -25,8 +25,14 @@ function registerProductValidate($productInformations)
     $errors["priceEqualZero"] = "O valor do produto deve ser maior que 0";
   }
 
-  if(empty($productInformations["cost"])){
+  $cost = implode(explode("R$ ", $productInformations["cost"]));
+
+  if($cost === "R$"){
     $errors["emptyCost"] = "Informe o custo do produto";
+  }
+
+  if ($cost == 0) {
+    $errors["costEqualZero"] = "O valor do produto deve ser maior que 0";
   }
 
   if (empty($productInformations["quantity"])) {
@@ -35,17 +41,19 @@ function registerProductValidate($productInformations)
     $errors["quantityEqualZero"] = "A quantidade do produto deve ser maior que 0";
   }
 
-  if (empty($productInformations["selectCategory"])) {
-    if (empty($productInformations["newCategory"])) {
-      $errors["selectCategory"] = "Selecione a categoria do produto ou registre uma nova abaixo";
-    } else {
-      $query = "SELECT * FROM categorias";
-      $values = $productInformations["newCategory"];
-      $categorieExist = comparingCategoryName($query, $values);
+  if (empty($productInformations["selectCategory"]) && empty($productInformations["newCategory"])) {
+    $errors["selectCategory"] = "Selecione a categoria do produto ou registre uma nova abaixo";
+  }
 
-      if($categorieExist == true){
-        $errors["categorieAlreadyExist"] = "Essa categoria já existe, selecione-a no campo acima";
-      }
+  if (empty($productInformations["selectCategory"]) && $productInformations["newCategory"] != "") {
+    $query = "SELECT NOME FROM categorias WHERE NOME = ?";
+    $values = $productInformations["newCategory"];
+    $categorieExist = comparingCategoryName($query, $values);
+
+    // return $categorieExist;
+
+    if($categorieExist == true){
+      $errors["categorieAlreadyExist"] = "Essa categoria já existe, selecione-a no campo acima";
     }
   }
 
