@@ -8,7 +8,10 @@
   <link rel="stylesheet" href="../Assets/css/registerAndShowProductsPages.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="../vendor/alertifyjs/css/alertify.min.css" />
+  <link rel="stylesheet" href="../vendor/alertifyjs/css/themes/default.min.css" />
   <script src="https://cdn.jsdelivr.net/npm/cleave.js"></script>
+  <script src="../vendor/alertifyjs/alertify.min.js"></script>
 </head>
 
 <body class="showProductsPage">
@@ -27,10 +30,11 @@
 
             <div class="first-content-inputs">
 
-              <?php 
+              <?php
                 $idProduct = $_GET["id"];
+                $_SESSION["productId"] = $idProduct;
 
-                if(isset($idProduct)){
+                if(isset($idProduct) ){
                   $_SESSION["currentProductId"] = $idProduct;
                   $query = "SELECT * FROM produtos WHERE ID = ?";
                   $values = $idProduct;
@@ -49,6 +53,21 @@
                 <label>Nome do produto</label>
                 <input type="text" name="productName" id="" value="<?php echo $rowProduct["NOME"] ?>">
               </div>
+
+              <?php
+                  if (isset($_SESSION['errorsShowAndEditProducts'])) {
+                      echo "<div id='error-messages-login' class='error-messages'>";
+                      foreach ($_SESSION['errorsShowAndEditProducts'] as $errorIndex => $errorMessage) {
+                        if ($errorIndex === 'productNameEmpty') {
+                          echo "<script>
+                                    alertify.error('$errorMessage');
+                                  </script>";
+                        }
+                      }
+                      echo "</div>";
+                    }
+
+                ?>
 
               <div class="button-img-product">
 

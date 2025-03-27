@@ -108,7 +108,6 @@
 
                       echo"<tbody class='table-body'>";
                           echo "<tr>";
-
                             echo "<td><a class='column-product' href='showProducts.php?id={$row['ID']}'>
                                         <img class='image-product' src='./../Assets/img/{$row['IMAGENS']}' />
                                         <span>{$row['NOME']}</span>
@@ -135,8 +134,6 @@
               echo"</div>";
              echo"</div>";
             ?>
-
-      
     </main>
   </div>
 </body>

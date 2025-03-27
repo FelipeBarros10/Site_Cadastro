@@ -2,12 +2,20 @@
 
 require_once __DIR__ . "/../model/products.php";
 
-function productInformationValidate($productInformations)
+function productInformationValidate($productInformations, $infoUploadImage = null)
 {
 
   foreach ($productInformations as $keyIndex => $value) {
 
     $productInformations[$keyIndex] = trim($productInformations[$keyIndex]);
+  }
+
+  if(isset($infoUploadImage)){
+    $extractingImageType = implode(explode("image/", $infoUploadImage["type"]));
+    
+    if(!preg_match('/jpeg|jpg|png|webp/', $extractingImageType)){
+      $errors["invalidImage"] = "Tipo da imagem inválido";
+    }
   }
 
   if (empty($productInformations["productName"])) {

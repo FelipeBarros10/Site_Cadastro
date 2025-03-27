@@ -13,34 +13,43 @@ if(isset($_POST)){
 
   $productInformations = $_POST;
 
+  
+  if(isset($_FILES["file"])){
+    $infoUploadImage = $_FILES["file"];
+    
+    update($productId,$productInformations, $infoUploadImage);
+  }
+
   update($productId,$productInformations);
 
 }
 
 
-function update ($productId, $productInformations){
-  if(isset($productId) && isset($productInformations)){
+function update ($productId, $productInformations, $infoUploadImage = null){
+  if(isset($productId) && isset($productInformations) && isset($infoUploadImage)){
+    $productInformationValidating = productInformationValidate($productInformations, $infoUploadImage);
+
+    return var_dump($productInformationValidating);
+    
+  } else {
     $productInformationValidating = productInformationValidate($productInformations);
-
-    if(isset($productInformationValidating['invalid'])){
-      $_SESSION['errors'] = $productInformationValidating['invalid'];
-      
-    } else{
-
-      if(isset($_FILES["file"])){
-        $infoUploadImage = $_FILES["file"];
-      }
-
-      $updatingProduct = updateProduct($productId, $productInformations, $infoUploadImage);
-
-      if(isset($updatingProduct)){
-        header("Location: ../views/mainPage.php");
-        exit();
-      } 
-    }
   }
 
-  
+  if(isset($productInformationValidating['invalid'])){
+    $_SESSION['errorsShowAndEditProducts'] = $productInformationValidating['invalid'];
+
+    header("Location: ../views/showProducts.php?id={$_SESSION["productId"]}");
+    exit();
+  } else{
+
+
+    $updatingProduct = updateProduct($productId, $productInformations, $infoUploadImage);
+
+    if(isset($updatingProduct)){
+      header("Location: ../views/mainPage.php");
+      exit();
+    } 
+  }
 
 }
 
