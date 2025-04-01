@@ -1,11 +1,10 @@
 <?php
 
-require_once '../vendor/autoload.php';
-
+require_once __DIR__ .  '/../vendor/autoload.php';
 
 function connectDb()
 {
-  $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+  $dotenv = Dotenv\Dotenv::createImmutable(dirname(__DIR__));
   $dotenv->load();
 
   $hostName = $_ENV['DB_HOST'];
@@ -19,10 +18,9 @@ function connectDb()
     return $conn;
   } else {
     echo "erro no banco";
-    return;
+    return false;
   }
 }
-
 
 function dbQuery($query, $values = ""){
   // return [$query, $values];

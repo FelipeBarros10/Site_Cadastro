@@ -66,7 +66,6 @@
                       }
                       echo "</div>";
                     }
-
                 ?>
 
               <div class="button-img-product">
@@ -74,6 +73,20 @@
                 <div class="currentImg">
                   <img src="../Assets/img/<?php echo $rowProduct["IMAGENS"] ?>" alt="" id="currentImgProduct" />
                 </div>
+
+                <?php
+                  if (isset($_SESSION['errorsShowAndEditProducts'])) {
+                      echo "<div id='error-messages-login' class='error-messages'>";
+                      foreach ($_SESSION['errorsShowAndEditProducts'] as $errorIndex => $errorMessage) {
+                        if ($errorIndex === 'invalidImage') {
+                          echo "<script>
+                                    alertify.error('$errorMessage');
+                                  </script>";
+                        }
+                      }
+                      echo "</div>";
+                    }
+                ?>
 
                 <input type="file" name="file" id="inputFile" style="display: none;">
                 <button class="btnChangeImg" type="button" id="btn" onclick="openFile()">
@@ -91,12 +104,51 @@
                   <input type="text" name="price" id="price" value="<?php echo $rowProduct["PRECO"] ?>">
                 </div>
 
+                <?php
+                  if (isset($_SESSION['errorsShowAndEditProducts'])) {
+                      echo "<div id='error-messages-login' class='error-messages'>";
+                      foreach ($_SESSION['errorsShowAndEditProducts'] as $errorIndex => $errorMessage) {
+                        if ($errorIndex === 'priceEmpty') {
+                          echo "<script>
+                                    alertify.error('$errorMessage');
+                                  </script>";
+                        }
+
+                        if ($errorIndex === 'priceEqualZero') {
+                          echo "<script>
+                                    alertify.error('$errorMessage');
+                                  </script>";
+                        }
+                      }
+                      echo "</div>";
+                    }
+                ?>
+
                 <div class="input-cost">
                   <label>Custo</label>
                   <input type="text" name="cost" id="cost" value="<?php echo $rowProduct["CUSTO"] ?>">
                 </div>
 
-               
+                <?php
+                  if (isset($_SESSION['errorsShowAndEditProducts'])) {
+                      echo "<div id='error-messages-login' class='error-messages'>";
+                      foreach ($_SESSION['errorsShowAndEditProducts'] as $errorIndex => $errorMessage) {
+                        if ($errorIndex === 'emptyCost') {
+                          echo "<script>
+                                    alertify.error('$errorMessage');
+                                  </script>";
+                        }
+
+                        if ($errorIndex === 'costEqualZero') {
+                          echo "<script>
+                                    alertify.error('$errorMessage');
+                                  </script>";
+                        }
+                      }
+                      echo "</div>";
+                    }
+                ?>
+
                 <div class="button-register">
                   <button>Atualizar</button>
                 </div>
@@ -121,6 +173,31 @@
                       }
                     }
                   echo '</select>';
+
+
+                  if (isset($_SESSION['errorsShowAndEditProducts'])) {
+                    echo "<div id='error-messages-login' class='error-messages'>";
+                    foreach ($_SESSION['errorsShowAndEditProducts'] as $errorIndex => $errorMessage) {
+                      if ($errorIndex === 'selectCategory') {
+                        echo "<script>
+                                  alertify.error('$errorMessage');
+                                </script>";
+                      }
+
+                      if ($errorIndex === 'categorieAlreadyExist') {
+                        echo "<script>
+                                  alertify.error('$errorMessage');
+                                </script>";
+                      }
+
+                      if ($errorIndex === 'bothFilled') {
+                        echo "<script>
+                                  alertify.error('$errorMessage');
+                                </script>";
+                      }
+                    }
+                    echo "</div>";
+                  }
                   ?>
 
                 </div>
@@ -129,6 +206,21 @@
                   <label>Quantidade</label>
                   <input type="text" name="quantity" id="" value="<?php echo $rowProduct["QUANTIDADE_ESTOQUE"] ?>">
                 </div>
+
+                <?php
+                  if (isset($_SESSION['errorsShowAndEditProducts'])) {
+                      echo "<div id='error-messages-login' class='error-messages'>";
+                      foreach ($_SESSION['errorsShowAndEditProducts'] as $errorIndex => $errorMessage) {
+                        if ($errorIndex === 'quantityEmpty') {
+                          echo "<script>
+                                    alertify.error('$errorMessage');
+                                  </script>";
+                        }
+                      }
+                      echo "</div>";
+                    }
+                    unset($_SESSION['errorsShowAndEditProducts']);
+                ?>
 
                 <div class="who-registered-product">
                   <label>Responsável pelo cadastro:</label>
@@ -148,9 +240,6 @@
                     ?>
                   </div>
                 </div>
-
-             
-               
               </div>
             </div>
           </div><!--até aqui-->

@@ -13,7 +13,7 @@ function productInformationValidate($productInformations, $infoUploadImage = nul
   if(isset($infoUploadImage)){
     $extractingImageType = implode(explode("image/", $infoUploadImage["type"]));
     
-    if(!preg_match('/jpeg|jpg|png|webp/', $extractingImageType)){
+    if(!preg_match('/jpeg|jpg|webp|png/', $extractingImageType)){
       $errors["invalidImage"] = "Tipo da imagem inválido";
     }
   }
@@ -22,15 +22,24 @@ function productInformationValidate($productInformations, $infoUploadImage = nul
     $errors["productNameEmpty"] = "Informe o nome do produto";
   }
 
+  $price = implode(explode("R$ ", $productInformations["price"]));
 
-  if (empty($productInformations["price"])) {
+  if ($price === "R$") {
     $errors["priceEmpty"] = "Informe o valor do produto";
-  } else if ($productInformations["price"] === 0) {
+  }
+
+  if ($price === "0,00") {
     $errors["priceEqualZero"] = "O valor do produto deve ser maior que 0";
   }
 
-  if(empty($productInformations["cost"])){
+  $cost = implode(explode("R$ ", $productInformations["cost"]));
+
+  if($cost === "R$"){
     $errors["emptyCost"] = "Informe o custo do produto";
+  }
+
+  if ($cost === "0,00") {
+    $errors["costEqualZero"] = "O valor do custo deve ser maior que 0";
   }
 
   if (empty($productInformations["quantity"])) {

@@ -3,9 +3,10 @@
 session_start();
 
 #Incluindo os arquivos necessários
-include_once '../model/usuarios.php';
-include_once '../validations/loginValidate.php';
+require_once __DIR__ . '/../model/usuarios.php';
+require_once __DIR__ . '/../validations/loginValidate.php';
 
+echo dirname(__DIR__);
 
 #Valida se a requisição POST aconteceu 
 if(isset($_POST)){

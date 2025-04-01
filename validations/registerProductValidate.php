@@ -2,12 +2,20 @@
 
 require_once __DIR__ . "/../model/products.php";
 
-function registerProductValidate($productInformations)
+function registerProductValidate($productInformations, $infoUploadImage = null)
 {
 
   foreach ($productInformations as $keyIndex => $value) {
 
     $productInformations[$keyIndex] = trim($productInformations[$keyIndex]);
+  }
+
+  if(isset($infoUploadImage)){
+    $extractingImageType = implode(explode("image/", $infoUploadImage["type"]));
+    
+    if(!preg_match('/jpeg|jpg|webp|png/', $extractingImageType)){
+      $errors["invalidImage"] = "Tipo da imagem inválido";
+    }
   }
 
   if (empty($productInformations["productName"])) {
@@ -21,7 +29,7 @@ function registerProductValidate($productInformations)
     $errors["priceEmpty"] = "Informe o valor do produto";
   } 
   
-  if ($price == 0) {
+  if ($price === "0,00") {
     $errors["priceEqualZero"] = "O valor do produto deve ser maior que 0";
   }
 
@@ -37,8 +45,6 @@ function registerProductValidate($productInformations)
 
   if (empty($productInformations["quantity"])) {
     $errors["quantityEmpty"] = "Informe a quantidade do produto";
-  } else if ($productInformations["quantity"] === 0) {
-    $errors["quantityEqualZero"] = "A quantidade do produto deve ser maior que 0";
   }
 
   if (empty($productInformations["selectCategory"]) && empty($productInformations["newCategory"])) {

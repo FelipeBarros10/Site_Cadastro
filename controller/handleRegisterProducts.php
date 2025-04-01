@@ -10,11 +10,23 @@ if(isset($_POST)){
 
   $productInformations = $_POST;
 
+  if(isset($_FILES['file'])){
+    $infoUploadImage = $_FILES['file'];
+    
+    registerProduct($productInformations, $infoUploadImage);
+  }
+
   registerProduct($productInformations);
 }
 
-function registerProduct ($productInformations){
-  $registerProductValidating = registerProductValidate($productInformations);
+function registerProduct ($productInformations, $infoUploadImage = null){
+  if(isset($productId) && isset($productInformations) && $infoUploadImage['name'] != ''){
+    $registerProductValidating = productInformationValidate($productInformations, $infoUploadImage);
+
+  } else {
+    $registerProductValidating = productInformationValidate($productInformations);
+  }
+  
   if(isset($registerProductValidating['invalid'])){
     $_SESSION['errorsRegisterProduct'] = $registerProductValidating['invalid'];
 

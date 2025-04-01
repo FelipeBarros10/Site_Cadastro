@@ -9,13 +9,12 @@ require_once __DIR__  . '/../validations/showAndEditProductValidate.php';
 
 if(isset($_POST)){
 
-  $productId = $_SESSION["currentProductId"];
+  $productId = $_SESSION['currentProductId'];
 
   $productInformations = $_POST;
 
-  
-  if(isset($_FILES["file"])){
-    $infoUploadImage = $_FILES["file"];
+  if(isset($_FILES['file'])){
+    $infoUploadImage = $_FILES['file'];
     
     update($productId,$productInformations, $infoUploadImage);
   }
@@ -26,11 +25,9 @@ if(isset($_POST)){
 
 
 function update ($productId, $productInformations, $infoUploadImage = null){
-  if(isset($productId) && isset($productInformations) && isset($infoUploadImage)){
+  if(isset($productId) && isset($productInformations) && $infoUploadImage['name'] != ''){
     $productInformationValidating = productInformationValidate($productInformations, $infoUploadImage);
 
-    return var_dump($productInformationValidating);
-    
   } else {
     $productInformationValidating = productInformationValidate($productInformations);
   }

@@ -123,7 +123,9 @@
                                     </form>
                                   </td>";
                             echo "<td>
-                                    <button class='btn'><i class='bi bi-pencil-square'></i></button>
+                                    <a class='column-product' href='showProducts.php?id={$row['ID']}'>
+                                      <button class='btn'><i class='bi bi-pencil-square'></i></button>
+                                    </a>
                                   </td>";
                           echo "</tr>";
                       echo"</tbody>";
