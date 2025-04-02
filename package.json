@@ -1,5 +1,6 @@
 {
   "dependencies": {
-    "alertifyjs": "^1.14.0"
+    "alertifyjs": "^1.14.0",
+    "aos": "^2.3.4"
   }
 }

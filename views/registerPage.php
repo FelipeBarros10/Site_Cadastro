@@ -13,9 +13,11 @@
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <link rel="stylesheet" href="../vendor/alertifyjs/css/alertify.min.css" />
   <link rel="stylesheet" href="../vendor/alertifyjs/css/themes/default.min.css" />
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script src="../vendor/alertifyjs/alertify.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/cleave.js"></script>
-  
+  <script src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs" type="module"></script>
 </head>
 
 <body>
@@ -27,8 +29,10 @@
     require_once __DIR__  . '/../components/headerTop.php'
     ?>
 
-    <main class="main-register-content">
-
+    <main data-aos="zoom-in" class="main-register-content">
+      <div class="loading" id="loading">
+        <dotlottie-player  src="https://lottie.host/33022999-343c-4490-b368-1fd709b0081b/2ax7KO5izZ.lottie" background="transparent" speed="3" style="width: 50%; height: 50%" direction="1" playMode="forward" loop autoplay></dotlottie-player>
+      </div>
 
       <div class="main-register-products">
         <form action="../controller/handleRegisterProducts.php" method="post" enctype="multipart/form-data">
@@ -43,26 +47,14 @@
               <?php
               if (isset($_SESSION['errorsRegisterProduct'])) {
                 foreach ($_SESSION['errorsRegisterProduct'] as $errorIndex => $errorMessage) {
-                      if ($errorIndex === 'productNameEmpty') {
-                        echo "<script>
+                  if ($errorIndex === 'productNameEmpty') {
+                    echo "<script>
                                 alertify.error('$errorMessage');
                               </script>";
-                      }
-                    }
-                
+                  }
+                }
               }
-
-              // if (isset($_SESSION['errorsRegisterProduct'])) {
-              //   echo "<div id='error-messages-login' class='error-messages'>";
-              //   foreach ($_SESSION['errorsRegisterProduct'] as $errorIndex => $errorMessage) {
-              //     if ($errorIndex === 'productNameEmpty') {
-              //       echo "<p>{$errorMessage}</p>";
-              //     }
-              //   }
-              //   echo "</div>";
-              // }
               ?>
-
 
               <div class="button-img-product">
                 <input type="file" name="file" id="inputFile" style="display: none;">
@@ -83,24 +75,23 @@
                 </div>
 
                 <?php
-                  if (isset($_SESSION['errorsRegisterProduct'])) {
-                    echo "<div id='error-messages-login' class='error-messages'>";
-                    foreach ($_SESSION['errorsRegisterProduct'] as $errorIndex => $errorMessage) {
-                      if ($errorIndex === 'priceEmpty') {
-                        echo "<script>
+                if (isset($_SESSION['errorsRegisterProduct'])) {
+                  echo "<div id='error-messages-login' class='error-messages'>";
+                  foreach ($_SESSION['errorsRegisterProduct'] as $errorIndex => $errorMessage) {
+                    if ($errorIndex === 'priceEmpty') {
+                      echo "<script>
                                   alertify.error('$errorMessage');
                                 </script>";
-                          
-                      }
-
-                      if($errorIndex === 'priceEqualZero'){
-                        echo "<script>
-                                alertify.error('$errorMessage');
-                              </script>";                      
-                      }
                     }
-                    echo "</div>";
+
+                    if ($errorIndex === 'priceEqualZero') {
+                      echo "<script>
+                                alertify.error('$errorMessage');
+                              </script>";
+                    }
                   }
+                  echo "</div>";
+                }
 
                 ?>
 
@@ -109,26 +100,25 @@
                   <input type="text" name="cost" id="cost">
                 </div>
                 <?php
-                  if (isset($_SESSION['errorsRegisterProduct'])) {
-                      echo "<div id='error-messages-login' class='error-messages'>";
-                      foreach ($_SESSION['errorsRegisterProduct'] as $errorIndex => $errorMessage) {
-                        if ($errorIndex === 'emptyCost') {
-                          echo "<script>
+                if (isset($_SESSION['errorsRegisterProduct'])) {
+                  echo "<div id='error-messages-login' class='error-messages'>";
+                  foreach ($_SESSION['errorsRegisterProduct'] as $errorIndex => $errorMessage) {
+                    if ($errorIndex === 'emptyCost') {
+                      echo "<script>
                                     alertify.error('$errorMessage');
                                   </script>";
-                            
-                        }
-
-                        if($errorIndex === 'costEqualZero'){
-                          echo "<script>
-                                  alertify.error('$errorMessage');
-                                </script>";                      
-                        }
-                      }
-                      echo "</div>";
                     }
 
-                    
+                    if ($errorIndex === 'costEqualZero') {
+                      echo "<script>
+                                  alertify.error('$errorMessage');
+                                </script>";
+                    }
+                  }
+                  echo "</div>";
+                }
+
+
                 ?>
 
                 <div class="input-stock">
@@ -137,26 +127,25 @@
                 </div>
 
                 <?php
-                  if (isset($_SESSION['errorsRegisterProduct'])) {
-                      echo "<div id='error-messages-login' class='error-messages'>";
-                      foreach ($_SESSION['errorsRegisterProduct'] as $errorIndex => $errorMessage) {
-                        if ($errorIndex === 'quantityEmpty') {
-                          echo "<script>
+                if (isset($_SESSION['errorsRegisterProduct'])) {
+                  echo "<div id='error-messages-login' class='error-messages'>";
+                  foreach ($_SESSION['errorsRegisterProduct'] as $errorIndex => $errorMessage) {
+                    if ($errorIndex === 'quantityEmpty') {
+                      echo "<script>
                                     alertify.error('$errorMessage');
                                   </script>";
-                            
-                        }
-
-                        if($errorIndex === 'quantityEqualZero'){
-                          echo "<script>
-                                  alertify.error('$errorMessage');
-                                </script>";                      
-                        }
-                      }
-                      echo "</div>";
                     }
 
-                    
+                    if ($errorIndex === 'quantityEqualZero') {
+                      echo "<script>
+                                  alertify.error('$errorMessage');
+                                </script>";
+                    }
+                  }
+                  echo "</div>";
+                }
+
+
                 ?>
 
                 <div class="button-register">
@@ -189,26 +178,25 @@
                 </div>
 
                 <?php
-                  if (isset($_SESSION['errorsRegisterProduct'])) {
-                      echo "<div id='error-messages-login' class='error-messages'>";
-                      foreach ($_SESSION['errorsRegisterProduct'] as $errorIndex => $errorMessage) {
-                        if ($errorIndex === 'selectCategory') {
-                          echo "<script>
+                if (isset($_SESSION['errorsRegisterProduct'])) {
+                  echo "<div id='error-messages-login' class='error-messages'>";
+                  foreach ($_SESSION['errorsRegisterProduct'] as $errorIndex => $errorMessage) {
+                    if ($errorIndex === 'selectCategory') {
+                      echo "<script>
                                     alertify.error('$errorMessage');
                                   </script>";
-                            
-                        }
-
-                        if($errorIndex === 'categorieAlreadyExist'){
-                          echo "<script>
-                                  alertify.error('$errorMessage');
-                                </script>";                      
-                        }
-                      }
-                      echo "</div>";
                     }
 
-                    unset($_SESSION['errorsRegisterProduct']);
+                    if ($errorIndex === 'categorieAlreadyExist') {
+                      echo "<script>
+                                  alertify.error('$errorMessage');
+                                </script>";
+                    }
+                  }
+                  echo "</div>";
+                }
+
+                unset($_SESSION['errorsRegisterProduct']);
                 ?>
               </div>
             </div>
@@ -218,7 +206,10 @@
     </main>
   </div>
   <script src="../Assets/js/global.js"></script>
+  <script src="../Assets/js/registerPage.js"></script>
+  <script>
+    AOS.init();
+  </script>
 </body>
-
 
 </html>

@@ -21,10 +21,10 @@ if(isset($_POST)){
 
 function registerProduct ($productInformations, $infoUploadImage = null){
   if(isset($productId) && isset($productInformations) && $infoUploadImage['name'] != ''){
-    $registerProductValidating = productInformationValidate($productInformations, $infoUploadImage);
+    $registerProductValidating = registerProductValidate($productInformations, $infoUploadImage);
 
   } else {
-    $registerProductValidating = productInformationValidate($productInformations);
+    $registerProductValidating = registerProductValidate($productInformations);
   }
   
   if(isset($registerProductValidating['invalid'])){

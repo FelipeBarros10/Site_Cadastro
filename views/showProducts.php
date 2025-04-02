@@ -10,6 +10,8 @@
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <link rel="stylesheet" href="../vendor/alertifyjs/css/alertify.min.css" />
   <link rel="stylesheet" href="../vendor/alertifyjs/css/themes/default.min.css" />
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/cleave.js"></script>
   <script src="../vendor/alertifyjs/alertify.min.js"></script>
 </head>
@@ -23,11 +25,10 @@
     include '../components/headerTop.php'
     ?>
 
-    <main class="main-register-content">
+    <main data-aos="zoom-in" class="main-register-content">
       <div class="main-register-products">
         <form action="../controller/handleShowAndEditProducts.php" method="post" enctype="multipart/form-data">
           <div class="register-inputs">
-
             <div class="first-content-inputs">
 
               <?php
@@ -248,6 +249,9 @@
     </main>
   </div>
 <script src="../Assets/js/global.js"></script>
+<script>
+  AOS.init();
+</script>
 </body>
 
 

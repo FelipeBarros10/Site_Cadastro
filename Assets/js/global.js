@@ -9,8 +9,6 @@ function openFile() {
     var img = btn.querySelector("img");
   }
   
-
-  
   inputFile.click();
 
   inputFile.addEventListener("change", (event) => {
