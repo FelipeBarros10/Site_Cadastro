@@ -31,11 +31,11 @@
 
     <main data-aos="zoom-in" class="main-register-content">
       <div class="loading" id="loading">
-        <dotlottie-player  src="https://lottie.host/33022999-343c-4490-b368-1fd709b0081b/2ax7KO5izZ.lottie" background="transparent" speed="3" style="width: 50%; height: 50%" direction="1" playMode="forward" loop autoplay></dotlottie-player>
+        <dotlottie-player src="https://lottie.host/33022999-343c-4490-b368-1fd709b0081b/2ax7KO5izZ.lottie" background="transparent" speed="3" style="width: 50%; height: 50%" direction="1" playMode="forward" loop autoplay></dotlottie-player>
       </div>
 
       <div class="main-register-products">
-        <form action="../controller/handleRegisterProducts.php" method="post" enctype="multipart/form-data">
+        <form id="registerForm" action="../controller/handleRegisterProducts.php" method="post" enctype="multipart/form-data">
           <div class="register-inputs">
 
             <div class="first-content-inputs">
@@ -149,7 +149,7 @@
                 ?>
 
                 <div class="button-register">
-                  <button>Cadastrar</button>
+                  <button id="registerBtn">Cadastrar</button>
                 </div>
               </div>
 
