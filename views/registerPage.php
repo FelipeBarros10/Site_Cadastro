@@ -35,7 +35,7 @@
       </div>
 
       <div class="main-register-products">
-        <form id="registerForm" action="../controller/handleRegisterProducts.php" method="post" enctype="multipart/form-data">
+        <form id="form" action="../controller/handleRegisterProducts.php" method="post" enctype="multipart/form-data">
           <div class="register-inputs">
 
             <div class="first-content-inputs">
@@ -59,7 +59,7 @@
               <div class="button-img-product">
                 <input type="file" name="file" id="inputFile" style="display: none;">
 
-                <button type="button" id="btn" onclick="openFile(event)">
+                <button type="button" id="btn" onclick="openFile()">
                   <i id="iconBtn" class="bi bi-camera-fill"></i>
                 </button>
 
@@ -149,7 +149,7 @@
                 ?>
 
                 <div class="button-register">
-                  <button id="registerBtn">Cadastrar</button>
+                  <button type="button" onclick="loadingContent()" id="registerBtn">Cadastrar</button>
                 </div>
               </div>
 
@@ -206,7 +206,6 @@
     </main>
   </div>
   <script src="../Assets/js/global.js"></script>
-  <script src="../Assets/js/registerPage.js"></script>
   <script>
     AOS.init();
   </script>

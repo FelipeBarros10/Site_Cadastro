@@ -55,17 +55,29 @@
       <!--Início do Segundo Subtítulo-->
       <div data-aos="fade-left" class="header-information-stock">
         <div class="value-stock">
-          <h4>R$ 000.000,0</h4>
+
+        <?php 
+            $query = "SELECT SUM(PRECO), SUM(CUSTO) FROM produtos";
+            $queryResult = dbQuery($query);
+
+            if ($value = mysqli_fetch_assoc($queryResult)) {
+
+                $predictedProfit = $value['SUM(PRECO)'] - $value['SUM(CUSTO)'];
+                $stockValue = str_replace([".", " "], [",", ","] , $value);
+
+            }
+          ?>
+          <h4>R$ <?php echo $stockValue['SUM(PRECO)'] ?></h4>
           <span>Valor em estoque</span>
         </div>
 
         <div class="cost-stock">
-          <h4>R$ 000.000,0</h4>
+          <h4>R$ <?php echo $stockValue['SUM(CUSTO)'] ?></h4>
           <span>Custo do estoque</span>
         </div>
 
         <div class="profit-stock">
-          <h4>R$ 000.000,0</h4>
+          <h4>R$ <?php echo number_format($predictedProfit, 2, ",", ".") ?></h4>
           <span>Lucro Previsto</span>
         </div>
       </div>
