@@ -1,11 +1,16 @@
 <?php
 
+require_once __DIR__ .  '/../vendor/autoload.php';
+
 function connectDb()
 {
-  $hostName = "localhost";
-  $userHost = "root";
-  $password = "";
-  $nameDb = "site_register";
+  $dotenv = Dotenv\Dotenv::createImmutable(dirname(__DIR__));
+  $dotenv->load();
+
+  $hostName = $_ENV['DB_HOST'];
+  $userHost = $_ENV['DB_USER'];
+  $password = $_ENV['DB_PASS'];
+  $nameDb = $_ENV['DB_NAME'];
 
   $conn = mysqli_connect($hostName, $userHost, $password, $nameDb);
 
@@ -13,30 +18,30 @@ function connectDb()
     return $conn;
   } else {
     echo "erro no banco";
-    return;
+    return false;
   }
 }
 
-
 function dbQuery($query, $values = ""){
-
+  // return [$query, $values];
   $conn = connectDb();
 
   if ($query != '') {
 
     if ($values) {
-
+      
       $stmt = mysqli_prepare($conn, $query);
-
+      // return [$stmt];
+      
       if (isset($stmt)) {
 
         $typeParam = [];
 
         if (is_array($values)) {
           foreach ($values as $value) {
-            if(filter_var($values, FILTER_VALIDATE_INT)){
+            if(filter_var($value, FILTER_VALIDATE_INT)){
               $typeParam[] = "i";
-            } elseif (filter_var($values, FILTER_VALIDATE_FLOAT)){
+            } elseif (filter_var($value, FILTER_VALIDATE_FLOAT)){
               $typeParam[] = "d";
             } else {
               $typeParam[] = "s";
@@ -46,7 +51,9 @@ function dbQuery($query, $values = ""){
           $typeParamToStr = implode($typeParam);
 
           $bindParam = mysqli_stmt_bind_param($stmt, $typeParamToStr, ...$values);
+  
         } else {
+          
           if(filter_var($values, FILTER_VALIDATE_INT)){
             $typeParam[] = "i";
           } elseif (filter_var($values, FILTER_VALIDATE_FLOAT)){
@@ -55,15 +62,18 @@ function dbQuery($query, $values = ""){
             $typeParam[] = "s";
           }
 
+          
           $typeParamToStr = implode($typeParam);
-
-
+          
           $bindParam = mysqli_stmt_bind_param($stmt, $typeParamToStr, $values);
+          
+          
         }
+
 
         if (isset($bindParam)) {
           $queryResult = mysqli_stmt_execute($stmt);
-
+         
           if ($queryResult) {
             if(preg_match("/SELECT/", $query)){
               $result = mysqli_stmt_get_result($stmt);

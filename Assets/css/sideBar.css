@@ -8,7 +8,7 @@
 
 .sidebar, .sidebar-open{
   width: 7%;
-  height: 100vh;
+  min-height: 100vh;
   background-image: linear-gradient( #270069 10%, #6640a8 55% , #53318d 80% );
   display: flex;
   justify-content: center;

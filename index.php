@@ -1,6 +1,5 @@
 <?php
 session_start();
-
 ?>
 
 <!DOCTYPE html>
@@ -52,6 +51,8 @@ session_start();
               foreach ($_SESSION['errorsLogin'] as $errorIndex => $errorMessage) {
                 if ($errorIndex === 'emailEmpty') {
                   echo "<p>{$errorMessage}</p>";
+
+              
                 }
 
                 if ($errorIndex === 'emailEstructure') {
@@ -158,21 +159,21 @@ session_start();
             </label>
 
             <?php
-            if (isset($_SESSION['errors'])) {
-              echo "<div id='error-messages' class='error-messages'>";
+              if (isset($_SESSION['errors'])) {
+                echo "<div id='error-messages' class='error-messages'>";
 
-              foreach ($_SESSION['errors'] as $errorIndex => $errorMessage) {
-                if ($errorIndex === 'email') {
-                  echo "<p>{$errorMessage}</p>";
-                }
+                foreach ($_SESSION['errors'] as $errorIndex => $errorMessage) {
+                  if ($errorIndex === 'email') {
+                    echo "<p>{$errorMessage}</p>";
+                  }
 
-                if ($errorIndex === 'emailExist') {
-                  echo "<p>{$errorMessage}</p>";
+                  if ($errorIndex === 'emailExist') {
+                    echo "<p>{$errorMessage}</p>";
+                  }
                 }
+                echo "</div>";
               }
-              echo "</div>";
-            }
-
+              
             ?>
 
             <label class="label-input" for="">

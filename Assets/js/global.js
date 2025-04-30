@@ -4,7 +4,9 @@ function openFile() {
 
   const iconBtn = document.getElementById("iconBtn");
 
-  var img = btn.querySelector("img");
+  if (iconBtn) {
+    var img = btn.querySelector("img");
+  }
 
   inputFile.click();
 
@@ -12,16 +14,26 @@ function openFile() {
     if (iconBtn) {
       iconBtn.remove(); // Remove o ícone se ele existir
       img = document.createElement("img");
+
+      const reader = new FileReader();
+
+      reader.readAsDataURL(event.target.files[0]);
+
+      reader.onload = function () {
+        img.src = reader.result;
+        btn.appendChild(img);
+      };
+    } else {
+      const img = document.getElementById("currentImgProduct");
+
+      const reader = new FileReader();
+
+      reader.readAsDataURL(event.target.files[0]);
+
+      reader.onload = function (event) {
+        img.src = reader.result;
+      };
     }
-
-    const reader = new FileReader();
-
-    reader.readAsDataURL(event.target.files[0]);
-
-    reader.onload = function (event) {
-      img.src = reader.result;
-      btn.appendChild(img);
-    };
   });
 }
 
@@ -30,12 +42,11 @@ function stylingThePriceInput() {
   var inputCost = document.getElementById("cost");
 
   var inputPriceDotReplace = inputPrice.value.replace(".", ",");
-  var inputCostDotReplace = inputCost.value.replace(".", ",")
+  var inputCostDotReplace = inputCost.value.replace(".", ",");
 
   inputPrice.value = inputPriceDotReplace;
 
   inputCost.value = inputCostDotReplace;
-  
 
   new Cleave(inputPrice, {
     prefix: "R$ ",
@@ -55,3 +66,12 @@ function stylingThePriceInput() {
 }
 
 stylingThePriceInput();
+
+function loadingContent() {
+  const loadingContent = document.getElementById("loading");
+
+  loadingContent.style.display = "flex";
+  setTimeout(() => {
+    document.getElementById("form").submit();
+  }, 650);
+}

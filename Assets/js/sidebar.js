@@ -7,7 +7,6 @@ let currentUrl = window.location.pathname;
     const logo = document.getElementById("logo");
 
 
-    // if(currentUrl != url)
     const selectedIconId = localStorage.getItem("selectedIcon");
 
     if(!currentUrl.includes("register") || !currentUrl.includes("historic") || !currentUrl.includes("users") || !currentUrl.includes("historic") || !currentUrl.includes("sale")){
@@ -68,10 +67,7 @@ function sidebarIconSelected() {
       item.addEventListener("click", (event) => {
         
         localStorage.setItem("selectedIcon", event.currentTarget.id);
-
-        // let url = window.location;
-
-       
+   
 
         //Primeiro, verifica se já existe um ícone selecionado
         

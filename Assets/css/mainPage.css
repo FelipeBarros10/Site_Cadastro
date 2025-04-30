@@ -13,6 +13,7 @@ body{
 
 .main-parent{
   display: flex;
+  height: 100%;
 }
 
 .main-register-content{
@@ -73,6 +74,7 @@ td{
   border-radius: 20px;
   padding: 2px 6px;
   transition: background-color 0.5s ease;
+  
 }
 
 .btn:hover{
@@ -80,7 +82,7 @@ td{
 }
 
 .btn i{
-  color: black;
+  color: #4b00ce;
   font-size: 20px;
   transition: color 0.3s ease;
 }

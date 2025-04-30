@@ -4,8 +4,8 @@
 session_start();
 
 #Incluindo os arquivos necessários
-include_once '../model/usuarios.php';
-include_once '../validations/createAccountValidate.php';
+require_once __DIR__ .  '/../model/usuarios.php';
+require_once __DIR__ .  '/../validations/createAccountValidate.php';
 
 #Valida se a requisição POST aconteceu 
 if (isset($_POST)) {

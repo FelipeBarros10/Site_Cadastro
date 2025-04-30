@@ -10,14 +10,28 @@ if(isset($_POST)){
 
   $productInformations = $_POST;
 
+  if(isset($_FILES['file'])){
+    $infoUploadImage = $_FILES['file'];
+    
+    registerProduct($productInformations, $infoUploadImage);
+  }
+
   registerProduct($productInformations);
 }
 
-function registerProduct ($productInformations){
-  $registerProductValidating = registerProductValidate($productInformations);
+function registerProduct ($productInformations, $infoUploadImage = null){
+  if(isset($productId) && isset($productInformations) && $infoUploadImage['name'] != ''){
+    $registerProductValidating = registerProductValidate($productInformations, $infoUploadImage);
 
+  } else {
+    $registerProductValidating = registerProductValidate($productInformations);
+  }
+  
   if(isset($registerProductValidating['invalid'])){
-    $_SESSION['errors'] = $registerProductValidating['invalid'];
+    $_SESSION['errorsRegisterProduct'] = $registerProductValidating['invalid'];
+
+    header('Location: ../views/registerPage.php');
+    exit();
   } else {
     
     if(isset($_FILES["file"])){
@@ -25,7 +39,6 @@ function registerProduct ($productInformations){
     }
 
     $createNewProduct = createNewProduct($registerProductValidating, $infoUploadImage);
-
 
     if(isset($createNewProduct['valid'])){
       header("Location: ../views/mainPage.php");

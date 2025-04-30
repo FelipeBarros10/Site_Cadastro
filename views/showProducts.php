@@ -8,7 +8,13 @@
   <link rel="stylesheet" href="../Assets/css/registerAndShowProductsPages.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="../vendor/alertifyjs/css/alertify.min.css" />
+  <link rel="stylesheet" href="../vendor/alertifyjs/css/themes/default.min.css" />
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/cleave.js"></script>
+  <script src="../vendor/alertifyjs/alertify.min.js"></script>
+  <script src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs" type="module"></script>
 </head>
 
 <body class="showProductsPage">
@@ -20,29 +26,33 @@
     include '../components/headerTop.php'
     ?>
 
-    <main class="main-register-content">
-      <div class="main-register-products">
-        <form action="../controller/handleShowAndEditProducts.php" method="post" enctype="multipart/form-data">
-          <div class="register-inputs">
+    <main data-aos="zoom-in" class="main-register-content">
 
+      <div class="loading" id="loading">
+        <dotlottie-player src="https://lottie.host/33022999-343c-4490-b368-1fd709b0081b/2ax7KO5izZ.lottie" background="transparent" speed="3" style="width: 50%; height: 50%" direction="1" playMode="forward" loop autoplay></dotlottie-player>
+      </div>
+      <div class="main-register-products">
+        <form id="form" action="../controller/handleShowAndEditProducts.php" method="post" enctype="multipart/form-data">
+          <div class="register-inputs">
             <div class="first-content-inputs">
 
-              <?php 
-                $idProduct = $_GET["id"];
+              <?php
+              $idProduct = $_GET["id"];
+              $_SESSION["productId"] = $idProduct;
 
-                if(isset($idProduct)){
-                  $_SESSION["currentProductId"] = $idProduct;
-                  $query = "SELECT * FROM produtos WHERE ID = ?";
-                  $values = $idProduct;
+              if (isset($idProduct)) {
+                $_SESSION["currentProductId"] = $idProduct;
+                $query = "SELECT * FROM produtos WHERE ID = ?";
+                $values = $idProduct;
 
-                  $result = dbQuery($query, $values);
+                $result = dbQuery($query, $values);
 
-                  if(mysqli_num_rows($result) > 0){
-                    $rowProduct = mysqli_fetch_assoc($result);
-                  }
+                if (mysqli_num_rows($result) > 0) {
+                  $rowProduct = mysqli_fetch_assoc($result);
                 }
-              
-              
+              }
+
+
               ?>
 
               <div class="input-name-product">
@@ -50,11 +60,39 @@
                 <input type="text" name="productName" id="" value="<?php echo $rowProduct["NOME"] ?>">
               </div>
 
+              <?php
+              if (isset($_SESSION['errorsShowAndEditProducts'])) {
+                echo "<div id='error-messages-login' class='error-messages'>";
+                foreach ($_SESSION['errorsShowAndEditProducts'] as $errorIndex => $errorMessage) {
+                  if ($errorIndex === 'productNameEmpty') {
+                    echo "<script>
+                                    alertify.error('$errorMessage');
+                                  </script>";
+                  }
+                }
+                echo "</div>";
+              }
+              ?>
+
               <div class="button-img-product">
 
                 <div class="currentImg">
-                  <img src="../Assets/img/<?php echo $rowProduct["IMAGENS"] ?>" alt="" />
+                  <img src="../Assets/img/<?php echo $rowProduct["IMAGENS"] ?>" alt="" id="currentImgProduct" />
                 </div>
+
+                <?php
+                if (isset($_SESSION['errorsShowAndEditProducts'])) {
+                  echo "<div id='error-messages-login' class='error-messages'>";
+                  foreach ($_SESSION['errorsShowAndEditProducts'] as $errorIndex => $errorMessage) {
+                    if ($errorIndex === 'invalidImage') {
+                      echo "<script>
+                                    alertify.error('$errorMessage');
+                                  </script>";
+                    }
+                  }
+                  echo "</div>";
+                }
+                ?>
 
                 <input type="file" name="file" id="inputFile" style="display: none;">
                 <button class="btnChangeImg" type="button" id="btn" onclick="openFile()">
@@ -72,19 +110,55 @@
                   <input type="text" name="price" id="price" value="<?php echo $rowProduct["PRECO"] ?>">
                 </div>
 
+                <?php
+                if (isset($_SESSION['errorsShowAndEditProducts'])) {
+                  echo "<div id='error-messages-login' class='error-messages'>";
+                  foreach ($_SESSION['errorsShowAndEditProducts'] as $errorIndex => $errorMessage) {
+                    if ($errorIndex === 'priceEmpty') {
+                      echo "<script>
+                                    alertify.error('$errorMessage');
+                                  </script>";
+                    }
+
+                    if ($errorIndex === 'priceEqualZero') {
+                      echo "<script>
+                                    alertify.error('$errorMessage');
+                                  </script>";
+                    }
+                  }
+                  echo "</div>";
+                }
+                ?>
+
                 <div class="input-cost">
                   <label>Custo</label>
                   <input type="text" name="cost" id="cost" value="<?php echo $rowProduct["CUSTO"] ?>">
                 </div>
 
-                <div class="input-stock">
-                  <label>Quantidade</label>
-                  <input type="text" name="quantity" id="" value="<?php echo $rowProduct["QUANTIDADE_ESTOQUE"] ?>">
-                </div>
+                <?php
+                if (isset($_SESSION['errorsShowAndEditProducts'])) {
+                  echo "<div id='error-messages-login' class='error-messages'>";
+                  foreach ($_SESSION['errorsShowAndEditProducts'] as $errorIndex => $errorMessage) {
+                    if ($errorIndex === 'emptyCost') {
+                      echo "<script>
+                                    alertify.error('$errorMessage');
+                                  </script>";
+                    }
+
+                    if ($errorIndex === 'costEqualZero') {
+                      echo "<script>
+                                    alertify.error('$errorMessage');
+                                  </script>";
+                    }
+                  }
+                  echo "</div>";
+                }
+                ?>
 
                 <div class="button-register">
-                  <button>Atualizar</button>
+                  <button type="button" onclick="loadingContent()">Atualizar</button>
                 </div>
+
               </div>
 
               <div class="input-category-product">
@@ -96,39 +170,79 @@
 
                   echo "<select name='selectCategory' id=''>";
 
-                    if (mysqli_num_rows($queryResult) > 0) {
-                      while ($row = mysqli_fetch_assoc($queryResult)) {
-                        if($row["id"] === $idProduct){
-                          echo "<option value='{$row["nome"]}' selected>{$row["nome"]}</option>";
-                        }
-                        echo "<option value='{$row["nome"]}'>{$row["nome"]}</option>";
+                  if (mysqli_num_rows($queryResult) > 0) {
+                    while ($row = mysqli_fetch_assoc($queryResult)) {
+                      if ($row["id"] === $idProduct) {
+                        echo "<option value='{$row["nome"]}' selected>{$row["nome"]}</option>";
+                      }
+                      echo "<option value='{$row["nome"]}'>{$row["nome"]}</option>";
+                    }
+                  }
+                  echo '</select>';
+
+
+                  if (isset($_SESSION['errorsShowAndEditProducts'])) {
+                    echo "<div id='error-messages-login' class='error-messages'>";
+                    foreach ($_SESSION['errorsShowAndEditProducts'] as $errorIndex => $errorMessage) {
+                      if ($errorIndex === 'selectCategory') {
+                        echo "<script>
+                                  alertify.error('$errorMessage');
+                                </script>";
+                      }
+
+                      if ($errorIndex === 'categorieAlreadyExist') {
+                        echo "<script>
+                                  alertify.error('$errorMessage');
+                                </script>";
+                      }
+
+                      if ($errorIndex === 'bothFilled') {
+                        echo "<script>
+                                  alertify.error('$errorMessage');
+                                </script>";
                       }
                     }
-                  echo '</select>';
+                    echo "</div>";
+                  }
                   ?>
 
                 </div>
 
-                <div class="input-new-category">
-                  <label>Nova categoria</label>
-                  <input type="text" name="newCategory" id="">
+                <div class="input-stock">
+                  <label>Quantidade</label>
+                  <input type="text" name="quantity" id="" value="<?php echo $rowProduct["QUANTIDADE_ESTOQUE"] ?>">
                 </div>
+
+                <?php
+                if (isset($_SESSION['errorsShowAndEditProducts'])) {
+                  echo "<div id='error-messages-login' class='error-messages'>";
+                  foreach ($_SESSION['errorsShowAndEditProducts'] as $errorIndex => $errorMessage) {
+                    if ($errorIndex === 'quantityEmpty') {
+                      echo "<script>
+                                    alertify.error('$errorMessage');
+                                  </script>";
+                    }
+                  }
+                  echo "</div>";
+                }
+                unset($_SESSION['errorsShowAndEditProducts']);
+                ?>
 
                 <div class="who-registered-product">
                   <label>Responsável pelo cadastro:</label>
                   <div>
-                    <?php 
-                      $query = "SELECT * FROM cadastro_usuarios WHERE ID = ?";
-                      $value = $rowProduct["ID_USUARIO"];
+                    <?php
+                    $query = "SELECT * FROM cadastro_usuarios WHERE ID = ?";
+                    $value = $rowProduct["ID_USUARIO"];
 
-                      $result = dbQuery($query, $value);
+                    $result = dbQuery($query, $value);
 
-                      if(mysqli_num_rows($result) > 0){
-                        $rowUsers = mysqli_fetch_assoc($result);
-                      }
+                    if (mysqli_num_rows($result) > 0) {
+                      $rowUsers = mysqli_fetch_assoc($result);
+                    }
 
-                      echo "<i class='bi bi-person-fill'></i>";
-                      echo "<span>{$rowUsers["NOME"]}</span>";
+                    echo "<i class='bi bi-person-fill'></i>";
+                    echo "<span>{$rowUsers["NOME"]}</span>";
                     ?>
                   </div>
                 </div>
@@ -139,13 +253,7 @@
       </div>
     </main>
   </div>
-<<<<<<< HEAD
-</body>
-
-<script src="../Assets/js/global.js"></script>
-</body>'
-
-=======
-<script src="../Assets/js/global.js"></script>
+  <script src="../Assets/js/global.js"></script>
+  <script>AOS.init()</script>
 </body>
 >>>>>>> c1bdc4e10bdcb492fcb1eecc374982d6ce88eb21
