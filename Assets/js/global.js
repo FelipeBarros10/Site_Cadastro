@@ -21,12 +21,14 @@ function showImgToUser (inputFile, iconBtn){
       }
     }
 
-    const img = document.getElementById("currentImgProduct");
+    else {
+      const img = document.getElementById("currentImgProduct");
 
-    reader.onload = function () {
-      img.src = reader.result;
-    };
-
+      reader.onload = function () {
+        img.src = reader.result;
+      };
+    }
+    
     reader.readAsDataURL(event.target.files[0]);
   });
 }
