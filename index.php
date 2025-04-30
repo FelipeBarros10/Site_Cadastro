@@ -128,7 +128,7 @@ session_start();
             </div>
 
             <label class="label-input" for="">
-              <i class="bi bi-person icon-modify "></i>
+              <i class="bi bi-person icon-modify"></i>
               <input type="text" name="name" placeholder="Nome">
             </label>
             <?php

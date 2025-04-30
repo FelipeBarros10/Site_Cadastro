@@ -1,4 +1,4 @@
-'<?php require_once __DIR__ . "/../config/config.php" ?>
+<?php require_once __DIR__ . "/../config/config.php" ?>
 <?php require_once __DIR__ . "/../connect/connectionBd.php" ?>
 
 <head>
@@ -256,4 +256,3 @@
   <script src="../Assets/js/global.js"></script>
   <script>AOS.init()</script>
 </body>
->>>>>>> c1bdc4e10bdcb492fcb1eecc374982d6ce88eb21
