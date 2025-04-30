@@ -232,7 +232,7 @@ body {
 .second-content {
   position: absolute;
   display: flex;
-  background-color:#ffff;
+  padding: 200px 0;
 }
 
 .second-content .first-column {
@@ -242,7 +242,7 @@ body {
 }
 .second-content .second-column {
   order: 1;
-  z-index: -1;
+  z-index: -1; 
 }
 
 .password {
@@ -412,4 +412,20 @@ body {
   color: red;
   font-weight: 500;
   font-size: 15px;
+}
+
+
+@media (max-width: 1440px) {
+  .content{
+    padding: 260px 0;
+
+  }
+
+  .title {
+    font-size: 23px;
+  }
+
+  .form input{
+    height: 40px;
+  }
 }
