@@ -254,7 +254,5 @@
     </main>
   </div>
   <script src="../Assets/js/global.js"></script>
-  <script>
-    AOS.init();
-  </script>
+  <script>AOS.init()</script>
 </body>
