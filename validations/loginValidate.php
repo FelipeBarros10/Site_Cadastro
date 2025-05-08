@@ -65,7 +65,7 @@ function loginValidateAtDB ($userInformation){
   #Chama a função que faz a conexão com o banco de dados
   $conn = connectDb();
   #Comando que será usado no BD
-  $query = "SELECT ID,SENHA FROM CADASTRO_USUARIOS WHERE EMAIL = ?";
+  $query = "SELECT ID,SENHA FROM cadastro_usuarios WHERE EMAIL = ?";
   #Cria uma variável que prepara a conexão com o comando sql
   $stmt = $conn->prepare($query);
   #Binda o parâmetro "?" da consulta com o email do usuário para a consulta sql acontecer
