@@ -30,7 +30,7 @@ function createUser($userInformation, $profileImage = "")
 
     if (isset($profileImageHahsed)) {
       #Comando SQL de insert no BD
-      $queryInsert = 'INSERT INTO CADASTRO_USUARIOS SET 
+      $queryInsert = 'INSERT INTO cadastro_usuarios SET 
         NOME = ? , 
         EMAIL = ?,
         SENHA = ?,
@@ -44,7 +44,7 @@ function createUser($userInformation, $profileImage = "")
 
     } 
   } else {
-      $queryInsert = 'INSERT INTO CADASTRO_USUARIOS SET 
+      $queryInsert = 'INSERT INTO cadastro_usuarios SET 
         NOME = ?
         EMAIL = ?
         SENHA = ?';

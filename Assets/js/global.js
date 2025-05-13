@@ -1,3 +1,39 @@
+function showImgToUser (inputFile, iconBtn){
+  const profileImg = document.getElementById('profileImg')
+
+  inputFile.addEventListener("change", (event) => {
+    const reader = new FileReader();
+
+    if (iconBtn) {
+      iconBtn.remove();
+      img = document.createElement("img");
+
+      reader.onload = function () {
+        img.src = reader.result;
+        btn.appendChild(img);
+      };
+    
+    } 
+    
+    if (profileImg){
+      reader.onload = () => {
+        profileImg.src = reader.result
+      }
+    }
+
+    else {
+      const img = document.getElementById("currentImgProduct");
+
+      reader.onload = function () {
+        img.src = reader.result;
+      };
+    }
+    
+    reader.readAsDataURL(event.target.files[0]);
+  });
+}
+
+
 function openFile() {
   const inputFile = document.getElementById("inputFile");
   const btn = document.getElementById("btn");
@@ -8,33 +44,7 @@ function openFile() {
     var img = btn.querySelector("img");
   }
 
-  inputFile.click();
-
-  inputFile.addEventListener("change", (event) => {
-    if (iconBtn) {
-      iconBtn.remove(); // Remove o ícone se ele existir
-      img = document.createElement("img");
-
-      const reader = new FileReader();
-
-      reader.readAsDataURL(event.target.files[0]);
-
-      reader.onload = function () {
-        img.src = reader.result;
-        btn.appendChild(img);
-      };
-    } else {
-      const img = document.getElementById("currentImgProduct");
-
-      const reader = new FileReader();
-
-      reader.readAsDataURL(event.target.files[0]);
-
-      reader.onload = function (event) {
-        img.src = reader.result;
-      };
-    }
-  });
+  inputFile.click(showImgToUser(inputFile, iconBtn));
 }
 
 function stylingThePriceInput() {

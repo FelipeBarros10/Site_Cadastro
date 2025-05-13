@@ -36,7 +36,7 @@ function registerValidate($userInformation){
     $errors['email'] = "Insira um endereço de e-mail válido. Exemplo: \"exemplo@dominio.com\".";
   } else {
     #Se não, a função de conexão do BD é chamada
-    $query = "SELECT * FROM CADASTRO_USUARIOS";
+    $query = "SELECT * FROM cadastro_usuarios";
     #A consulta é realizada, chamando uma função que recebe
     $result = dbQuery($query);
 
