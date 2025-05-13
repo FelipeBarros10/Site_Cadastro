@@ -19,7 +19,7 @@
 
 
       <div id="sale" class="icon">
-        <a id="link" class="link" href="../views/registerPage.php">
+        <a id="link" class="link" href="../views/salesPage.php">
           <i id="icon" class="bi bi-check-circle"></i>
           <span>Vender</span>
         </a>
