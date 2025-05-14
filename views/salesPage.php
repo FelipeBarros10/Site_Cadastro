@@ -53,6 +53,13 @@
           </button>
         </div>
       </div>
+
+      <div class="cart-content">
+        <h3>Selecionar cliente</h3>
+        <div class="products-cart">
+          <span>Nenhum item selecionado</span>
+        </div>
+      </div>
     </main>
   </div>
 

@@ -67,6 +67,7 @@ function sidebarIconSelected() {
       item.addEventListener("click", (event) => {
         
         localStorage.setItem("selectedIcon", event.currentTarget.id);
+        
    
 
         //Primeiro, verifica se já existe um ícone selecionado
@@ -93,7 +94,7 @@ function sidebarIconSelected() {
         //Criando uma constante que recebe o <i> do "evento"(icone do array) atual clicado
         const iconElementSelected = event.currentTarget.querySelector("#icon");
         
-        //Seitch para verificar qual ícone está sendo clicado
+        //Switch para verificar qual ícone está sendo clicado
         switch(parentElementIcon.id){
           //Caso seja o "register"
           case "register":
