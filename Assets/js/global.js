@@ -1,18 +1,27 @@
 function showImgToUser (inputFile, iconBtn){
-  const profileImg = document.getElementById('profileImg')
-
+ 
   inputFile.addEventListener("change", (event) => {
+    const profileImg = document.getElementById('profileImg');
+    const imgProduct = document.getElementById("currentImgProduct");
     const reader = new FileReader();
-
-    if (iconBtn) {
-      iconBtn.remove();
-      img = document.createElement("img");
-
+    const btn = document.getElementById("btn");
+    
+    if(imgProduct){
       reader.onload = function () {
         img.src = reader.result;
+      };
+    }
+
+    if (iconBtn) {
+      
+      iconBtn.remove();
+      let img = document.createElement("img");
+      
+     reader.onload = function () {
+        base64 = reader.result;
+        img.src = base64
         btn.appendChild(img);
       };
-    
     } 
     
     if (profileImg){
@@ -21,14 +30,6 @@ function showImgToUser (inputFile, iconBtn){
       }
     }
 
-    else {
-      const img = document.getElementById("currentImgProduct");
-
-      reader.onload = function () {
-        img.src = reader.result;
-      };
-    }
-    
     reader.readAsDataURL(event.target.files[0]);
   });
 }
@@ -36,13 +37,7 @@ function showImgToUser (inputFile, iconBtn){
 
 function openFile() {
   const inputFile = document.getElementById("inputFile");
-  const btn = document.getElementById("btn");
-
   const iconBtn = document.getElementById("iconBtn");
-
-  if (iconBtn) {
-    var img = btn.querySelector("img");
-  }
 
   inputFile.click(showImgToUser(inputFile, iconBtn));
 }
@@ -51,12 +46,22 @@ function stylingThePriceInput() {
   var inputPrice = document.getElementById("price");
   var inputCost = document.getElementById("cost");
 
-  var inputPriceDotReplace = inputPrice.value.replace(".", ",");
-  var inputCostDotReplace = inputCost.value.replace(".", ",");
 
-  inputPrice.value = inputPriceDotReplace;
+  if (!inputPrice.textContent) {
+      inputPrice.value = inputPrice.value.replace(".", ",");
+    
+  }
 
-  inputCost.value = inputCostDotReplace;
+  inputPrice.textContent = inputPrice.textContent.replace(".", ",");
+
+  if (!inputCost.textContent) {
+      inputCost.value = inputCost.value.replace(".", ",");
+
+  }
+  
+  inputCost.textContent = inputPrice.textContent.replace(".", ",");
+
+  
 
   new Cleave(inputPrice, {
     prefix: "R$ ",

@@ -38,15 +38,28 @@
         </div>
 
         <div class="products-to-sale">
-          <div class="produto">Produto 1</div>
-          <div class="produto">Produto 2</div>
-          <div class="produto">Produto 3</div>
-          <div class="produto">Produto 1</div>
-          <div class="produto">Produto 2</div>
-          <div class="produto">Produto 3</div>
-          <div class="produto">Produto 1</div>
-          <div class="produto">Produto 2</div>
-          <div class="produto">Produto 3</div>
+          <?php 
+            $query = 'SELECT * FROM produtos';
+            $queryResult = dbQuery($query);
+
+            while($row = mysqli_fetch_assoc($queryResult)){
+              echo "
+                <div class='product'>
+                    <div>
+                      <img src='../Assets/img/{$row['IMAGENS']}'/>
+
+                      <div class='product-name-value'>
+                        <span>{$row['NOME']}</span>
+                        <span id='price'>R$ {$row['PRECO']}</span>
+                      </div>
+                    </div>
+                </div>
+              
+              ";
+            }
+          
+          
+          ?>
 
           <button class="btn-add-product">
             <i class="bi bi-plus-lg"></i>
