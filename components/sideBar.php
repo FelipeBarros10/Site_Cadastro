@@ -8,21 +8,12 @@
 
 <body>
   <div id="sidebar" class="sidebar">
-    <div data-aos="fade-right" class="icons-sidebar">
-      <!-- <div class="logo-container">
-        <a href="../views/mainPage.php"><img id="logo" class="logo" src="../Assets/img/logo2.png" alt=""></a>
-      </div> -->
-
+    <div data-aos="fade-right" class="links-sidebar">
       <a href="../views/mainPage.php">
         <div class="logo-container">
           <img id="logo" class="logo" src="../Assets/img/logo2.png" alt=""></a>
         </div>
       </a>
-
-      <!-- <div id="list" class="icon">
-      <i id="icon-list" class="bi bi-list"></i>
-        
-      </div> -->
 
       <a id="linkList" href="#">
         <div id="list" class="parentIcon">

@@ -44,7 +44,7 @@
 
             while($row = mysqli_fetch_assoc($queryResult)){
               echo "
-                <div class='product'>
+                <div class='product' id='product' data-nome='{$row['NOME']}' data-preco='{$row['PRECO']}' data-id='{$row['ID']}'>
                     <div>
                       <img src='../Assets/img/{$row['IMAGENS']}'/>
 
@@ -77,4 +77,6 @@
   </div>
 
   <script src="../Assets/js/global.js"></script>
+
+  <script src="../Assets/js/salesPage.js"></script>
 </body>
