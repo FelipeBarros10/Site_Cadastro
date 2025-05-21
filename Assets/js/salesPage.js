@@ -1,48 +1,51 @@
-const productElement = document.querySelectorAll('.product');
-const warningEmptyCart = document.getElementById('warningTetxt');
-console.log(warningEmptyCart);
+const productElement = document.querySelectorAll(".product");
+const warningEmptyCart = document.getElementById("warningTetxt");
+const cartElement = document.querySelector(".products-cart");
 
-let cart  = []
-console.log(cart.length);
+let cart = [];
 
-
-
-
-productElement.forEach(productItem => {
-  productItem.addEventListener('click', () => { 
+productElement.forEach((productItem) => {
+  productItem.addEventListener("click", () => {
     const productInfos = {
-        nome:  productItem.dataset.nome,
-        preco: productItem.dataset.preco,
-        id: productItem.dataset.id
+      nome: productItem.dataset.nome,
+      preco: productItem.dataset.preco,
+      id: productItem.dataset.id,
+    };
 
-      }
+    const alreadyInCart = cart.find((item) => item.id === productInfos.id); //Find executa função de callback para cada elemento no carrinho, até que seja true, se não achar nada retorna false;
 
-      const alreadyInCart = cart.find((item) => item.id === productInfos.id) //Find executa função de callback para cada elemento no carrinho, até que seja true, se não achar nada retorna false;
+    if (!alreadyInCart) {
+      cart.push({
+        ...productInfos,
+        quantidade: 1,
+      });
+    } else {
+      alreadyInCart.quantidade += 1;
+    }
 
-      if(!alreadyInCart){
-        cart.push({
-          ...productInfos,
-          quantity: 1
-        })
-        
-      } else {
-        alreadyInCart.quantity += 1
-      }
-    
-      updateCart(cart);
-  })
+    updateCart(productInfos.id);
+  });
+});
 
-})
-
-
-
-function updateCart (cart){
-  if (cart.length !== 0){
-    warningEmptyCart.style.display = 'none'
+function updateCart(productId) {
+  if (cart.length !== 0) {
+    warningEmptyCart.style.display = "none";
   }
-  
-  // cart.array.forEach(cartProduct => {
-    
-  // });
+
+  const productInCart = cart.find((item) => item.id === productId); //Find executa função de callback para cada elemento no carrinho, até que seja true, se não achar nada retorna false;
+  const productDiv = document.getElementById(`cart-${productId}`);
+
+  if (!productDiv) {
+    cartElement.innerHTML += `
+      <div class='cart-item' id='cart-${productInCart.id}'>
+        <span class='productQtd'>${productInCart.quantidade}</span>
+        <span class='productName'>${productInCart.nome}</span>
+      </div>
+      `;
+  }
+
+  const qtdSpan = productDiv.querySelector('.productQtd')
+  qtdSpan.textContent = productInCart.quantidade
+  console.log(productDiv);
   
 }

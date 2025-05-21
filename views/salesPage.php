@@ -61,9 +61,9 @@
           
           ?>
 
-          <button class="btn-add-product">
+          <a href="registerPage.php" class="btn-add-product">
             <i class="bi bi-plus-lg"></i>
-          </button>
+          </a>
         </div>
       </div>
 
