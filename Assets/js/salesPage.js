@@ -4,8 +4,10 @@ const cartElement = document.querySelector(".products-cart");
 
 let cart = [];
 
-productElement.forEach((productItem) => {
-  productItem.addEventListener("click", () => {
+productElement.forEach((productItem) => 
+  {
+  productItem.addEventListener("click", () => 
+    {
     const productInfos = {
       nome: productItem.dataset.nome,
       preco: productItem.dataset.preco,
@@ -27,25 +29,27 @@ productElement.forEach((productItem) => {
   });
 });
 
-function updateCart(productId) {
-  if (cart.length !== 0) {
-    warningEmptyCart.style.display = "none";
+
+function updateCart(productId)
+{
+  if(cart.length !== 0){
+    warningEmptyCart.style.display = 'none'
   }
-
-  const productInCart = cart.find((item) => item.id === productId); //Find executa função de callback para cada elemento no carrinho, até que seja true, se não achar nada retorna false;
-  const productDiv = document.getElementById(`cart-${productId}`);
-
-  if (!productDiv) {
+  
+  const productInCart  = cart.find((item) => item.id === productId) //Retorna todo o objeto do produto {nome,preço, qtd}
+  const productInCartHtmlElement = document.getElementById(`cart-${productInCart.id}`)
+  
+  if(!productInCartHtmlElement){
     cartElement.innerHTML += `
       <div class='cart-item' id='cart-${productInCart.id}'>
         <span class='productQtd'>${productInCart.quantidade}</span>
-        <span class='productName'>${productInCart.nome}</span>
+        <span class='productNome'>${productInCart.nome}</span>
       </div>
-      `;
+      `   
+  } else { 
+    //Ta pegando o primeiro elemento com classe productID e não o elemento referente ao ID(produto clicado)
+    const spanQtd = productInCartHtmlElement.querySelector('.productQtd')
+    spanQtd.textContent = productInCart.quantidade
+   
   }
-
-  const qtdSpan = productDiv.querySelector('.productQtd')
-  qtdSpan.textContent = productInCart.quantidade
-  console.log(productDiv);
-  
 }
