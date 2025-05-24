@@ -38,27 +38,27 @@
         </div>
 
         <div class="products-to-sale">
-          <?php 
-            $query = 'SELECT * FROM produtos';
-            $queryResult = dbQuery($query);
+          <?php
+          $query = 'SELECT * FROM produtos';
+          $queryResult = dbQuery($query);
 
-            while($row = mysqli_fetch_assoc($queryResult)){
-              echo "
+          while ($row = mysqli_fetch_assoc($queryResult)) {
+            echo "
                 <div class='product' id='product' data-nome='{$row['NOME']}' data-preco='{$row['PRECO']}' data-id='{$row['ID']}'>
                     <div>
                       <img src='../Assets/img/{$row['IMAGENS']}'/>
 
                       <div class='product-name-value'>
                         <span>{$row['NOME']}</span>
-                        <span id='price'>R$ {$row['PRECO']}</span>
+                        <span class='price'>R$ {$row['PRECO']}</span>
                       </div>
                     </div>
                 </div>
               
               ";
-            }
-          
-          
+          }
+
+
           ?>
 
           <a href="registerPage.php" class="btn-add-product">
@@ -68,15 +68,39 @@
       </div>
 
       <div class="cart-content">
-        <h3>Selecionar cliente</h3>
+        <h3>Produtos no carrinho</h3>
         <div class="products-cart">
           <span id="warningTetxt">Nenhum item selecionado</span>
+        </div>
+
+        <div class="infos-cart">
+          <div>
+            <span id="sumItems">0</span>
+            <span>items</span>
+          </div>
+
+          <div class="subtotal-cart">
+            <span>Subtotal: </span>
+            <span>R$ <span id="subtotal">0,00 </span></span>
+          </div>
+        </div>
+
+        <div class="total-cart">
+          <div>
+            <span>Total:</span>
+          </div>
+
+          <div>
+            <span>R$ <span id="total">0,00 </span></span>
+          </div>
+        </div>
+        
+        <div class="sell">
+          <button class="">Vender</button>
         </div>
       </div>
     </main>
   </div>
-
-  <script src="../Assets/js/global.js"></script>
 
   <script src="../Assets/js/salesPage.js"></script>
 </body>

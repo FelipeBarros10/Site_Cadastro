@@ -47,22 +47,16 @@ function stylingThePriceInput() {
   var inputCost = document.getElementById("cost");
 
 
-  if (!inputPrice.textContent) {
+  if (inputPrice) {
       inputPrice.value = inputPrice.value.replace(".", ",");
     
   }
 
-  inputPrice.textContent = inputPrice.textContent.replace(".", ",");
-
-  if (!inputCost.textContent) {
+  if (inputCost) {
       inputCost.value = inputCost.value.replace(".", ",");
 
   }
   
-  inputCost.textContent = inputPrice.textContent.replace(".", ",");
-
-  
-
   new Cleave(inputPrice, {
     prefix: "R$ ",
     numeral: true,
