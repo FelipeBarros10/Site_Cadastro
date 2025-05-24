@@ -39,9 +39,11 @@ productElement.forEach((productItem) => {
   });
 });
 
-function updateCart(productId) {
-  if (cart.length !== 0) {
-    warningEmptyCart.style.display = "none";
+
+function updateCart(productId)
+{
+  if(cart.length !== 0){
+    warningEmptyCart.style.display = 'none'
   }
 
   const productInCart = cart.find((item) => item.id === productId); 
