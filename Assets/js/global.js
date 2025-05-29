@@ -7,8 +7,9 @@ function showImgToUser (inputFile, iconBtn){
     const btn = document.getElementById("btn");
     
     if(imgProduct){
+      console.log(imgProduct);
       reader.onload = function () {
-        img.src = reader.result;
+        imgProduct.src = reader.result;
       };
     }
 
