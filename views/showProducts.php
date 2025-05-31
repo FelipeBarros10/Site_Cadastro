@@ -107,7 +107,7 @@
               <div class="input-price-stock-product">
                 <div class="input-price">
                   <label>Preço</label>
-                  <input type="text" name="price" id="price" value="<?php echo $rowProduct["PRECO"] ?>">
+                  <input type="text" name="price" id="inputPrice" value="<?php echo $rowProduct["PRECO"] ?>">
                 </div>
 
                 <?php
@@ -132,7 +132,7 @@
 
                 <div class="input-cost">
                   <label>Custo</label>
-                  <input type="text" name="cost" id="cost" value="<?php echo $rowProduct["CUSTO"] ?>">
+                  <input type="text" name="cost" id="inputCost" value="<?php echo $rowProduct["CUSTO"] ?>">
                 </div>
 
                 <?php
@@ -253,6 +253,8 @@
       </div>
     </main>
   </div>
-  <script src="../Assets/js/global.js"></script>
+  <script src="../Assets/js/stylingInputPrice.js"></script>
+  <script src="../Assets/js/loadingPageAnimation.js"></script>
+
   <script>AOS.init()</script>
 </body>

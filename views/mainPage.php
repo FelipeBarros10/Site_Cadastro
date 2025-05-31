@@ -1,6 +1,23 @@
 <?php require_once __DIR__ . "/../config/config.php" ?>
 <?php require_once __DIR__ . "/../connect/connectionBd.php" ?>
 
+<?php
+
+$query = "SELECT * FROM produtos";
+$queryResult = dbQuery($query);
+$products = mysqli_fetch_all($queryResult, MYSQLI_ASSOC);
+
+$searchProduct = isset($_GET['busca']) ? $_GET['busca'] : '';
+
+if ($searchProduct) {
+  $querySearch = "SELECT * FROM produtos WHERE nome LIKE ?";
+  $values = "%$searchProduct%";
+  $querySearchResult = dbQuery($querySearch, $values);
+
+  $products = mysqli_fetch_all($querySearchResult, MYSQLI_ASSOC);
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,11 +29,13 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs" type="module"></script>
+
 </head>
 
 <body>
   <div class="main-parent">
-      <?php include '../components/sideBar.php' ?>
+    <?php include '../components/sideBar.php' ?>
     <main class="main-register-content">
       <?php
       $page_title = "Produtos";
@@ -24,15 +43,18 @@
       ?>
       <!--Início Subtítulo-->
       <div data-aos="fade-right" class="header-inputs">
-        <div class="inputs-search-subtitle">
-          <input type="text" placeholder="Pesquise">
-          <button><i class="bi bi-search"></i></button>
-        </div>
+        <form method="get" action="mainPage.php" id="form" onSubmit="loadingContent()">
+          <div class="inputs-search-subtitle">
+            <input type="text" placeholder="Pesquise" id="busca" name="busca" value="<?php echo isset($_GET['busca']) ? $_GET['busca'] : ''; ?>">
+            <button type="button" onclick="loadingContent()"><i class="bi bi-search"></i></button>
+          </div>
+        </form>
 
         <div class="inputs-select-subtitle">
           <div class="icon-select">
             <i class="bi bi-funnel"></i>
           </div>
+
 
           <form action="">
             <select name="filtros" id="">
@@ -54,18 +76,18 @@
 
       <!--Início do Segundo Subtítulo-->
       <div data-aos="fade-left" class="header-information-stock">
+        
         <div class="value-stock">
 
-        <?php 
-            $query = "SELECT SUM(PRECO), SUM(CUSTO) FROM produtos";
-            $queryResult = dbQuery($query);
+          <?php
+          $query = "SELECT SUM(PRECO), SUM(CUSTO) FROM produtos";
+          $queryResult = dbQuery($query);
 
-            if ($value = mysqli_fetch_assoc($queryResult)) {
+          if ($value = mysqli_fetch_assoc($queryResult)) {
 
-                $predictedProfit = $value['SUM(PRECO)'] - $value['SUM(CUSTO)'];
-                $stockValue = str_replace([".", " "], [",", ","] , $value);
-
-            }
+            $predictedProfit = $value['SUM(PRECO)'] - $value['SUM(CUSTO)'];
+            $stockValue = str_replace([".", " "], [",", ","], $value);
+          }
           ?>
           <h4>R$ <?php echo $stockValue['SUM(PRECO)'] ?></h4>
           <span>Valor em estoque</span>
@@ -84,31 +106,33 @@
       <!--Fim Segundo Subtítulo-->
 
       <?php
-      $query = "SELECT * FROM produtos";
-      $queryResult = dbQuery($query);
 
+      if (count($products) != 0) {
 
-      if (mysqli_num_rows($queryResult) > 0) {
+        echo 
+        "
+        <div data-aos='fade-up' class='main-table-products'>
+          <div class='loading' id='loading'>
+          <dotlottie-player src='https://lottie.host/33022999-343c-4490-b368-1fd709b0081b/2ax7KO5izZ.lottie' background='transparent' speed='3' style='width: 50%; height: 50%' direction='1' playMode='forward' loop autoplay></dotlottie-player>
+         </div>
+          <div>
+          <table class='table-products'>
+          <thead class='table-header'
+          <tr>
+          <th>Produto</th>
+          <th>Categoria</th>
+          <th>Estoque</th>
+          <th>Preço</th>
+          <th></th>
+          </tr>
+          </thead>
+        ";
 
-        echo "<div data-aos='fade-up' class='main-table-products'>";
-        echo "<div>";
-        echo "<table class='table-products'>";
-        echo "<thead class='table-header'";
-        echo "<tr>";
-        echo "<th>Produto</th>";
-        echo "<th>Categoria</th>";
-        echo "<th>Estoque</th>";
-        echo "<th>Preço</th>";
-        echo "<th></th>";
-        echo "</tr>";
-        echo "</thead>";
-
-        while ($row = mysqli_fetch_assoc($queryResult)) {
-
+        foreach ($products as $product) {
           $queryInnerJoin = "SELECT categorias.NOME FROM categorias
             INNER JOIN produtos ON categorias.ID = produtos.ID_CATEGORIAS WHERE categorias.ID = ?";
 
-          $values = $row["ID_CATEGORIAS"];
+          $values = $product["ID_CATEGORIAS"];
 
           $queryInnerJoinResult = dbQuery($queryInnerJoin, $values);
 
@@ -116,40 +140,50 @@
 
           $categorieName = $categorieRow["NOME"];
 
-          $row['PRECO'] = str_replace(".", ",", $row['PRECO']);
-
-          echo "<tbody class='table-body'>";
-          echo "<tr>";
-          echo "<td><a class='column-product' href='showProducts.php?id={$row['ID']}'>
-                                        <img class='image-product' src='./../Assets/img/{$row['IMAGENS']}' />
-                                        <span>{$row['NOME']}</span>
-                                      </a>
-                                  </td>";
-          echo "<td>$categorieName</td>";
-          echo "<td>{$row['QUANTIDADE_ESTOQUE']}</td>";
-          echo "<td>{$row['PRECO']}</td>";
-          echo "<td>
-                                    <form action='../controller/handleDeleteProducts.php' method='post' class=''>
-                                      <input type='hidden' name='product_id' value='{$row['ID']}'>
-                                      <button class='btn'><i class='bi bi-trash'></i></button>
-                                    </form>
-                                  </td>";
-          echo "<td>
-                                    <a class='column-product' href='showProducts.php?id={$row['ID']}'>
-                                      <button class='btn'><i class='bi bi-pencil-square'></i></button>
-                                    </a>
-                                  </td>";
-          echo "</tr>";
-          echo "</tbody>";
+          $product['PRECO'] = str_replace(".", ",", $product['PRECO']);
+          echo
+          "
+            <tbody class='table-body'>
+              <tr>
+                <td>
+                  <a class='column-product' href='showProducts.php?id={$product['ID']}'>
+                    <img class='image-product' src='./../Assets/img/{$product['IMAGENS']}' />
+                    <span>{$product['NOME']}</span>
+                  </a>
+                </td>
+                <td>$categorieName</td>
+                <td>{$product['QUANTIDADE_ESTOQUE']}</td>
+                <td>{$product['PRECO']}</td>
+                <td>
+                  <form action='../controller/handleDeleteProducts.php' method='post'>
+                    <input type='hidden' name='product_id' value='{$product['ID']}'>
+                    <button class='btn'><i class='bi bi-trash'></i></button>
+                  </form>
+                </td>
+                <td>
+                  <a class='column-product' href='showProducts.php?id={$product['ID']}'>
+                    <button class='btn'><i class='bi bi-pencil-square'></i></button>
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          ";
         }
+        echo
+        "
+          </table>
+          </div>
+          </div>
+        ";
       }
-      echo "</table>";
-      echo "</div>";
-      echo "</div>";
+
       ?>
     </main>
   </div>
 </body>
+<script src="../Assets/js/global.js"></script>
+<script src="../Assets/js/stylingInputPrice.js"></script>
+<script src="../Assets/js/loadingPageAnimation.js"></script>
 <script src="../Assets/js/mainPage.js"></script>
 <script>
   AOS.init();

@@ -71,7 +71,7 @@
               <div class="input-price-stock-product">
                 <div class="input-price">
                   <label>Preço</label>
-                  <input type="text" name="price" id="price">
+                  <input type="text" name="price" id="inputPrice">
                 </div>
 
                 <?php
@@ -97,7 +97,7 @@
 
                 <div class="input-cost">
                   <label>Custo</label>
-                  <input type="text" name="cost" id="cost">
+                  <input type="text" name="cost" id="inputCost">
                 </div>
                 <?php
                 if (isset($_SESSION['errorsRegisterProduct'])) {
@@ -205,7 +205,10 @@
       </div>
     </main>
   </div>
+
   <script src="../Assets/js/global.js"></script>
+  <script src="../Assets/js/stylingInputPrice.js"></script>
+  <script src="../Assets/js/loadingPageAnimation.js"></script>
   <script>
     AOS.init();
   </script>
