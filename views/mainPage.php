@@ -45,7 +45,7 @@ if ($searchProduct) {
       <div data-aos="fade-right" class="header-inputs">
         <form method="get" action="mainPage.php" id="form" onSubmit="loadingContent()">
           <div class="inputs-search-subtitle">
-            <input type="text" placeholder="Pesquise" id="busca" name="busca" value="<?php echo isset($_GET['busca']) ? $_GET['busca'] : ''; ?>">
+            <input type="text" placeholder="Pesquise o nome" id="busca" name="busca" value="<?php echo isset($_GET['busca']) ? $_GET['busca'] : ''; ?>">
             <button type="button" onclick="loadingContent()"><i class="bi bi-search"></i></button>
           </div>
         </form>
