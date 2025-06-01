@@ -1,6 +1,22 @@
 <?php require_once __DIR__ . "/../config/config.php" ?>
 <?php require_once __DIR__ . "/../connect/connectionBd.php" ?>
 
+<?php
+$query = "SELECT * FROM produtos";
+$queryResult = dbQuery($query);
+$products = mysqli_fetch_all($queryResult, MYSQLI_ASSOC);
+
+$searchProduct = $_GET['busca'] ?? '';
+
+if($searchProduct){
+  $querySearch = "SELECT * FROM produtos WHERE nome LIKE ?";
+  $values = "%$searchProduct%";
+  $queryResultSearch = dbQuery($querySearch, $values);
+
+  $products = mysqli_fetch_all($queryResultSearch, MYSQLI_ASSOC);
+}
+?>
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -28,10 +44,12 @@
 
     <main class="main-sales-content">
       <div class="products-content">
-        <div class="inputs-search-products">
-          <input type="text" placeholder="Nome do produto">
-          <button><i class="bi bi-search"></i></button>
-        </div>
+        <form action="salesPage.php" method="get">
+          <div class="inputs-search-products">
+            <input type="text" placeholder="Nome do produto" name="busca" value="<?php echo isset($_GET['busca']) ? $_GET['busca'] : '' ?>">
+            <button><i class="bi bi-search"></i></button>
+          </div>
+        </form>
 
         <div class="title-products">
           <h2>Produtos</h2>
@@ -39,22 +57,20 @@
 
         <div class="products-to-sale">
           <?php
-          $query = 'SELECT * FROM produtos';
-          $queryResult = dbQuery($query);
 
-          while ($row = mysqli_fetch_assoc($queryResult)) {
-            echo "
-                <div class='product' id='product' data-nome='{$row['NOME']}' data-preco='{$row['PRECO']}' data-id='{$row['ID']}'>
+          foreach ($products as $product) {
+            echo
+            "
+                <div class='product' id='product' data-nome='{$product['NOME']}' data-preco='{$product['PRECO']}' data-id='{$product['ID']}'>
                     <div>
-                      <img src='../Assets/img/{$row['IMAGENS']}'/>
+                      <img src='../Assets/img/{$product['IMAGENS']}'/>
 
                       <div class='product-name-value'>
-                        <span>{$row['NOME']}</span>
-                        <span class='price'>R$ {$row['PRECO']}</span>
+                        <span>{$product['NOME']}</span>
+                        <span class='price'>R$ {$product['PRECO']}</span>
                       </div>
                     </div>
                 </div>
-              
               ";
           }
 
@@ -94,7 +110,7 @@
             <span>R$ <span id="total">0,00 </span></span>
           </div>
         </div>
-        
+
         <div class="sell">
           <button class="">Vender</button>
         </div>
