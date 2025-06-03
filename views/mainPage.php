@@ -2,16 +2,17 @@
 <?php require_once __DIR__ . "/../connect/connectionBd.php" ?>
 
 <?php
-
-$query = "SELECT * FROM produtos";
-$queryResult = dbQuery($query);
+$userId = $_SESSION["userId"];
+$query = "SELECT * FROM produtos WHERE ID_USUARIO = ?";
+$values = $userId;
+$queryResult = dbQuery($query, $userId);
 $products = mysqli_fetch_all($queryResult, MYSQLI_ASSOC);
 
 $searchProduct = isset($_GET['busca']) ? $_GET['busca'] : '';
 
 if ($searchProduct) {
-  $querySearch = "SELECT * FROM produtos WHERE nome LIKE ?";
-  $values = "%$searchProduct%";
+  $querySearch = "SELECT * FROM produtos WHERE nome LIKE ? AND ID_USUARIO = $?";
+  $values = ["%$searchProduct%", $userId];
   $querySearchResult = dbQuery($querySearch, $values);
 
   $products = mysqli_fetch_all($querySearchResult, MYSQLI_ASSOC);
@@ -55,12 +56,26 @@ if ($searchProduct) {
             <i class="bi bi-funnel"></i>
           </div>
 
-
           <form action="">
             <select name="filtros" id="">
               <option value="">Filtros</option>
-              <option value="sim">Sim</option>
-              <option value="nao">Não</option>
+              <?php
+              $queryCategories = "SELECT categorias.NOME FROM categorias
+                INNER JOIN produtos ON categorias.ID = produtos.ID_CATEGORIAS
+                WHERE produtos.ID_USUARIO = ?
+                ";
+              $Values = $userId;
+              $queryResultCategories = dbQuery($queryCategories, $values);
+
+
+              $categories = mysqli_fetch_all($queryResultCategories, MYSQLI_ASSOC);
+
+              foreach ($categories as $categorie) {
+                echo "
+                    <option value='{$categorie['NOME']}'>{$categorie['NOME']}</option>
+                  ";
+              }
+              ?>
             </select>
           </form>
         </div>
@@ -76,7 +91,7 @@ if ($searchProduct) {
 
       <!--Início do Segundo Subtítulo-->
       <div data-aos="fade-left" class="header-information-stock">
-        
+
         <div class="value-stock">
 
           <?php
@@ -109,7 +124,7 @@ if ($searchProduct) {
 
       if (count($products) != 0) {
 
-        echo 
+        echo
         "
         <div data-aos='fade-up' class='main-table-products'>
           <div class='loading' id='loading'>

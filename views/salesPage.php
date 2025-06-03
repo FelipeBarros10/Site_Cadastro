@@ -2,15 +2,17 @@
 <?php require_once __DIR__ . "/../connect/connectionBd.php" ?>
 
 <?php
-$query = "SELECT * FROM produtos";
-$queryResult = dbQuery($query);
+$userId = $_SESSION["userId"];
+$query = "SELECT * FROM produtos WHERE ID_USUARIO = ?";
+$values = $userId;
+$queryResult = dbQuery($query, $userId);
 $products = mysqli_fetch_all($queryResult, MYSQLI_ASSOC);
 
 $searchProduct = $_GET['busca'] ?? '';
 
 if($searchProduct){
-  $querySearch = "SELECT * FROM produtos WHERE nome LIKE ?";
-  $values = "%$searchProduct%";
+  $querySearch = "SELECT * FROM produtos WHERE nome LIKE ? AND ID_USUARIO = ?";
+  $values = ["%$searchProduct%", $userId];
   $queryResultSearch = dbQuery($querySearch, $values);
 
   $products = mysqli_fetch_all($queryResultSearch, MYSQLI_ASSOC);

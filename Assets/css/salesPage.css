@@ -123,6 +123,7 @@ body {
   background-color: rgba(119, 88, 173, 0.3);
   border-radius: 10px;
   width: 95%;
+  height: 200px;
   align-items: center;
   justify-content: center;
   display: flex;
