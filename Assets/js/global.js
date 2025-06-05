@@ -1,5 +1,4 @@
 function showImgToUser (inputFile, iconBtn){
-
   inputFile.addEventListener("change", (event) => {
     const profileImg = document.getElementById('profileImg');
     const imgProduct = document.getElementById("currentImgProduct");

@@ -56,28 +56,28 @@ if ($searchProduct) {
             <i class="bi bi-funnel"></i>
           </div>
 
-          <form action="">
-            <select name="filtros" id="">
-              <option value="">Filtros</option>
-              <?php
-              $queryCategories = "SELECT categorias.NOME FROM categorias
+
+          <select name="filtros" id="selectCategorie" onchange="filterCategorie()">
+            <option value="filtros">Filtros</option>
+            <?php
+            $queryCategories = "SELECT categorias.NOME FROM categorias
                 INNER JOIN produtos ON categorias.ID = produtos.ID_CATEGORIAS
                 WHERE produtos.ID_USUARIO = ?
                 ";
-              $Values = $userId;
-              $queryResultCategories = dbQuery($queryCategories, $values);
+            $Values = $userId;
+            $queryResultCategories = dbQuery($queryCategories, $values);
 
 
-              $categories = mysqli_fetch_all($queryResultCategories, MYSQLI_ASSOC);
+            $categories = mysqli_fetch_all($queryResultCategories, MYSQLI_ASSOC);
 
-              foreach ($categories as $categorie) {
-                echo "
+            foreach ($categories as $categorie) {
+              echo "
                     <option value='{$categorie['NOME']}'>{$categorie['NOME']}</option>
                   ";
-              }
-              ?>
-            </select>
-          </form>
+            }
+            ?>
+          </select>
+
         </div>
 
         <div class="inputs-plus-product-subtitle">
@@ -196,7 +196,7 @@ if ($searchProduct) {
     </main>
   </div>
 </body>
-<script src="../Assets/js/global.js"></script>
+<script src="../Assets/js/global.js"></script>>
 <script src="../Assets/js/stylingInputPrice.js"></script>
 <script src="../Assets/js/loadingPageAnimation.js"></script>
 <script src="../Assets/js/mainPage.js"></script>
