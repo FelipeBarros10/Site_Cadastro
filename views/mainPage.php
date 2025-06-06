@@ -9,11 +9,20 @@ $queryResult = dbQuery($query, $userId);
 $products = mysqli_fetch_all($queryResult, MYSQLI_ASSOC);
 
 $searchProduct = isset($_GET['busca']) ? $_GET['busca'] : '';
+$searchProductCategorie = isset($_GET['filtros']) ? $_GET['filtros'] : '';
 
-if ($searchProduct) {
-  $querySearch = "SELECT * FROM produtos WHERE nome LIKE ? AND ID_USUARIO = $?";
-  $values = ["%$searchProduct%", $userId];
-  $querySearchResult = dbQuery($querySearch, $values);
+if ($searchProduct || $searchProductCategorie) {
+  if ($searchProduct) {
+    $querySearch = "SELECT * FROM produtos WHERE nome LIKE ? AND ID_USUARIO = ?";
+    $values = ["%$searchProduct%", $userId];
+    $querySearchResult = dbQuery($querySearch, $values);
+  } else {
+    $querySearch = "SELECT produtos.NOME, produtos.QUANTIDADE_ESTOQUE, produtos.PRECO, produtos.IMAGENS, produtos.CUSTO, produtos.ID_CATEGORIAS, produtos.ID FROM produtos 
+     INNER JOIN categorias ON categorias.ID = produtos.ID_CATEGORIAS
+     WHERE categorias.NOME LIKE ? AND ID_USUARIO = ?";
+    $values = ["%$searchProductCategorie%", $userId];
+    $querySearchResult = dbQuery($querySearch, $values);
+  }
 
   $products = mysqli_fetch_all($querySearchResult, MYSQLI_ASSOC);
 }
@@ -31,7 +40,7 @@ if ($searchProduct) {
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs" type="module"></script>
-
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 
 <body>
@@ -56,28 +65,30 @@ if ($searchProduct) {
             <i class="bi bi-funnel"></i>
           </div>
 
-
-          <select name="filtros" id="selectCategorie" onchange="filterCategorie()">
-            <option value="filtros">Filtros</option>
-            <?php
-            $queryCategories = "SELECT categorias.NOME FROM categorias
+          <form id="formSelect" action="mainPage.php" method="get">
+            <select name="filtros" value="filtros" id="selectCategorie" onchange="filterCategorie()">
+              <option value="" <?php echo empty($_GET['filtros']) ? 'selected' : ''; ?>>Todos</option>
+              <?php
+              $queryCategories = "SELECT categorias.NOME FROM categorias
                 INNER JOIN produtos ON categorias.ID = produtos.ID_CATEGORIAS
                 WHERE produtos.ID_USUARIO = ?
                 ";
-            $Values = $userId;
-            $queryResultCategories = dbQuery($queryCategories, $values);
+              $Values = $userId;
+              $queryResultCategories = dbQuery($queryCategories, $values);
 
 
-            $categories = mysqli_fetch_all($queryResultCategories, MYSQLI_ASSOC);
+              $categories = mysqli_fetch_all($queryResultCategories, MYSQLI_ASSOC);
 
-            foreach ($categories as $categorie) {
-              echo "
-                    <option value='{$categorie['NOME']}'>{$categorie['NOME']}</option>
+              foreach ($categories as $categorie) {
+                $categorieName = $categorie['NOME'];
+                $isSelected = ($categorieName === $_GET['filtros']) ? 'selected' : '';
+                echo "
+                    <option value='{$categorie['NOME']}'{$isSelected}>{$categorie['NOME']}</option>
                   ";
-            }
-            ?>
-          </select>
-
+              }
+              ?>
+            </select>
+          </form>
         </div>
 
         <div class="inputs-plus-product-subtitle">
