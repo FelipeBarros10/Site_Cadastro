@@ -7,8 +7,6 @@ function createNewProduct($productInformations, $infoUploadImage)
 
   if (!empty($infoUploadImage)) {
     $imageUniqueName = imageUniqueName($infoUploadImage);
-
-
     if (!isset($imageUniqueName)) {
       return $errors["moveFile"] = "Erro no upload da imagem";
     }
@@ -25,8 +23,8 @@ function createNewProduct($productInformations, $infoUploadImage)
   if ($productInformations["newCategory"] != "") {
     $insertDbCategories = insertDbCategories($productInformations["newCategory"]);
 
-    if ($insertDbCategories) {
-      $categorieId = $insertDbCategories;
+    if (isset($insertDbCategories)) {
+       $categorieId = $insertDbCategories;
     }
 
     if (!isset($insertDbCategories)) {
@@ -92,7 +90,7 @@ function insertDbCategories($categorie)
 
 
   if ($categorieInsert) {
-    return true;
+    return $categorieInsert;
   } else {
     return false;
   }
@@ -128,7 +126,7 @@ function comparingCategoryName($query, $values)
    
     $queryResult = dbQuery($queryCommand, $values);
 
-    if ($queryResult) {
+    if (mysqli_num_rows($queryResult) > 0) {
       return true;
     }
 

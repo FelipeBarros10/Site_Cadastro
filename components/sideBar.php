@@ -38,7 +38,7 @@
       <a id="linkHistoric" class="link" href="../views/historic.php">
         <div class="parentIcon">
           <i id="icon" class="bi bi-book"></i>
-          <span>Histórico</span>'
+          <span>Histórico</span>
         </div>
       </a>
       

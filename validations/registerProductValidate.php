@@ -56,7 +56,6 @@ function registerProductValidate($productInformations, $infoUploadImage = null)
     $values = $productInformations["newCategory"];
     $categorieExist = comparingCategoryName($query, $values);
 
-    // return $categorieExist;
 
     if($categorieExist == true){
       $errors["categorieAlreadyExist"] = "Essa categoria já existe, selecione-a no campo acima";

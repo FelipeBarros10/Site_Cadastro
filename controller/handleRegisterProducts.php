@@ -14,13 +14,15 @@ if(isset($_POST)){
     $infoUploadImage = $_FILES['file'];
     
     registerProduct($productInformations, $infoUploadImage);
+    return true;
   }
 
   registerProduct($productInformations);
 }
 
 function registerProduct ($productInformations, $infoUploadImage = null){
-  if(isset($productId) && isset($productInformations) && $infoUploadImage['name'] != ''){
+
+  if($infoUploadImage['name'] !== ''){
     $registerProductValidating = registerProductValidate($productInformations, $infoUploadImage);
 
   } else {
@@ -34,9 +36,6 @@ function registerProduct ($productInformations, $infoUploadImage = null){
     exit();
   } else {
     
-    if(isset($_FILES["file"])){
-      $infoUploadImage = $_FILES["file"];
-    }
 
     $createNewProduct = createNewProduct($registerProductValidating, $infoUploadImage);
 
