@@ -15,5 +15,5 @@ function loadingContent() {
 
   setTimeout(() => {
     document.getElementById("form").submit();
-  }, 650);
+  }, 500);
 }

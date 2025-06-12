@@ -10,7 +10,7 @@ $products = mysqli_fetch_all($queryResult, MYSQLI_ASSOC);
 
 $searchProduct = $_GET['busca'] ?? '';
 
-if($searchProduct){
+if ($searchProduct) {
   $querySearch = "SELECT * FROM produtos WHERE nome LIKE ? AND ID_USUARIO = ?";
   $values = ["%$searchProduct%", $userId];
   $queryResultSearch = dbQuery($querySearch, $values);
@@ -46,10 +46,10 @@ if($searchProduct){
 
     <main class="main-sales-content">
       <div class="products-content">
-        <form action="salesPage.php" method="get">
+        <form id="form" action="salesPage.php" method="get">
           <div class="inputs-search-products">
-            <input type="text" placeholder="Nome do produto" name="busca" value="<?php echo isset($_GET['busca']) ? $_GET['busca'] : '' ?>">
-            <button><i class="bi bi-search"></i></button>
+            <input type="text" placeholder="Nome do produto" id="busca" name="busca" value="<?php echo isset($_GET['busca']) ? $_GET['busca'] : '' ?>">
+            <button type="button" onclick="loadingContent()"><i class="bi bi-search"></i></button>
           </div>
         </form>
 
@@ -58,6 +58,9 @@ if($searchProduct){
         </div>
 
         <div class="products-to-sale">
+          <div class="loading" id="loading">
+            <dotlottie-player src="https://lottie.host/33022999-343c-4490-b368-1fd709b0081b/2ax7KO5izZ.lottie" background="transparent" speed="3" style="width: 32%; height: 32%" direction="1" playMode="forward" loop autoplay></dotlottie-player>
+          </div>
           <?php
 
           foreach ($products as $product) {
@@ -119,6 +122,6 @@ if($searchProduct){
       </div>
     </main>
   </div>
-
+  <script src="../Assets/js/loadingPageAnimation.js"></script>
   <script src="../Assets/js/salesPage.js"></script>
 </body>
