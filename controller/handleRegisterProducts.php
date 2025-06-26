@@ -20,7 +20,7 @@ if(isset($_POST)){
   registerProduct($productInformations);
 }
 
-function registerProduct ($productInformations, $infoUploadImage = null){
+function registerProduct($productInformations, $infoUploadImage = null){
 
   if($infoUploadImage['name'] !== ''){
     $registerProductValidating = registerProductValidate($productInformations, $infoUploadImage);

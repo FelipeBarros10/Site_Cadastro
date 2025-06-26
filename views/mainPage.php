@@ -73,9 +73,8 @@ if ($searchProduct || $searchProductCategorie) {
                 INNER JOIN produtos ON categorias.ID = produtos.ID_CATEGORIAS
                 WHERE produtos.ID_USUARIO = ?
                 ";
-              $Values = $userId;
+              $values = $userId;
               $queryResultCategories = dbQuery($queryCategories, $values);
-
 
               $categories = mysqli_fetch_all($queryResultCategories, MYSQLI_ASSOC);
 

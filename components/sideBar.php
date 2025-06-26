@@ -41,12 +41,6 @@
           <span>Histórico</span>
         </div>
       </a>
-      <!-- <a id="linkUsers" class="link" href="#">
-        <div class="parentIcon">
-          <i id="icon" class="bi bi-people"></i>
-          <span>Usuários</span>
-        </div>  
-      </a> -->
     </div>
   </div>
   <script src="../Assets/js/sidebar.js"></script>

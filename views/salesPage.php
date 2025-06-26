@@ -117,7 +117,7 @@ if ($searchProduct) {
         </div>
 
         <div class="sell">
-          <button class="">Vender</button>
+          <button id="SaleBtn" onclick="sendSaledProductsToController()" class="">Vender</button>
         </div>
       </div>
     </main>

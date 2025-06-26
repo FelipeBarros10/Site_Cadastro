@@ -79,10 +79,23 @@ function updateCart(productId)
   sumItems.textContent = parseInt(sumItems.textContent) + 1
   subtotal.textContent = (parseFloat(subtotal.textContent) + parseFloat(productInCart.preco)).toFixed(2).replace('.', ',')
   total.textContent = parseFloat(subtotal.textContent).toFixed(2).replace('.', ',')
+}
+
+async function sendSaledProductsToController(){
+  if(cart.length <= 0){
+    //Criar um erro com alertfy se carrinho for vazio
+  }
+
+  return await fetch("/controller/handleSalesPage.php", {
+      method: "POST",
+      body: JSON.stringify({ saledCart: cart })
+    })
+    .then(response => {
+      return response.json()
+    })
+    .then((data) => {
+      console.log('Resposta PHP: ', data);
+      //Criar um erro com alertfy se a venda não for validada
+    })
   
-
-
-
-  
- 
 }

@@ -9,7 +9,6 @@ const linksPages = [
   document.getElementById("linkSale"),
   document.getElementById("linkRegister"),
   document.getElementById("linkHistoric"),
-  document.getElementById("linkUsers"),
 ];
 
 
@@ -66,7 +65,6 @@ function sidebarIconSelected() {
     document.getElementById("linkSale"),
     document.getElementById("linkRegister"),
     document.getElementById("linkHistoric"),
-    document.getElementById("linkUsers"),
   ];
 
   //Variável que vai receber o ícone selecionado
@@ -106,10 +104,9 @@ function sidebarIconSelected() {
         const linkIcon = event.currentTarget;
 
         const parentDivIcon = linkIcon.querySelector('.parentIcon')
-        // return console.log(parentDivIcon);
+
         //Criando uma constante que recebe o <i> do "evento"(icone do array) atual clicado
         const iconElementSelected = event.currentTarget.querySelector("#icon");
-        // return console.log(iconElementSelected);
 
         //Switch para verificar qual ícone está sendo clicado
         switch(linkIcon.id){
@@ -179,7 +176,7 @@ function openAndCloseSideBar (){
      
       //Validação se o sidebar está aberto 
       if(sidebarIsOpen === true){
-
+        
         //Se estiver a classe de sidebar fechada é incluída
         sidebar.className = "sidebar";
 
@@ -215,6 +212,7 @@ function openAndCloseSideBar (){
         
         //É feito um foreach no array de ícones
         linksPages.forEach((item) => {
+          
           //Constante que pega o <a> link de cada item do array
           const link = item.querySelector('.parentIcon');
 
