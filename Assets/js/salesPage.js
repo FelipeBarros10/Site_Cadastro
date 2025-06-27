@@ -88,11 +88,9 @@ async function sendSaledProductsToController(){
 
   return await fetch("/controller/handleSalesPage.php", {
       method: "POST",
-      body: JSON.stringify({ saledCart: cart })
+      body: JSON.stringify(cart)
     })
-    .then(response => {
-      return response.json()
-    })
+    .then(response => response.json())
     .then((data) => {
       console.log('Resposta PHP: ', data);
       //Criar um erro com alertfy se a venda não for validada

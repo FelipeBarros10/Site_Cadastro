@@ -2,8 +2,6 @@
 // Cria a variável que vai falar se o sidebar está aberto ou não
 let sidebarIsOpen = false;
 
-
-
 const linksPages = [
   document.getElementById("linkList"),
   document.getElementById("linkSale"),
@@ -11,21 +9,17 @@ const linksPages = [
   document.getElementById("linkHistoric"),
 ];
 
-
-
   document.addEventListener("DOMContentLoaded", () => {
 
     let selectedStorageLinkId = localStorage.getItem("selectedIcon");
     
     let currentUrl = window.location.pathname;
 
-    
     if(currentUrl.includes("mainPage")){
       localStorage.removeItem("selectedIcon");
       return
     }
       
-  
     if (selectedStorageLinkId) {
       
       const selectedStorageLinkElement = document.getElementById(selectedStorageLinkId);
