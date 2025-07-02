@@ -71,9 +71,15 @@ if ($searchProduct) {
                     <div>
                       <img src='../Assets/img/{$product['IMAGENS']}'/>
 
-                      <div class='product-name-value'>
-                        <span>{$product['NOME']}</span>
-                        <span class='price'>R$ {$product['PRECO']}</span>
+                      <div class='product-name-value-quantity'>
+                        <div class='name-and-value'>
+                          <span>{$product['NOME']}</span>
+                          <span class='price'>R$ {$product['PRECO']}</span>
+                        </div>
+
+                        <div class='quantity-products'>
+                          <span>{$product['QUANTIDADE_ESTOQUE']}</span>
+                        </div>
                       </div>
                     </div>
                 </div>

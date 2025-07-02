@@ -64,22 +64,39 @@ function updateCart(productId)
 
         <div class='price-div'>
           <span class='productPrice'>R$ <span id='productPrice' > ${productInCart.preco.replace('.', ',')}</span></span>
-          <i class="bi bi-x-lg"></i>
+          <i onclick="deleteProductCart(${productInCart.id})" id="deleteProductCart" class="bi bi-x-lg"></i>
         </div>
       </div>
       `;
   } else {
-    const qtdSpan = productDiv.querySelector('#productQtd')
-    const priceSpan = productDiv.querySelector('#productPrice')
+    const qtdProductElement = productDiv.querySelector('#productQtd')
+    const priceProductElement = productDiv.querySelector('#productPrice')
     
-    qtdSpan.textContent = productInCart.quantidade
-    priceSpan.textContent = (parseFloat(priceSpan.textContent) + parseFloat(productInCart.preco)).toFixed(2).replace('.', ',');
+    qtdProductElement.textContent = productInCart.quantidade
+    priceProductElement.textContent = (parseFloat(priceProductElement.textContent) + parseFloat(productInCart.preco)).toFixed(2).replace('.', ',');
   }
 
   sumItems.textContent = parseInt(sumItems.textContent) + 1
   subtotal.textContent = (parseFloat(subtotal.textContent) + parseFloat(productInCart.preco)).toFixed(2).replace('.', ',')
   total.textContent = parseFloat(subtotal.textContent).toFixed(2).replace('.', ',')
 }
+
+
+function deleteProductCart(productCartId){
+    const qtdProductElement = document.querySelector('#productQtd')
+    const carItem = document.querySelector(`#cart-${productCartId}`)
+    let findedProductInCart = cart.find((item) => parseInt(item.id) === productCartId)
+
+    if(findedProductInCart.quantidade > 1){
+      findedProductInCart.quantidade -= 1;
+      qtdProductElement.textContent = findedProductInCart.quantidade
+      
+    } else {
+      carItem.remove();
+    } 
+
+}
+
 
 async function sendSaledProductsToController(){
   if(cart.length <= 0){
