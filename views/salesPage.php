@@ -74,11 +74,11 @@ if ($searchProduct) {
                       <div class='product-name-value-quantity'>
                         <div class='name-and-value'>
                           <span>{$product['NOME']}</span>
-                          <span class='price'>R$ {$product['PRECO']}</span>
+                          <span id='originalPrice' class='price'>R$ {$product['PRECO']}</span>
                         </div>
 
                         <div class='quantity-products'>
-                          <span>{$product['QUANTIDADE_ESTOQUE']}</span>
+                          <span id='originalQuantity'>{$product['QUANTIDADE_ESTOQUE']}</span>
                         </div>
                       </div>
                     </div>
@@ -98,7 +98,7 @@ if ($searchProduct) {
       <div class="cart-content">
         <h3>Produtos no carrinho</h3>
         <div class="products-cart">
-          <span id="warningTetxt">Nenhum item selecionado</span>
+          <span id="warningText">Nenhum item selecionado</span>
         </div>
 
         <div class="infos-cart">
