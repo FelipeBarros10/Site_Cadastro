@@ -11,11 +11,9 @@ require_once __DIR__ .  '/../validations/createAccountValidate.php';
 if (isset($_POST)) {
   #Se sim, uma variável é criada para receber as informações do usuário  
   $userInformation = $_POST;
-
   #Passa as informações para a função que cuidará do login
   register($userInformation);
   
-
 }
 
 function register($userInformation, $profileImage = "") {
@@ -34,7 +32,6 @@ function register($userInformation, $profileImage = "") {
     if(isset($_FILES)){
       $profileImage = $_FILES["profileImage"];
     } 
-
     #Se não, criamos uma variável que recebe a criação do usuário no BD
     $userCreated = createUser($userInformation,$profileImage);
     #Verifica se foi criado

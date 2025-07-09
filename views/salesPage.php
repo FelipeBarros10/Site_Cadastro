@@ -19,22 +19,9 @@ if ($searchProduct) {
 }
 ?>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Register</title>
-  <link rel="shortcut icon" type="image/png" href="/Assets/img/logo2.png">
-  <link rel="stylesheet" href="../Assets/css/salesPage.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-  <link rel="stylesheet" href="../vendor/alertifyjs/css/alertify.min.css" />
-  <link rel="stylesheet" href="../vendor/alertifyjs/css/themes/default.min.css" />
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/cleave.js"></script>
-  <script src="../vendor/alertifyjs/alertify.min.js"></script>
-  <script src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs" type="module"></script>
-</head>
+<?php $pageCss = "/../Assets/css/salesPage.css" ?>
+
+<?php require_once __DIR__ . "/../components/head.php"?>
 
 <body class="">
   <div class="main-parent">

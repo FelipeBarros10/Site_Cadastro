@@ -8,19 +8,19 @@ $values = $userId;
 $queryResult = dbQuery($query, $userId);
 $products = mysqli_fetch_all($queryResult, MYSQLI_ASSOC);
 
-$searchProduct = isset($_GET['busca']) ? $_GET['busca'] : '';
-$searchProductCategorie = isset($_GET['filtros']) ? $_GET['filtros'] : '';
+$searchPerProduct = isset($_GET['busca']) ? $_GET['busca'] : '';
+$searchPerCategorie = isset($_GET['filtros']) ? $_GET['filtros'] : '';
 
-if ($searchProduct || $searchProductCategorie) {
-  if ($searchProduct) {
+if ($searchPerProduct || $searchPerCategorie) {
+  if ($searchPerProduct) {
     $querySearch = "SELECT * FROM produtos WHERE nome LIKE ? AND ID_USUARIO = ?";
-    $values = ["%$searchProduct%", $userId];
+    $values = ["%$searchPerProduct%", $userId];
     $querySearchResult = dbQuery($querySearch, $values);
   } else {
     $querySearch = "SELECT produtos.NOME, produtos.QUANTIDADE_ESTOQUE, produtos.PRECO, produtos.IMAGENS, produtos.CUSTO, produtos.ID_CATEGORIAS, produtos.ID FROM produtos 
      INNER JOIN categorias ON categorias.ID = produtos.ID_CATEGORIAS
      WHERE categorias.NOME LIKE ? AND ID_USUARIO = ?";
-    $values = ["%$searchProductCategorie%", $userId];
+    $values = ["%$searchPerCategorie%", $userId];
     $querySearchResult = dbQuery($querySearch, $values);
   }
 
@@ -28,21 +28,9 @@ if ($searchProduct || $searchProductCategorie) {
 }
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
+<?php $pageCss = "/../Assets/css/mainPage.css" ?>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Register</title>
-  <link rel="shortcut icon" type="image/png" href="/Assets/img/logo2.png">
-  <link rel="stylesheet" href="../Assets/css/mainPage.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <script src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs" type="module"></script>
-  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-</head>
+<?php require_once __DIR__ . "/../components/head.php"?>
 
 <body>
   <div class="main-parent">
@@ -104,10 +92,10 @@ if ($searchProduct || $searchProductCategorie) {
       <div data-aos="fade-left" class="header-information-stock">
 
         <div class="value-stock">
-
           <?php
-          $query = "SELECT SUM(PRECO), SUM(CUSTO) FROM produtos";
-          $queryResult = dbQuery($query);
+          $query = "SELECT SUM(PRECO), SUM(CUSTO) FROM produtos WHERE ID_USUARIO = ?";
+          $values = $userId;
+          $queryResult = dbQuery($query, $values);
 
           if ($value = mysqli_fetch_assoc($queryResult)) {
 
@@ -115,12 +103,12 @@ if ($searchProduct || $searchProductCategorie) {
             $stockValue = str_replace([".", " "], [",", ","], $value);
           }
           ?>
-          <h4>R$ <?php echo $stockValue['SUM(PRECO)'] ?></h4>
+          <h4>R$ <?php echo $stockValue['SUM(PRECO)'] ? $stockValue['SUM(PRECO)'] : number_format(0.00, 2, ",", ".") ?></h4>
           <span>Valor em estoque</span>
         </div>
 
         <div class="cost-stock">
-          <h4>R$ <?php echo $stockValue['SUM(CUSTO)'] ?></h4>
+          <h4>R$ <?php echo $stockValue['SUM(CUSTO)'] ? $stockValue['SUM(CUSTO)'] : number_format(0.00, 2, ",", ".") ?></h4>
           <span>Custo do estoque</span>
         </div>
 
@@ -128,6 +116,7 @@ if ($searchProduct || $searchProductCategorie) {
           <h4>R$ <?php echo number_format($predictedProfit, 2, ",", ".") ?></h4>
           <span>Lucro Previsto</span>
         </div>
+
       </div>
       <!--Fim Segundo Subtítulo-->
 

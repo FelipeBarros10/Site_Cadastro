@@ -8,7 +8,6 @@ require_once __DIR__ . '/../config/cookie.php';
 #Função que cria usuário dentro do BD
 function createUser($userInformation, $profileImage = "")
 {
-
   #Laço de repetição
   foreach ($userInformation as $keyIndex => $userContent) {
     #Verifica se os campos de existem
@@ -23,9 +22,8 @@ function createUser($userInformation, $profileImage = "")
    #A senha criada, é transformada em um hash único
   $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
 
-  if (isset($profileImage)) {
+  if ($profileImage['name'] !== '') {
     $profileImageHahsed = imageUniqueName($profileImage);
-
 
     if (isset($profileImageHahsed)) {
       #Comando SQL de insert no BD
@@ -35,30 +33,23 @@ function createUser($userInformation, $profileImage = "")
         SENHA = ?,
         IMAGEM_PERFIL = ?';
 
-      
-
       $values = [$name, $email, $hashedPassword, $profileImageHahsed];
 
       $resultOfInsert = dbQuery($queryInsert, $values);
-
     } 
   } else {
       $queryInsert = 'INSERT INTO cadastro_usuarios SET 
-        NOME = ?
-        EMAIL = ?
+        NOME = ?,
+        EMAIL = ?,
         SENHA = ?';
 
       $values = [$name, $email, $hashedPassword];
 
       $resultOfInsert = dbQuery($queryInsert, $values);
-
-      
-
   }
  
   #Verifica se o insert foi realizado
   if ($resultOfInsert) {
-  
     $userCookie = setUserCookie("user", $resultOfInsert);
 
     if(isset($userCookie)){
