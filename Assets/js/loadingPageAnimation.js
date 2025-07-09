@@ -1,4 +1,6 @@
 const searchInput = document.getElementById("busca");
+const loadingElement = document.getElementById("loading");
+const form = document.getElementById("form");
 
 if (searchInput) {
   searchInput.addEventListener("keydown", (event) => {
@@ -10,10 +12,20 @@ if (searchInput) {
 }
 
 function loadingContent() {
-  const loadingContent = document.getElementById("loading");
-  loadingContent.style.display = "flex";
+  loadingElement.style.display = "flex";
 
   setTimeout(() => {
-    document.getElementById("form").submit();
+    if(form){
+      form.submit();
+    }
   }, 500);
+}
+
+
+function loadingContentWithoutForm() {
+  loadingElement.style.display = "flex";
+}
+
+function hideLoadingContentWithoutForm(){
+  loadingElement.style.display = "none";
 }

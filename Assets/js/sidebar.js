@@ -10,8 +10,6 @@ const linksPages = [
 ];
 
   document.addEventListener("DOMContentLoaded", () => {
-
-    let selectedStorageLinkId = localStorage.getItem("selectedIcon");
     
     let currentUrl = window.location.pathname;
 
@@ -19,6 +17,12 @@ const linksPages = [
       localStorage.removeItem("selectedIcon");
       return
     }
+
+    if(currentUrl.includes("registerPage")){
+      localStorage.setItem("selectedIcon", 'linkRegister');
+    }
+
+    let selectedStorageLinkId = localStorage.getItem("selectedIcon");
       
     if (selectedStorageLinkId) {
       
@@ -71,7 +75,6 @@ function sidebarIconSelected() {
     
       //Se sim, é incluído o evento de escuta que vai verificar se algum item será clicado
       item.addEventListener("click", (event) => {
-        
         
         localStorage.setItem("selectedIcon", event.currentTarget.id);
  
