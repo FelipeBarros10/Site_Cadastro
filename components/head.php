@@ -4,6 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="google-signin-client_id" content="401912658472-gc1ddh5ohq9i1kkj0dqnau7ci1ub8755.apps.googleusercontent.com">
   <title>Register</title>
   <link rel="shortcut icon" type="image/png" href="/Assets/img/logo2.png">
   <?php if($pageCss) :?> 
@@ -18,4 +19,5 @@
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/cleave.js"></script>
   <script src="../vendor/alertifyjs/alertify.min.js"></script>
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
 </head>

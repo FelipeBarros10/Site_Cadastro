@@ -2,19 +2,9 @@
 session_start();
 ?>
 
-<!DOCTYPE html>
-<html lang="pt-br">
+<?php $pageCss = "/Assets/css/login.css" ?>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Register</title>
-  <link rel="shortcut icon" type="image/png" href="/Assets/img/logo2.png">
-  <link rel="stylesheet" href="./Assets/css/login.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-</head>
+<?php require_once __DIR__ . "/components/head.php"?>
 
 <body>
   <div class="main">
@@ -32,9 +22,7 @@ session_start();
           <div class="social-media">
             <ul class="list-social-media">
               <a class="link-social-media icon-modify" href="#">
-                <li class="item-social-media">
-                  <i class="bi bi-google"></i>
-                </li>
+                <div class="g-signin2" data-onsuccess="onSignIn"></div>
               </a>
             </ul>
           </div><!-- social media -->
