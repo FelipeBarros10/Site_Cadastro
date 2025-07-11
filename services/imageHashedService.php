@@ -1,5 +1,10 @@
 <?php
 
+function publicPath($path = '')
+{
+  return realpath(__DIR__ . '/' . $path);
+}
+
 function imageUniqueName($infoUploadImage)
 {
   $imageName = $infoUploadImage["name"];
@@ -8,7 +13,7 @@ function imageUniqueName($infoUploadImage)
 
   $tmpName = $infoUploadImage["tmp_name"];
 
-  $destinationDir = public_path("../Assets/img");
+  $destinationDir = publicPath("../Assets/img");
 
   $destinationPath = $destinationDir . "/" . $imageHashed;
 

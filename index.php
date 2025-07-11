@@ -18,15 +18,17 @@ session_start();
           <button id="signup" class="btn btn-primary">cadastre-se</button>
         </div>
         <div class="second-column">
-          <h2 class="title title-second">faça login com google</h2>
+          <h2 class="title title-second">faça login no register</h2>
           <div class="social-media">
-            <ul class="list-social-media">
+            <!-- <ul class="list-social-media">
               <a class="link-social-media icon-modify" href="#">
-                <div class="g-signin2" data-onsuccess="onSignIn"></div>
+                <li class="item-social-media">
+                  <i class="bi bi-google"></i>
+                </li>
               </a>
-            </ul>
+            </ul> -->
           </div><!-- social media -->
-          <p class="description description-second">ou use sua conta de email:</p>
+          <!-- <p class="description description-second">ou use sua conta de email:</p> -->
           <form action="controller/handleLogin.php" method="post" class="form">
 
             <label class="label-input" for="">
@@ -74,7 +76,7 @@ session_start();
             }
 
             ?>
-            <a class="password" href="#">Esqueceu sua senha?</a>
+            <!-- <a class="password" href="#">Esqueceu sua senha?</a> -->
             <button class="btn btn-second">entrar</button>
           </form>
         </div><!-- second column -->
@@ -90,17 +92,17 @@ session_start();
           <button id="signin" class="btn btn-primary">login</button>
         </div>
         <div class="second-column">
-          <h2 class="title title-second">crie sua conta com  Google</h2>
+          <h2 class="title title-second">crie sua conta</h2>
           <div class="social-media">
-            <ul class="list-social-media">
+            <!-- <ul class="list-social-media">
               <a class="link-social-media" href="#">
                 <li class="item-social-media icon-modify">
                   <i class="bi bi-google "></i>
                 </li>
               </a>
-            </ul>
+            </ul> -->
           </div><!-- social media -->
-          <p class="description description-second">ou use seu email para o cadastro:</p>
+          <!-- <p class="description description-second">ou use seu email para o cadastro:</p> -->
           <form action="controller/handleCreateAccount.php" method="post" class="form" enctype="multipart/form-data">
 
             <div class="profileImg">

@@ -53,12 +53,6 @@ function createNewProduct($productInformations, $infoUploadImage)
   }
 }
 
-function public_path($path = '')
-{
-  return realpath(__DIR__ . '/' . $path);
-}
-
-
 function insertDbCategories($categorie)
 {
 
